@@ -14,15 +14,24 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
+
     "plugins": [
       {
         "name": "next"
       }
     ],
+    
+    "ignoreDeprecations": "6.0",
+
+    "baseUrl": ".",
+
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["./*"],
+      "hero": ["components/Home/Hero"]
+        }
   },
+
+
   "include": [
     "next-env.d.ts",
     "**/*.ts",
