@@ -3,7 +3,7 @@ import Logo from '@/components/Helper/Logo';
 
 const Footer = () => {
     return (
-      <div className="width-full bg-blue-600 border-t border-gray-200 mt-20">
+      <div className="width-full bg-blue-600 border-t border-gray-200 ">
         <div className="w-[80%] mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 xl:grid-cols-3 gap-y-12 gap-x-16">
           {/* kolom pertmaeee */}
           <div className="space-y-4  ">
@@ -27,9 +27,13 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-medium mb-3">Bantuan</h3>
             <ul className="space-y-4 text-sm text-white">
-              <li className="hover:text-blue-300 cursor-pointer">Tentang Aplikasi</li>
+              <li className="hover:text-blue-300 cursor-pointer">
+                Tentang Aplikasi
+              </li>
               <li className="hover:text-blue-300 cursor-pointer">FAQ</li>
-              <li className="hover:text-blue-300 cursor-pointer">Panduan Penggunaan</li>
+              <li className="hover:text-blue-300 cursor-pointer">
+                Panduan Penggunaan
+              </li>
               <li className="hover:text-blue-300 cursor-pointer">Kebijakan</li>
             </ul>
           </div>
@@ -54,6 +58,17 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+          {/* sosmed part */}
+
+          <div className="text-white text-sm cursor-pointer flex-wrap flex gap-3 mb-1">
+            <span className=" hover:text-blue-300">GitHub </span>|
+            <span className=" hover:text-blue-300">LinkedIn </span>|
+            <span className=" hover:text-blue-300">Instagram</span>
+          </div>
+        </div>
+        <div className="border-t border-gray-200 py-6 text-center text-sm text-white">
+          {" "}
+          2026 ncopstar. All Right Reserved
         </div>
       </div>
     );

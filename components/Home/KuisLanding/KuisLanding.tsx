@@ -3,7 +3,7 @@ import React from 'react';
 
 const KuisLanding = () => {
   return (
-    <div className="py-16">
+    <div className="bg-blue-50 py-16">
       <div className="w-[80%] sm:mt-18 mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
         {/* header kiri */}
         <div>

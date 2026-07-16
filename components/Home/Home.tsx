@@ -2,6 +2,7 @@ import React from "react";
 import Hero from "hero";
 import About from "../About/About";
 import KuisLanding from "./KuisLanding/KuisLanding";
+import Scrollback from "../Helper/scrollback";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Hero />
       <About />
       <KuisLanding />
+      <Scrollback />
     </div>
   );
 };
