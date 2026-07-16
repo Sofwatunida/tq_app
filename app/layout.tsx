@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import WrapperNav from "@/components/Home/Navbar/WrapperNav";
+import Footer from "@/components/Home/Footer/Footer";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -35,6 +36,7 @@ export default function RootLayout({
         >
           <WrapperNav  />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

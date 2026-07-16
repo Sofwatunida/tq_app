@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const About = () => {
     return (
-      <div className="py-24 bg-blue-400">
+      <div className="py-24 bg-blue-300">
         <div className="w-[80%] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
           {/* image */}
           <div>
@@ -21,10 +21,15 @@ const About = () => {
               Kuasai Tajwid, Mulai Dari Sini!
             </h1>
             {/* isinya */}
-            <p className="mt-3 text-base sm:text-lg lg:text-xl leading-8 text-center">
+            <p className="text-gray-600 text-lg mt-2 sm:w-4/5">
               Pelajari dasar hukum tajwid dengan materi yang ringkas dan mudah
-              dipahami. <br />Siapkan dirimu sebelum menaklukkan kuis!
+              dipahami.
+              Siapkan dirimu sebelum menaklukkan kuis!
             </p>
+            {/* cta buttttttttton */}
+            <button className="mt-3 px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-blue-500 text-white">
+              Pelajari
+            </button>
           </div>
         </div>
       </div>
