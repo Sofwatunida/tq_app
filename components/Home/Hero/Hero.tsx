@@ -12,9 +12,9 @@ const Hero = () => {
           <h1
             data-aos="fade-up"
             data-aos-delay="100"
-            className="text-4xl leading-tight sm:text-5xl md:text-7xl lg:text-8xl font-bold text-center text-gray-800"
+            className="text-3xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center text-gray-800"
           >
-            Belajar Tajwid Jadi{" "}
+            Belajar Tajwid Jadi <br />
             <span className="text-cyan-600">Lebih Mudah</span>
           </h1>
           {/* isinya */}

@@ -3,7 +3,7 @@ import React from 'react';
 
 const KuisLanding = () => {
   return (
-    <div className="bg-blue-50 py-16">
+    <div className=" py-16 bg-blue-50 mb-12 ">
       <div className="w-[80%] sm:mt-18 mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
         {/* header kiri */}
         <div>
@@ -22,7 +22,11 @@ const KuisLanding = () => {
         </div>
 
         {/* kolom kanan */}
-        <div className="mt-7 justify-self-end">
+        <div
+          className="mt-7 justify-self-end"
+          data-aos="zoom-in"
+          data-aos-anchor-placement="top-center"
+        >
           <Image src={"/images/quran.png"} alt="img" width={300} height={300} />
         </div>
       </div>

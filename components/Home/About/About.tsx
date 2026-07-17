@@ -6,7 +6,8 @@ const About = () => {
       <div className="py-24 bg-blue-50">
         <div className="w-[80%] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
           {/* image */}
-          <div>
+          <div 
+          data-aos="zoom-in" data-aos-anchor-placement="top-center" className="">
             <Image
               src={"/images/quran.png"}
               alt="about"

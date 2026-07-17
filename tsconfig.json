@@ -28,8 +28,10 @@
     "paths": {
       "@/*": ["./*"],
       "hero": ["components/Home/Hero"],
-      "about": ["components/About"]
-        }
+      "about": ["components/Home/About"],
+      "kuisLanding": ["components/Home/KuisLanding"],
+      "scrollback": ["components/Helper/scrollback"]
+    }
   },
 
 
