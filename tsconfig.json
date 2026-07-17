@@ -27,7 +27,8 @@
 
     "paths": {
       "@/*": ["./*"],
-      "hero": ["components/Home/Hero"]
+      "hero": ["components/Home/Hero"],
+      "about": ["components/About"]
         }
   },
 

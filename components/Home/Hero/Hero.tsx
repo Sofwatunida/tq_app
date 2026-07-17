@@ -9,12 +9,20 @@ const Hero = () => {
       >
         <div className="relative">
           {/* heading text */}
-          <h1 className="text-4xl leading-tight sm:text-5xl md:text-7xl lg:text-8xl font-bold text-center text-gray-800">
+          <h1
+            data-aos="fade-up"
+            data-aos-delay="100"
+            className="text-4xl leading-tight sm:text-5xl md:text-7xl lg:text-8xl font-bold text-center text-gray-800"
+          >
             Belajar Tajwid Jadi{" "}
             <span className="text-cyan-600">Lebih Mudah</span>
           </h1>
           {/* isinya */}
-          <p className="mt-4 text-base sm:text-3xl lg:text-2xl leading-8 text-center">
+          <p
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="mt-4 text-base sm:text-3xl lg:text-2xl leading-8 text-center"
+          >
             Belajar, uji pemahaman, dan bersing dengan <br /> teman- teman untuk
             menjadi yang terbaik.
           </p>
