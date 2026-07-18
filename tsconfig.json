@@ -42,7 +42,11 @@
       "pilihMateri": ["components/Materi/PilihMateri"],
       "listMateri":["components/Materi/ListMateri"],
       "learnMateri": ["components/Materi/LearnMateri"],
-      "fahamMateri": ["components/Materi/FahamMateri"]
+      "fahamMateri": ["components/Materi/FahamMateri"],
+
+      // kuis
+      "kuisLevel": ["components/Kuis/KuisLevel"],
+      "kataMutiara": ["components/Kuis/KataMutiara"]
     }
   },
 
