@@ -46,7 +46,10 @@
 
       // kuis
       "kuisLevel": ["components/Kuis/KuisLevel"],
-      "kataMutiara": ["components/Kuis/KataMutiara"]
+      "kataMutiara": ["components/Kuis/KataMutiara"],
+
+      // profil
+      "profilUser":["components/Profil/ProfilUser"]
     }
   },
 

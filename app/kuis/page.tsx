@@ -1,9 +1,12 @@
 import React from 'react';
+import KuisPages from '@/components/Kuis/KuisPages';
 
-const KuisPage = () => {
-    
-    return <div>Bismillah dlu sebelum ngerjain</div>;
-
-};
-
-export default KuisPage;
+export default function Page() {
+  return (
+    <main className="bg-blue-50 pt-28 pb-20">
+      <div>
+        <KuisPages />
+      </div>
+    </main>
+  );
+}
