@@ -4,11 +4,11 @@ import React from "react";
 const KuisPages = () => {
   return (
     <div>
-      <div className="bg-white m-8 p-5 shadow-md rounded-lg ">
+      <div className="bg-white m-20 p-12 shadow-md rounded-lg ">
         <h1 className="font-bold">Soal 1 dari 10</h1>
         <p>Perhatikan ayat di bawah ini!</p>
 
-        <div className="border  border-black rounded-sm text-center p-8 m-3">
+        <div className="border text-2xl border-black rounded-xl text-center p-8 m-3">
           نَـارٌ حَـامِيَهٌ
         </div>
 

@@ -17,6 +17,6 @@ export const NAVLINKS = [
   {
     id: 4,
     url: "#",
-    label: "Peringkat",
+    label: "Predikat",
   },
 ];

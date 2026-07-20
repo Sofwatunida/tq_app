@@ -1,7 +1,15 @@
+"use client"
 import React from 'react';
 import Logo from 'logo';
+import { usePathname } from "next/navigation";
 
-const Footer = () => {
+  const Footer = () => {
+    const pathname = usePathname();
+    
+    if (pathname.startsWith("/auth")) {
+    return null;
+    }
+    
     return (
       <div className="width-full bg-blue-600 border-t border-gray-200 ">
         <div className="w-[80%] mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 xl:grid-cols-3 gap-y-12 gap-x-16">
