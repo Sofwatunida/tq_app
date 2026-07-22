@@ -1,20 +1,33 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
 
-export function LoginForm() {
+export default function MasukPage() {
 
   const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      alert("Isi woi biasain!!");
+      return;
+    }
 
-
+    alert("Login berhasil");
     router.push("/");
   };
+
+    console.log(email);
+    console.log(password);
+
+
+  
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-blue-50">
@@ -28,25 +41,32 @@ export function LoginForm() {
           <input
             type="email"
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full border bg-white border-gray-500 rounded-lg p-3 mb-4"
           />
 
           <input
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full border bg-white border-gray-500 rounded-lg p-3 mb-4"
           />
 
-        
-             <div className="flex justify-center">
+          <div className="flex justify-center">
             <button
               type="submit"
               className=" bg-blue-500 text-white px-6 py-2 rounded-lg"
-            >Masuk
-              </button>
+            >
+              Masuk
+            </button>
           </div>
+          <p className="mt-3">
+            Belum punya akun? <span className="font-bold text-blue-500 cursor-pointer">Daftar disini</span>
+          </p>
         </form>
       </div>
     </div>
   );
-}
+};
