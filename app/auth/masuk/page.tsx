@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { supabase } from "@/lib/supabase/supabase";
+import Link from "next/link";
 
 
 export default function MasukPage() {
@@ -14,18 +16,29 @@ export default function MasukPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      alert("Isi woi biasain!!");
+    const { error } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+    
+    if (error) {
+      alert("Anda belum mendaftar akun!");
       return;
     }
 
-    alert("Login berhasil");
+    alert("login berhasil");
     router.push("/");
   };
 
-    console.log(email);
-    console.log(password);
+  //   if (!email || !password) {
+  //     alert("Isi woi biasain!!");
+  //     return;
+  //   }
 
+  //   alert("Login berhasil");
+  //   router.push("/");
+  // };
 
   
 
@@ -63,7 +76,13 @@ export default function MasukPage() {
             </button>
           </div>
           <p className="mt-3">
-            Belum punya akun? <span className="font-bold text-blue-500 cursor-pointer">Daftar disini</span>
+            Belum punya akun?
+            <Link
+              href="/auth/daftar"
+              className="font-bold text-blue-500 cursor-pointer"
+            >
+              Daftar disini
+            </Link>
           </p>
         </form>
       </div>
