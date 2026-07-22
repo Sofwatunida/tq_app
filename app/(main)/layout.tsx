@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import WrapperNav from "@/components/Home/Navbar/WrapperNav";
 import Footer from "@/components/Home/Footer/Footer";
 
@@ -27,16 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
           <WrapperNav />
           {children}
           <Footer />
-        </ThemeProvider>
       </body>
     </html>
   );

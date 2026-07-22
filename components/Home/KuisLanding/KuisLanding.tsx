@@ -3,7 +3,7 @@ import React from 'react';
 
 const KuisLanding = () => {
   return (
-    <div className=" py-16 bg-blue-50 mb-12 ">
+    <div className=" py-16 bg-blue-50 ">
       <div className="w-[80%] sm:mt-18 mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
         {/* header kiri */}
         <div>
@@ -27,7 +27,13 @@ const KuisLanding = () => {
           data-aos="zoom-in"
           data-aos-anchor-placement="top-center"
         >
-          <Image src={"/images/quran.png"} alt="img" width={300} height={300} />
+          <Image
+            src={"/images/quran.png"}
+            alt="img"
+            width={250}
+            height={2500}
+            className=""
+          />
         </div>
       </div>
     </div>

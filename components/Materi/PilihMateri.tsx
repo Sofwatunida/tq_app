@@ -42,7 +42,7 @@ const PilihMateri = () => {
           return (
             <div
               key={materi.no}
-              className={`flex items-center justify-between rounded-xl p-4 ${style.card}`}
+              className={`flex flex-wrap items-center justify-between rounded-xl p-4 ${style.card}`}
             >
               <div className="flex items-center gap-4">
                 <span>{materi.no}</span>

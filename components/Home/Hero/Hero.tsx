@@ -12,7 +12,7 @@ const Hero = () => {
           <h1
             data-aos="fade-up"
             data-aos-delay="100"
-            className="text-3xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center text-gray-800"
+            className="text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center text-gray-800"
           >
             Belajar Tajwid Jadi <br />
             <span className="text-cyan-600">Lebih Mudah</span>
@@ -21,7 +21,7 @@ const Hero = () => {
           <p
             data-aos="fade-up"
             data-aos-delay="200"
-            className="mt-4 text-base sm:text-3xl lg:text-2xl leading-8 text-center"
+            className="mt-3 text-base sm:text-3xl lg:text-2xl leading-8 text-center"
           >
             Belajar, uji pemahaman, dan bersing dengan <br /> teman- teman untuk
             menjadi yang terbaik.

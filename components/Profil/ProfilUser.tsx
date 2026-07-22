@@ -17,15 +17,13 @@ const ProfilUser = () => {
 
         <h1 className="font-bold text-4xl mt-4">Sofwatunida</h1>
         <p className="text-sm">sofwatunida.arahma@gmail.com</p>
-        <div className="bg-blue-600 text-white rounded-lg mt-5 p-4">
-          <h2 className="text-2xl">Total Poin</h2>
-          <div className="text-2xl flex items-center justify-center gap-2  mt-2">
+        <div className="mt-5 p-4">
+          <div className="flex items-center justify-center">
             <Image
-              src={"/images/crown.png"}
+              src={"/images/perak.png"}
               alt="img"
-              width={50}
-              height={50} />
-            <span className="text-4xl">990</span>
+              width={250}
+              height={250} />
           </div>
         </div>
         <button className="bg-red-600 text-white p-3 rounded-lg w-full mt-3">

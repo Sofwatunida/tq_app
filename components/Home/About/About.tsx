@@ -11,8 +11,9 @@ const About = () => {
             <Image
               src={"/images/quran.png"}
               alt="about"
-              width={300}
-              height={300}
+              width={250}
+              height={250}
+              className="flex justify-center items-center"
             />
           </div>
           {/* isinya */}
