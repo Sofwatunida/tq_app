@@ -1,48 +1,50 @@
-
-
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase/supabase";
-import  { useState } from "react";
-
+import { useState } from "react";
 
 export default function DaftarPage() {
-
-    const [nama, setNama] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
+  const [nama, setNama] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const router = useRouter();
 
+  // buat mengatur pendaftaran akun
   const handleDaftar = async (e: React.FormEvent) => {
     e.preventDefault();
 
-     const { data, error } = await supabase.auth.signUp({
-       email,
-       password,
-     });
+    // untuk kirim ke supabes auth
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
 
-  
     if (error) {
-      alert("error sodara2ku");
+      alert("Akun anda sudah terdaftar!");
       return;
     }
 
-    await supabase.from("profiles").insert({
-        id: data.user?.id,
-        nama: nama,
-        email: email,
+    // masukin data inputan ke tabel
+    const { error: profileError } = await supabase.from("profiles").insert({
+      id: data.user?.id,
+      nama_pengguna: nama,
+      email: email,
     });
-    
+
+    if (profileError) {
+  
+      alert("Nama pengguna sudah terpakai!");
+      return;
+    }
+
+    // setelah daftar nnti ke halaman masuk
     alert("Pendaftaran Berhasil");
     router.push("/auth/masuk");
   };
-
-
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-blue-50">
@@ -82,7 +84,7 @@ export default function DaftarPage() {
               type="submit"
               className=" bg-blue-500 text-white px-6 py-2 rounded-lg"
             >
-              Masuk
+              Daftar
             </button>
           </div>
           <p className="mt-3">
@@ -99,4 +101,3 @@ export default function DaftarPage() {
     </div>
   );
 }
-

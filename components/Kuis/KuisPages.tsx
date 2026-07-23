@@ -1,8 +1,20 @@
 "use client";
 import { dummyKuis } from "@/constant/dummyKuis";
-import React from "react";
+import React, { useState } from "react";
+
 
 const KuisPages = () => {
+
+  const [timer, setTimer] = useState(20);
+  const [] = useState("");
+  const [level, setLevel] = useState("");
+  const [jawabanDipilih, setJawabanDipilih] = useState("");
+  const [poin, setPoin] = useState("");
+  const [predikat, setPredikat] = useState("");
+  const [totalWaktu, setTotalWaktu] = useState("");
+
+  
+
   const soal = dummyKuis[0];
   return (
     <div>

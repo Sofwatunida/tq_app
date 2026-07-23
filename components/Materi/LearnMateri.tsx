@@ -29,7 +29,7 @@ const LearnMateri = () => {
 
         <p className="mt-6 text-gray-700 leading-relaxed">
           Simpelnya, ketika membaca hukum Idzhar, bunyi
-          <span className="text-red-500 font-bold"> "n" </span>
+          <span className="text-red-500 font-bold"> n </span>
           harus terdengar jelas.
         </p>
 
