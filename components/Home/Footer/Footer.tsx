@@ -1,29 +1,31 @@
-"use client"
-import React from 'react';
-import Logo from 'logo';
+"use client";
+import React from "react";
+import Logo from "logo";
 import { usePathname } from "next/navigation";
 
-  const Footer = () => {
-    const pathname = usePathname();
-    
-    if (pathname.startsWith("/auth")) {
+const Footer = () => {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/auth")) {
     return null;
-    }
-    
-    return (
-      <div className="width-full bg-blue-600 border-t border-gray-200 ">
+  }
+
+  return (
+    <div className="width-full bg-white border-t border-gray-200 ">
+      <div className="text-black">
         <div className="w-[80%] mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 xl:grid-cols-3 gap-y-12 gap-x-16">
           {/* kolom pertmaeee */}
           <div className="space-y-4  ">
             <Logo />
-            <p className="text-white text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed">
               Platform pembelajaran tajwid interaktif yang membantu pengguna
               memahami hukum tajwid melalui materi dan kuis secara mudah.
             </p>
           </div>
           {/* kolom kedue */}
+
           <div>
-            <h3 className="text-white font-medium mb-3">Menu</h3>
+            <h3 className="font-medium mb-3">Menu</h3>
             <ul className="space-y-4 text-sm text-white">
               <li className="hover:text-blue-300 cursor-pointer">Beranda</li>
               <li className="hover:text-blue-300 cursor-pointer">Materi</li>
@@ -33,7 +35,7 @@ import { usePathname } from "next/navigation";
           </div>
           {/* kolom telu */}
           <div>
-            <h3 className="text-white font-medium mb-3">Bantuan</h3>
+            <h3 className="font-medium mb-3">Bantuan</h3>
             <ul className="space-y-4 text-sm text-white">
               <li className="hover:text-blue-300 cursor-pointer">
                 Tentang Aplikasi
@@ -47,21 +49,21 @@ import { usePathname } from "next/navigation";
           </div>
           {/* kolom papat */}
           <div className="cursor-pointer">
-            <h3 className="text-white font-medium mb-3">Kontak</h3>
+            <h3 className="font-medium mb-3">Kontak</h3>
             <ul className="space-y-5 text-sm text-white">
               <li className="flex items-start gap-3 hover:text-blue-300">
-                <span className="text-pink-500 text-lg ">📍</span>
+                <span className="text-black text-lg ">📍</span>
                 <span>
                   Puncak <br />
                   Bogor
                 </span>
               </li>
               <li className="flex items-start gap-3 hover:text-blue-300">
-                <span className="text-pink-500 text-lg ">📞</span>
+                <span className="text-black text-lg ">📞</span>
                 <p>0851-5669-5976</p>
               </li>
               <li className="flex items-start gap-3 hover:text-blue-300">
-                <span className="text-pink-500 text-lg ">📧</span>
+                <span className="text-black text-lg ">📧</span>
                 <span>ncopjamil@gmail.com</span>
               </li>
             </ul>
@@ -74,12 +76,13 @@ import { usePathname } from "next/navigation";
             <span className=" hover:text-blue-300">Instagram</span>
           </div>
         </div>
-        <div className="border-t border-gray-200 py-6 text-center text-sm text-white">
-          {" "}
-          2026 ncopstar. All Right Reserved
-        </div>
       </div>
-    );
+      <div className="border-t border-gray-200 py-6 text-center text-sm text-white">
+        {" "}
+        2026 ncopstar. All Right Reserved
+      </div>
+    </div>
+  );
 };
 
 export default Footer;

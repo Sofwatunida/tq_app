@@ -2,13 +2,12 @@
 import { useParams } from "next/navigation";
 import { dummyKuis } from "@/constant/dummyKuis";
 import { useEffect, useState } from "react";
-
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
   
 
 
 const KuisPages = () => {
-  
+  const router = useRouter();
   const params = useParams();
   const level = params.level as string;
     
@@ -105,9 +104,13 @@ const lanjutSoal = () => {
           <p className="text-xl text-gray-600">Predikat :</p>
 
           <button
+            onClick={() => router.push("/kuisLevel")}
             className="bg-green-500 text-white font-medium p-4 rounded-lg m-2 "
             // router.push("/components/Kuis/KuisLevel");
-          >Kembali</button>
+          >
+            Kembali
+          </button>
+
         </div>
       </div>
     );

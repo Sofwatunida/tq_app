@@ -34,19 +34,19 @@ export default function KuisLevel() {
       case "selesai":
         return {
           card: "bg-green-50 border border-green-300 px-7",
-          badge: "px-5 bg-green-500 text-white",
+          badge: "px-6 py-3 bg-green-500 text-white font-bold",
         };
 
       case "Pelajari":
         return {
           card: "bg-blue-50 border border-blue-500",
-          badge: "px-4 bg-blue-500 text-white",
+          badge: "px-6 py-3 bg-blue-500 text-white font-bold",
         };
 
       default:
         return {
           card: "bg-gray-100 border border-gray-500",
-          badge: "bg-gray-500 text-white",
+          badge: "px-6 py-3 bg-gray-500 text-white font-bold",
         };
     }
   };
@@ -60,7 +60,7 @@ export default function KuisLevel() {
         <p>Tantang pemahamanmu dengan kuis level 1 sampai 5!</p>
       </div>
       {/* isi */}
-      <div className="p-5 space-y-3">
+      <div className="p-5 space-y-3 ">
         {levelMateri.map((kuisLevel) => {
           const status = getStatusLevel(
             kuisLevel.level,
@@ -76,8 +76,13 @@ export default function KuisLevel() {
               className={`flex items-center justify-between rounded-xl p-4  ${style.card}`}
             >
               <div>
-                <p>Level {kuisLevel.level}</p>
-                <p>{kuisLevel.jumlah}</p>
+                <div className="font-bold text-blue-500 text-4xl">
+                  <p>Level {kuisLevel.level}</p>
+                </div>
+
+                <div className="font-bold text-2xl">
+                  <p>{kuisLevel.jumlah}</p>
+                </div>
               </div>
 
               <span className={`rounded-full px-3 py-1 text-sm ${style.badge}`}>

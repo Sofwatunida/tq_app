@@ -83,7 +83,7 @@ export default function DaftarPage() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className=" bg-blue-500 text-white px-6 py-2 rounded-lg"
+              className=" bg-blue-100 text-white px-6 py-2 rounded-lg"
             >
               Daftar
             </button>

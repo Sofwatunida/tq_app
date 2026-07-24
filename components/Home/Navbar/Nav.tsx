@@ -46,7 +46,7 @@ const Nav = ({openNav}:Props) => {
             <Link
               key={link.id}
               href={link.url}
-              className="text-black hover:text-cyan-600 font-medium transition-all duration-200"
+              className="text-black hover:text-blue-500 font-medium transition-all duration-200"
             >
               {link.label}
             </Link>
@@ -59,13 +59,13 @@ const Nav = ({openNav}:Props) => {
        
           <button
             onClick={() => router.push("/auth/masuk")}
-            className="px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-cyan-700 text-white"
+            className="px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-blue-500 text-white"
           >
             Login
           </button>
           <Link
             href="/auth/daftar"
-            className="px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-cyan-700 text-white"
+            className="px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-blue-500 text-white"
           >
             Sign Up
           </Link>
