@@ -6,6 +6,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase/supabase";
 import { useState } from "react";
 
+// bikin komponen halaman
 export default function DaftarPage() {
   const [nama, setNama] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ export default function DaftarPage() {
 
   const router = useRouter();
 
-  // buat mengatur pendaftaran akun
+  // pendaftaran akun
   const handleDaftar = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -88,12 +89,12 @@ export default function DaftarPage() {
             </button>
           </div>
           <p className="mt-3">
-            Sudah punya akun?{" "}
+            Sudah punya akun? 
             <Link
               href="/auth/masuk"
               className="font-bold text-blue-500 cursor-pointer"
             >
-              Masuk disini
+               Masuk disini
             </Link>
           </p>
         </form>

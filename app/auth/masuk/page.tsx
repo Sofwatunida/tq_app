@@ -76,12 +76,12 @@ export default function MasukPage() {
             </button>
           </div>
           <p className="mt-3">
-            Belum punya akun?
+            Belum punya akun? 
             <Link
               href="/auth/daftar"
               className="font-bold text-blue-500 cursor-pointer"
             >
-              Daftar disini
+                   Daftar disini
             </Link>
           </p>
         </form>

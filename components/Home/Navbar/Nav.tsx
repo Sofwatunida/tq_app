@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Logo from "@/components/Helper/Logo";
 import { NAVLINKS } from "@/constant/constant";
+import { useRouter} from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { HiBars3BottomRight } from "react-icons/hi2";
 
@@ -14,6 +15,7 @@ type Props = {
 const Nav = ({openNav}:Props) => {
 
   const [navBg, setNavBg] = useState(false);
+     const router = useRouter();
 
   useEffect(() => {
     const handler = () => {
@@ -30,8 +32,10 @@ const Nav = ({openNav}:Props) => {
   },
   []);
   return (
-    <div className={`transition-all ${navBg ? "bg-white shadow-md":"fixed"} duration-200 h-[12vh] fixed w-full z-50`}>
-     {/*======shadow scroll end  */}
+    <div
+      className={`transition-all ${navBg ? "bg-white shadow-md" : "fixed"} duration-200 h-[12vh] fixed w-full z-50`}
+    >
+      {/*======shadow scroll end  */}
       <div className="flex items-center justify-between h-full w-[90%] xl:w-[80%] mx-auto">
         {/* Logo */}
         <Logo />
@@ -49,12 +53,27 @@ const Nav = ({openNav}:Props) => {
           ))}
         </div>
         {/* profil */}
+
         <div className="flex items-center space-x-4">
-          <button className="px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-cyan-700 text-white">Profil</button>
+
+       
+          <button
+            onClick={() => router.push("/auth/masuk")}
+            className="px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-cyan-700 text-white"
+          >
+            Login
+          </button>
+          <Link
+            href="/auth/daftar"
+            className="px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-cyan-700 text-white"
+          >
+            Sign Up
+          </Link>
           {/*Burger menu */}
-          <HiBars3BottomRight 
-          onClick={openNav}
-          className="w-8 h-8 cursor-pointer text-black lg:hidden"/>
+          <HiBars3BottomRight
+            onClick={openNav}
+            className="w-8 h-8 cursor-pointer text-black lg:hidden"
+          />
         </div>
       </div>
     </div>

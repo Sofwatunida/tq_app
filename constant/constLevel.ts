@@ -1,26 +1,26 @@
 export const levelMateri = [
   {
-    level: "Level 1",
+    level: 1,
     jumlah: "10 Soal",
     status: "Selesai",
   },
   {
-    level: "Level 2",
+    level: 2,
     jumlah: "10 Soal",
     status: "Mulai Kuis",
   },
   {
-    level: "Level 3",
+    level: 3,
     jumlah: "10 Soal",
     status: "Terkunci",
   },
   {
-    level: "Level 4",
+    level: 4,
     jumlah: "10 Soal",
     status: "Terkunci",
   },
   {
-    level: "Level 5",
+    level: 5,
     jumlah: "10 Soal",
     status: "Terkunci",
   },

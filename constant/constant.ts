@@ -1,22 +1,27 @@
 export const NAVLINKS = [
   {
     id: 1,
-    url: "#",
+    url: "/",
     label: "Beranda",
   },
   {
     id: 2,
-    url: "#",
+    url: "/materi",
     label: "Materi",
   },
   {
     id: 3,
-    url: "#",
+    url: "/kuisLevel",
     label: "Kuis",
   },
   {
     id: 4,
-    url: "#",
+    url: "/predikat",
     label: "Predikat",
   },
+  {
+    id: 5,
+    url: "/profil",
+    label: "Profil",
+  }
 ];
