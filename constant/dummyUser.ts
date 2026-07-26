@@ -18,9 +18,9 @@ export const dummyUser = [
 
   {
     id: 3,
-    username: "Fadil",
-    level: 5,
-    poin: 90,
+    username: "Abdal",
+    level: 1,
+    poin: 100,
     waktu: 60,
   },
 
@@ -28,7 +28,7 @@ export const dummyUser = [
   {
     id: 6,
     username: "Sofwatunida",
-    level: 2,
+    level: 1,
     poin: 70,
     waktu: 650,
   },

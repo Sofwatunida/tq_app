@@ -1,97 +1,140 @@
 "use client";
 import { useParams } from "next/navigation";
 import { dummyKuis } from "@/constant/dummyKuis";
-import { useEffect, useState } from "react";
+import { useCallback,useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-  
+import { supabase } from "@/lib/supabase/supabase";
 
 
 const KuisPages = () => {
   const router = useRouter();
   const params = useParams();
   const level = params.level as string;
-    
+
   const [timer, setTimer] = useState(10);
   const [nomorSoal, setNomorSoal] = useState(0);
   const [jawabanDipilih, setJawabanDipilih] = useState("");
   const [poin, setPoin] = useState(0);
   const [totalWaktu, setTotalWaktu] = useState(0);
   const [selesai, setSelesai] = useState(false);
-  
 
-  const soalLevel = dummyKuis.filter(
-  (item) => item.level === Number(level)
-  );
-
+  const soalLevel = dummyKuis.filter((item) => item.level === Number(level));
 
   const soal = soalLevel[nomorSoal];
+
   
-  useEffect(() => {
+  // Jadi kalau sudah memilih jawaban, timer tidak ikut memindahkan soal.
 
-    if (selesai) return;
-
-    const interval = setInterval(() => {
-      setTimer((prev) => prev - 1);
-    setTotalWaktu((prev) => prev + 1);
-  }, 1000);
-
-    
-  return () => clearInterval(interval);
-}, [selesai]);
-
-
-// lanjut soal
-  useEffect(() => {
-  if (jawabanDipilih) return;
-
-  if (timer === 0) {
+  const lanjutSoal = () => {
     if (nomorSoal < soalLevel.length - 1) {
       setNomorSoal((prev) => prev + 1);
       setTimer(10);
       setJawabanDipilih("");
     } else {
       setSelesai(true);
-    }   
-  }
-  }, [timer, nomorSoal, jawabanDipilih, soalLevel.length]);
-  // Jadi kalau sudah memilih jawaban, timer tidak ikut memindahkan soal.
-
-const lanjutSoal = () => {
-  if (nomorSoal < soalLevel.length - 1)
-  {
-    setNomorSoal((prev) => prev  + 1);
-    setTimer(10);
-    setJawabanDipilih("");
-  } else {
-    setSelesai(true);
-  }
+    }
   };
+
   
-  if (!soal) {
-    return <div>Loading soal...</div>
-  }
 
-  const pilihJawaban = (opsi: string) => {
-  
-    if (jawabanDipilih) return;
+  // hai
+  const simpanHasilKuis = useCallback(async () => {
 
-  setJawabanDipilih(opsi);
+      const {
+      data: { session },
+      
+    } = await supabase.auth.getSession();
 
-  if (opsi === soal.jawaban) {
-    if (timer > 5) {
-      setPoin((prev) => prev + 10);
-    } else {
-      setPoin((prev) => prev + 5);
+    console.log("Session", session);
+
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    console.log("User:", user);
+
+    if (!user) {
+      console.log("User belum login");
+      return;
     }
 
+    console.log("Level:", Number(level));
+    console.log("Poin", poin);
+    console.log("Waktu:", totalWaktu);
+    
+    const { error } = await supabase
+      .from("hasil_kuis")
+      .insert({
+      user_id: user.id,
+      level: Number(level),
+      poin,
+      waktu: totalWaktu,
+    });
+
+    if (error) {
+      console.error("Supabase Error:", error);
+    } else {
+      console.log("Berhasil disimpan");
+    }
+  }, [level, poin, totalWaktu]);
+
+
+  const pilihJawaban = (opsi: string) => {
+    if (jawabanDipilih) return;
+
+    setJawabanDipilih(opsi);
+
+    if (opsi === soal.jawaban) {
+      if (timer > 5) {
+        setPoin((prev) => prev + 10);
+      } else {
+        setPoin((prev) => prev + 5);
+      }
+    }
+
+    setTimeout(() => {
+      lanjutSoal();
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (selesai) return;
+
+    const interval = setInterval(() => {
+      setTimer((prev) => prev - 1);
+      setTotalWaktu((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [selesai]);
+
+useEffect(() => {
+  if (!selesai) return;
+
+  simpanHasilKuis();
+}, [selesai, simpanHasilKuis]);
+
+  useEffect(() => {
+    if (jawabanDipilih) return;
+
+    if (timer === 0) {
+      if (nomorSoal < soalLevel.length - 1) {
+        setNomorSoal((prev) => prev + 1);
+        setTimer(10);
+        setJawabanDipilih("");
+      } else {
+        setSelesai(true);
+      }
+    }
+  }, [timer, nomorSoal, jawabanDipilih, soalLevel.length]);
+
+
+  if (!soal) {
+    return <div>Loading soal...</div>;
   }
 
-  setTimeout(() => {
-    lanjutSoal();
-  }, 1000);
-  };
   
-
   if (selesai) {
     return (
       <div className="bg-gradient-to-br from-green-400 to-emerald-600 min-h-screen flex justify-center items-center">
@@ -108,14 +151,12 @@ const lanjutSoal = () => {
             className="bg-green-500 text-white font-medium p-4 rounded-lg m-2 "
             // router.push("/components/Kuis/KuisLevel");
           >
-            Kembali
+            Simpan
           </button>
-
         </div>
       </div>
     );
   }
-  
 
   return (
     <div>
@@ -129,7 +170,10 @@ const lanjutSoal = () => {
         >
           ⏱ {timer}
         </h2>
-        <h1 className="font-bold text-2xl ">  {nomorSoal + 1}/ {soalLevel.length}</h1>
+        <h1 className="font-bold text-2xl ">
+          {" "}
+          {nomorSoal + 1}/ {soalLevel.length}
+        </h1>
 
         <div className="border text-2xl rounded-xl text-center p-8 m-3 select-none">
           {soal.ayat}
@@ -146,7 +190,7 @@ const lanjutSoal = () => {
                 ? opsi === soal.jawaban
                   ? "bg-green-500"
                   : "bg-red-500"
-                  : "bg-blue-500"
+                : "bg-blue-500"
             }`}
           >
             {opsi}
