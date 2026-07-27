@@ -1,27 +1,32 @@
 export const daftarMateri = [
   {
-    no: 1,
-    nama: "Idzhar",
-    status: "Selesai",
-  },
-  {
-    no: 2,
-    nama: "Idghom",
+    id: 1,
+    judul: "Idgham",
     status: "Pelajari",
+    isi: "Penjelasan Idgham...",
   },
   {
-    no: 3,
-    nama: "Ikhfa",
+    id: 2,
+    judul: "Iqlab",
     status: "Terkunci",
+    isi: "Penjelasan Iqlab...",
   },
   {
-    no: 4,
-    nama: "Iqlab",
+    id: 3,
+    judul: "Idzhar",
     status: "Terkunci",
+    isi: "Penjelasan Idzhar...",
   },
   {
-    no: 5,
-    nama: "Alif lam",
+    id: 4,
+    judul: "Ikhfa",
     status: "Terkunci",
+    isi: "Penjelasan Ikhfa...",
+  },
+  {
+    id: 5,
+    judul: "Alif Lam",
+    status: "Terkunci",
+    isi: "Penjelasan Alif Lam...",
   },
 ];

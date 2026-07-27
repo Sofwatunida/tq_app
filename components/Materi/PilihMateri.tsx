@@ -1,7 +1,6 @@
 import React from "react";
 import { daftarMateri } from "@/constant/constMateri";
 
-
 const getStatusStyle = (status: string) => {
   switch (status) {
     case "Selesai":
@@ -24,7 +23,11 @@ const getStatusStyle = (status: string) => {
   };
 };
 
-const PilihMateri = () => {
+type Props = {
+  materi: typeof daftarMateri;
+};
+
+const PilihMateri = ({materi}: Props) => {
   return (
     // header
     <div className="bg-white w-full h-[600px]  rounded-2xl shadow-lg overflow-hidden">
@@ -35,23 +38,23 @@ const PilihMateri = () => {
 
       {/* isi */}
       <div className="p-5 space-y-3 text-xl font-bold">
-        {daftarMateri.map((materi) => {
-          const style = getStatusStyle(materi.status);
+        {materi.map((item) => {
+          const style = getStatusStyle(item.status);
 
           return (
             <div
-              key={materi.no}
+              key={item.id}
               className={`flex flex-wrap items-center justify-between rounded-xl p-4 ${style.card}`}
             >
               <div className="flex items-center gap-4">
-                <span>{materi.no}</span>
-                <span>{materi.nama}</span>
+                <span>{item.id}</span>
+                <span>{item.judul}</span>
               </div>
 
               <span
                 className={`rounded-full px-3 py-1 text-sm font-medium ${style.badge}`}
               >
-                {materi.status}
+                {item.status}
               </span>
             </div>
           );
