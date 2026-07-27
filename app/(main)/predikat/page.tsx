@@ -33,13 +33,13 @@ const PredikatLevel = () => {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
-      <h2 className="text-2xl font-bold mt-20 mb-4">
+      <h2 className="text-5xl font-bold mt-20 mb-4 text-blue-500">
         Predikat Level {selectedLevel}
       </h2>
 
       {/* tabel */}
-      <div className="overflow-hidden rounded-xl border border-blue-200">
-        <div className="grid grid-cols-4 bg-blue-100 font-semibold text-center p-3">
+      <div className="overflow-hidden rounded-xl  border-2 font-semibold border-blue-500">
+        <div className="grid grid-cols-4 bg-blue-500 font-extrabold text-white text-2xl text-center p-3">
           <div>Predikat</div>
           <div>Pengguna</div>
           <div>Waktu</div>
@@ -49,7 +49,7 @@ const PredikatLevel = () => {
         {userLevel.map((user) => (
           <div
             key={user.id}
-            className="grid grid-cols-4 text-center border-t p-3"
+            className="grid grid-cols-4 text-center border-t-2 border-blue-500 p-3"
           >
             {/* bagian yg nmpilin A/predikat */}
             <div>{getPredikat(user.poin)}</div>
@@ -61,11 +61,11 @@ const PredikatLevel = () => {
       </div>
 
       {/* dropdown */}
-      <div className="mt-5 flex justify-end">
+      <div className="mt-5 flex justify-center">
         <select
           value={selectedLevel}
           onChange={(e) => setSelectedLevel(Number(e.target.value))}
-          className="border rounded-lg px-4 py-2"
+          className="border-2 border-blue-500 font-bold rounded-lg px-4 py-2"
         >
           <option value={1}>Level 1</option>
           <option value={2}>Level 2</option>

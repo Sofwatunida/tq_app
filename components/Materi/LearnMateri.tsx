@@ -2,7 +2,7 @@ import React from "react";
 
 const LearnMateri = () => {
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div className="bg-white w-full h-[600px] p-5 rounded-2xl shadow-lg overflow-hidden">
       <div className="p-6">
         <h1 className="text-3xl font-bold mb-4">IDZHAR HALQI</h1>
 
@@ -11,7 +11,7 @@ const LearnMateri = () => {
           satu dari 6 huruf berikut:
         </p>
 
-        <div className="bg-blue-500 text-white border-2 border-blue-700 p-5 rounded-2xl flex justify-center items-center mt-4 text-4xl">
+        <div className="bg-blue-400 text-white border-2 border-blue-700 p-5 rounded-2xl flex justify-center items-center mt-4 text-4xl">
           ء هـ ع ح غ خ
         </div>
 

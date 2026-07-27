@@ -10,7 +10,7 @@ const Logo = () => {
                 <FaTasks className='w-5 h-5 text-white'/>
             </div> */}
         <Image src={"/images/logo.png"} alt="img" width={60} height={60} />
-        <h1 className="text-xl font-bold sm:block md:text-1xl text-[#1591DC]">
+        <h1 className="text-2xl font-bold sm:block md:text-1xl text-blue-500">
           TajwidQu
         </h1>
       </div>

@@ -71,19 +71,19 @@ export default function KuisLevel() {
         switch (status) {
           case "selesai":
             return {
-              card: "bg-green-50 border border-green-300 px-7",
+              card: "bg-green-50 border-2 border-green-500 px-7",
               badge: "px-6 py-3 bg-green-500 text-white font-bold",
             };
 
           case "Pelajari":
             return {
-              card: "bg-blue-50 border border-blue-500",
+              card: "bg-blue-50 border-2 border-blue-500",
               badge: "px-6 py-3 bg-blue-500 text-white font-bold",
             };
 
           default:
             return {
-              card: "bg-gray-100 border border-gray-500",
+              card: "bg-gray-100 border-2 border-gray-500",
               badge: "px-6 py-3 bg-gray-500 text-white font-bold",
             };
         }
@@ -93,8 +93,8 @@ export default function KuisLevel() {
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           {/* header */}
           <div className="text-white bg-blue-500 p-5">
-            <h2 className="text-2xl font-bold">Pilih level kuis!</h2>
-            <p>Tantang pemahamanmu dengan kuis level 1 sampai 5!</p>
+            <h2 className="text-5xl font-bold">Pilih level kuis!</h2>
+            <p className="text-xl">Tantang pemahamanmu dengan kuis level 1 sampai 5!</p>
           </div>
           {/* isi */}
           <div className="p-5 space-y-3 ">

@@ -2,17 +2,17 @@ import React from "react";
 
 const FahamMateri = () => {
   return (
-    <div className="bg-green-100 rounded-2xl p-6 shadow-lg flex items-center justify-between">
+    <div className="bg-green-300 w-full h-[150px] p-5 rounded-2xl shadow-lg flex items-center justify-between">
       <div>
-        <h3 className="font-semibold text-lg">Sudah memahami materi ini?</h3>
+        <h3 className="font-bold text-2xl">Sudah memahami materi ini?</h3>
 
-        <p className="text-sm text-gray-600">
-          Klik paham jika anda sudah memahaminya!
+        <p className="text-lg text-gray-600">
+          Klik Faham jika anda benar-benar sudah memahaminya!
         </p>
       </div>
 
-      <button className="px-8 py-3 rounded-lg font-semibold text-white bg-green-500 hover:bg-green-600 transition-all duration-200 cursor-pointer">
-        Paham
+      <button className="px-8 py-3 rounded-lg font-bold text-white bg-green-600 hover:bg-green-600 transition-all duration-200 cursor-pointer">
+        Faham
       </button>
     </div>
   );
