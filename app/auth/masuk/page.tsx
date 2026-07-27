@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { supabase } from "@/lib/supabase/supabase";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 
 export default function MasukPage() {
@@ -16,6 +17,16 @@ export default function MasukPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // validasi form yang kosong
+    if (!email || !password) {
+      await Swal.fire({
+        icon: "warning",
+        title: "Form belum lengkap",
+        text: "Silakan isi email dan password.",
+      });
+      return;
+    }
+
     const { error } =
       await supabase.auth.signInWithPassword({
         email,
@@ -23,11 +34,20 @@ export default function MasukPage() {
       });
     
     if (error) {
-      alert("Anda belum mendaftar akun!");
+      await Swal.fire({
+        icon: "error",
+        title: "Login gagal!",
+        text: "email atau password salah!",
+      });
       return;
     }
 
-    alert("login berhasil");
+    await Swal.fire({
+        icon: "success",
+        title: "Login berhasil!",
+        text: "Selamat datang di TajwidQu!!",
+      });
+    
     router.push("/");
   };
 

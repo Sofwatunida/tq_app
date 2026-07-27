@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import { dummyKuis } from "@/constant/dummyKuis";
-import { useCallback,useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/supabase";
 
@@ -18,10 +18,20 @@ const KuisPages = () => {
   const [totalWaktu, setTotalWaktu] = useState(0);
   const [selesai, setSelesai] = useState(false);
 
+
   const soalLevel = dummyKuis.filter((item) => item.level === Number(level));
 
   const soal = soalLevel[nomorSoal];
 
+  // useepek
+  
+  useEffect(() => {
+    console.log("===RENDER===");
+    console.log("timer:", timer);
+    console.log("nomorSoal:", nomorSoal);
+    console.log("selesai:", selesai);
+    console.log("jumlah soal:", soalLevel.length);
+  }, [timer, nomorSoal, selesai, soalLevel.length]);
   
   // Jadi kalau sudah memilih jawaban, timer tidak ikut memindahkan soal.
 
@@ -38,15 +48,39 @@ const KuisPages = () => {
   
 
   // hai
-  const simpanHasilKuis = useCallback(async () => {
+   const pilihJawaban = (opsi: string) => {
+     if (jawabanDipilih) return;
 
-      const {
-      data: { session },
-      
-    } = await supabase.auth.getSession();
+     setJawabanDipilih(opsi);
 
-    console.log("Session", session);
+     if (opsi === soal.jawaban) {
+       if (timer > 5) {
+         setPoin((prev) => prev + 10);
+       } else {
+         setPoin((prev) => prev + 5);
+       }
+     }
 
+     setTimeout(() => {
+       lanjutSoal();
+     }, 1000);
+   };
+
+   useEffect(() => {
+     if (selesai) return;
+
+     const interval = setInterval(() => {
+       setTimer((prev) => prev - 1);
+       setTotalWaktu((prev) => prev + 1);
+     }, 1000);
+
+     return () => clearInterval(interval);
+   }, [selesai]);
+
+useEffect(() => {
+  if (!selesai) return;
+
+  const simpanHasilKuis = async () => {
 
     const {
       data: { user },
@@ -62,7 +96,9 @@ const KuisPages = () => {
     console.log("Level:", Number(level));
     console.log("Poin", poin);
     console.log("Waktu:", totalWaktu);
-    
+
+     console.log("Akan disimpn user.id:", user.id);
+   
     const { error } = await supabase
       .from("hasil_kuis")
       .insert({
@@ -77,43 +113,12 @@ const KuisPages = () => {
     } else {
       console.log("Berhasil disimpan");
     }
-  }, [level, poin, totalWaktu]);
-
-
-  const pilihJawaban = (opsi: string) => {
-    if (jawabanDipilih) return;
-
-    setJawabanDipilih(opsi);
-
-    if (opsi === soal.jawaban) {
-      if (timer > 5) {
-        setPoin((prev) => prev + 10);
-      } else {
-        setPoin((prev) => prev + 5);
-      }
-    }
-
-    setTimeout(() => {
-      lanjutSoal();
-    }, 1000);
   };
 
-  useEffect(() => {
-    if (selesai) return;
-
-    const interval = setInterval(() => {
-      setTimer((prev) => prev - 1);
-      setTotalWaktu((prev) => prev + 1);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [selesai]);
-
-useEffect(() => {
-  if (!selesai) return;
+ 
 
   simpanHasilKuis();
-}, [selesai, simpanHasilKuis]);
+}, [selesai, level, poin, totalWaktu]);
 
   useEffect(() => {
     if (jawabanDipilih) return;
@@ -149,7 +154,6 @@ useEffect(() => {
           <button
             onClick={() => router.push("/kuisLevel")}
             className="bg-green-500 text-white font-medium p-4 rounded-lg m-2 "
-            // router.push("/components/Kuis/KuisLevel");
           >
             Simpan
           </button>

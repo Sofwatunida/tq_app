@@ -5,6 +5,7 @@ import React from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase/supabase";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 // bikin komponen halaman
 export default function DaftarPage() {
@@ -18,32 +19,77 @@ export default function DaftarPage() {
   const handleDaftar = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // untuk kirim ke supabes auth
+    // validasi form
+    if (!nama || !email || !password) {
+     await Swal.fire({
+            icon: "warning",
+            title: "Form belum lengkapl!",
+            text: "Silakan isi semua data!",
+          });
+          return;
+        }
+
+    // ck nmaa
+     const { data: cekUser } = await supabase
+       .from("profiles")
+       .select("id")
+       .eq("nama_pengguna", nama)
+       .maybeSingle();
+
+     if (cekUser) {
+       await Swal.fire({
+         icon: "error",
+         title: "Nama sudah digunakan!",
+         text: "silakan gunakan nama lain!",
+       });
+       return;
+     }
+
+    // untuk kirim ke supabes auth, daftar auth
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
 
-    if (error) {
-      alert("Akun anda sudah terdaftar!");
-      return;
-    }
 
-    // masukin data inputan ke tabel
-    const { error: profileError } = await supabase.from("profiles").insert({
-      id: data.user?.id,
-      nama_pengguna: nama,
-      email: email,
-    });
+    if (error) {
+       await Swal.fire({
+              icon: "error",
+              title: "Pendaftaran gagal!",
+              text: "Email sudah terdaftar!",
+            });
+            return;
+    }
+   
+    // masukin data inputan ke tabel propil
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .insert({
+        id: data.user?.id,
+        nama_pengguna: nama,
+        email,
+      });
 
     if (profileError) {
   
-      alert("Nama pengguna sudah terpakai!");
-      return;
+      await Swal.fire({
+             icon: "error",
+             title: "Gagal menyimpan profil",
+             text: profileError.message,
+           });
+           return;
+         
     }
 
-    // setelah daftar nnti ke halaman masuk
-    alert("Pendaftaran Berhasil");
+    // berhasillll, setelah daftar nnti ke halaman masuk
+    await Swal.fire({
+           icon: "success",
+           title: "Pendaftaran berhasil!",
+           text: "Silakan login dengan akun anda!",
+           timer: 1800,
+           showConfirmButton: false,
+         });
+    
     router.push("/auth/masuk");
   };
 
