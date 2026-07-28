@@ -1,8 +1,14 @@
 import React from "react";
-import { daftarMateri } from "@/constant/constMateri";
 
 type Props = {
-  materiAktif: (typeof daftarMateri)[number] | undefined;
+  materiAktif:
+    | {
+        id: number;
+        judul: string;
+        isi: string;
+        selesai: boolean;
+      }
+    | undefined;
 };
 
 const LearnMateri = ({ materiAktif }: Props) => {

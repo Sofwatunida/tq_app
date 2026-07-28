@@ -18,10 +18,10 @@ export const NAVLINKS = [
     id: 4,
     url: "/predikat",
     label: "Predikat",
-  },
-  {
-    id: 5,
-    url: "/profil",
-    label: "Profil",
   }
+  // {
+  //   id: 5,
+  //   url: "/profil",
+  //   label: "Profil",
+  // }
 ];

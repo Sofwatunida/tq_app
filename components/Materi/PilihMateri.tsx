@@ -3,7 +3,7 @@ import { daftarMateri } from "@/constant/constMateri";
 
 const getStatusStyle = (status: string) => {
   switch (status) {
-    case "Selesai":
+    case "Dipahami":
       return {
         card: "bg-green-50 border-2 border-green-500 px-7",
         badge: "px-6 py-3 bg-green-500 text-white font-bold",
@@ -25,11 +25,17 @@ const getStatusStyle = (status: string) => {
 
 type Props = {
   materi: typeof daftarMateri;
+  materiIndex: number;
+  handlePilihMateri: (index: number) => void;
+
 };
 
-const PilihMateri = ({materi}: Props) => {
-  return (
-    // header
+const PilihMateri = ({
+  materi,
+  handlePilihMateri,
+}: Props) => {
+   return (
+
     <div className="bg-white w-full h-[600px]  rounded-2xl shadow-lg overflow-hidden">
       {/* header */}
       <div className="text-white bg-blue-500 p-5">
@@ -38,13 +44,22 @@ const PilihMateri = ({materi}: Props) => {
 
       {/* isi */}
       <div className="p-5 space-y-3 text-xl font-bold">
-        {materi.map((item) => {
+        {materi.map((item, index) => {
           const style = getStatusStyle(item.status);
 
           return (
             <div
               key={item.id}
-              className={`flex flex-wrap items-center justify-between rounded-xl p-4 ${style.card}`}
+              onClick={() => handlePilihMateri(index)}
+              className={`flex flex-wrap items-center justify-between rounded-xl p-4 
+                ${style.card}
+                ${
+                item.status !== "Terkunci"
+                ? "cursor-pointer hover:scale-[1.02] transition"
+                : "cursor-not-allowed opacity-70"
+                }
+        
+                `}
             >
               <div className="flex items-center gap-4">
                 <span>{item.id}</span>

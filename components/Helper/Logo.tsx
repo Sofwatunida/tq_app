@@ -1,20 +1,22 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react';
 
 const Logo = () => {
     return (
       <div className="flex items-center gap-1">
-        <Image
+        {/* <Image
           src={"/images/logo.png"}
           alt="img"
-          width={50}
-          height={50}
-        />
+          width={100}
+          height={100}
+        /> */}
         <h1 className="text-2xl font-bold text-blue-500">
           TajwidQu
         </h1>
       </div>
     );
 };
+
+
 
 export default Logo;

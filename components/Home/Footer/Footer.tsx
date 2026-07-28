@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Logo from "logo";
+import Logo_1 from "logo";
 import { usePathname } from "next/navigation";
 
 const Footer = () => {
@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="w-[80%] mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 xl:grid-cols-3 gap-y-12 gap-x-16">
           {/* kolom pertmaeee */}
           <div className="space-y-4  ">
-            <Logo />
+            <Logo_1 />
             <p className=" font-medium leading-relaxed">
               Platform pembelajaran tajwid interaktif yang membantu pengguna
               memahami hukum tajwid melalui materi dan kuis secara mudah.

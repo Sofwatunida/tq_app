@@ -3,30 +3,93 @@ export const daftarMateri = [
     id: 1,
     judul: "Idgham",
     status: "Pelajari",
-    isi: "Penjelasan Idgham...",
+    subMateri: [
+      {
+        id: 1,
+        judul: "Idgham Bighunnah",
+        isi: "Penjelasan Idgham Bighunnah...",
+        selesai: false,
+      },
+      {
+        id: 2,
+        judul: "Idgham Bilaghunnah",
+        isi: "Penjelasan Idgham Bilaghunnah...",
+        selesai: false,
+      },
+    ],
   },
+
   {
     id: 2,
     judul: "Iqlab",
     status: "Terkunci",
-    isi: "Penjelasan Iqlab...",
+    subMateri: [
+      {
+        id: 1,
+        judul: "Iqlab",
+        isi: "Penjelasan Iqlab...",
+        selesai: false,
+      },
+    ],
   },
+
   {
     id: 3,
     judul: "Idzhar",
     status: "Terkunci",
-    isi: "Penjelasan Idzhar...",
+    subMateri: [
+      {
+        id: 1,
+        judul: "Idzhar Halqi",
+        isi: "Penjelasan Idzhar Halqi...",
+        selesai: false,
+      },
+      {
+        id: 2,
+        judul: "Idzhar Syafawi",
+        isi: "Penjelasan Idzhar Syafawi...",
+        selesai: false,
+      },
+    ],
   },
+
   {
     id: 4,
     judul: "Ikhfa",
     status: "Terkunci",
-    isi: "Penjelasan Ikhfa...",
+    subMateri: [
+      {
+        id: 1,
+        judul: "Ikhfa Haqiqi",
+        isi: "Penjelasan Ikhfa Haqiqi...",
+        selesai: false,
+      },
+      {
+        id: 2,
+        judul: "Ikhfa Syafawi",
+        isi: "Penjelasan Ikhfa Syafawi...",
+        selesai: false,
+      },
+    ],
   },
+
   {
     id: 5,
     judul: "Alif Lam",
     status: "Terkunci",
-    isi: "Penjelasan Alif Lam...",
+    subMateri: [
+      {
+        id: 1,
+        judul: "Alif Lam Qamariyah",
+        isi: "Penjelasan Alif Lam Qamariyah...",
+        selesai: false,
+      },
+      {
+        id: 2,
+        judul: "Alif Lam Syamsiyah",
+        isi: "Penjelasan Alif Lam Syamsiyah...",
+        selesai: false,
+      },
+    ],
   },
 ];

@@ -11,23 +11,54 @@ import FahamMateri from "fahamMateri";
 export default function MateriPage() {
 
 const [materi, setMateri] = useState(daftarMateri);
+  const [materiIndex, setMateriIndex] = useState(0);
+  const [subMateriIndex, setSubMateriIndex] = useState(0);
+  
+  
+  const materiAktif = materi[materiIndex];
 
-  const materiAktif = materi.find(
-    (m) => m.status === "Pelajari");
+  const subMateriAktif =
+    materiAktif?.subMateri[subMateriIndex];
+  
+  const semuaSelesai = materi.every(
+    (m) => m.status === "Dipahami"
+  );
+  
+  
+  const handlePilihMateri = (index: number) => {
+    if (materi[index].status === "Terkunci") return;
+
+    setMateriIndex(index);
+
+    setSubMateriIndex(0);
+  };
+
 
 const handleFaham = () => {
   setMateri((prev) => {
-    const data = prev.map((item) => ({...item}));
+    const data = structuredClone(prev);
+    const sub = data[materiIndex].subMateri;
 
-    const index = data.findIndex(
-      (m) => m.status === "Pelajari");
+    sub[subMateriIndex].selesai = true;
 
-    if (index === -1) return data;
+    // kalo masih ada sub berukutnya
 
-    data[index].status = "Selesai";
+    if (subMateriIndex < sub.length - 1) {
+      setSubMateriIndex(subMateriIndex + 1);
 
-    if (index + 1 < data.length) {
-      data[index + 1].status = "Pelajari";
+      return data;
+    }
+
+    // semua sub materi selesai
+    data[materiIndex].status = "Dipahami";
+
+    // buka materi berikutnya
+    if (materiIndex + 1 < data.length) {
+      data[materiIndex + 1].status = "Pelajari";
+
+      setMateriIndex(materiIndex + 1);
+
+      setSubMateriIndex(0);
     }
 
     return data;
@@ -39,14 +70,22 @@ const handleFaham = () => {
       <div className="w-[90%] mx-auto flex gap-6">
         {/* Kolom kiri */}
         <div className="w-1/3 space-y-6">
-          <PilihMateri materi={materi} />
-          <ListMateri materi={materi} />
+          <PilihMateri
+            materi={materi}
+            handlePilihMateri={handlePilihMateri}
+            materiIndex={materiIndex}
+          />
+          <ListMateri materiAktif={materiAktif} />
         </div>
 
         {/* Kolom kanan */}
         <div className="w-2/3 space-y-6">
-          <LearnMateri materiAktif={materiAktif} />
-          <FahamMateri handleFaham={handleFaham} />
+          <LearnMateri
+            materiAktif={subMateriAktif} />
+          <FahamMateri
+            handleFaham={handleFaham}
+            semuaSelesai={semuaSelesai}
+          />
         </div>
       </div>
     </main>
