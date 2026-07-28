@@ -80,6 +80,7 @@ const KuisPages = () => {
 useEffect(() => {
   if (!selesai) return;
 
+
   const simpanHasilKuis = async () => {
 
     const {
@@ -97,21 +98,51 @@ useEffect(() => {
     console.log("Poin", poin);
     console.log("Waktu:", totalWaktu);
 
-     console.log("Akan disimpn user.id:", user.id);
-   
-    const { error } = await supabase
+    //  logic penyimpanan
+    // cek user udh prnh ngerjain kagak
+    const { data: dataLama, error: cekError } = await supabase
       .from("hasil_kuis")
-      .insert({
-      user_id: user.id,
-      level: Number(level),
-      poin,
-      waktu: totalWaktu,
-    });
+      .select("id")
+      .eq("user_id", user.id)
+      .eq("level", Number(level))
+      .maybeSingle();
+    
+    if (cekError) {
+      console.error("error cek data:", cekError);
+      return;
+    }
 
-    if (error) {
-      console.error("Supabase Error:", error);
+    if (dataLama) {
+      // kalau ada jdinya update bukan insert
+      const { error } = await supabase
+        .from("hasil_kuis")
+        .update({
+          poin,
+          waktu: totalWaktu,
+        })
+        .eq("id", dataLama.id);
+      
+      if (error) {
+        console.error("update ggl", error);
+      } else {
+        console.log("data berhasil di update")
+      }
     } else {
-      console.log("Berhasil disimpan");
+      // blm ada insert brrti
+      const { error } = await supabase
+        .from("hasil_kuis")
+        .insert({
+          user_id: user.id,
+          level: Number(level),
+          poin,
+          waktu: totalWaktu,
+        });
+
+      if (error) {
+        console.error("Supabase Error:", error);
+      } else {
+        console.log("Berhasil disimpan");
+      }
     }
   };
 

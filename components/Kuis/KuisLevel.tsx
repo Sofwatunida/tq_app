@@ -119,8 +119,8 @@ export default function KuisLevel() {
                   className={`flex items-center justify-between rounded-xl p-4  ${style.card}`}
                 >
                   <div>
-                    <div className="font-bold text-blue-500 text-4xl">
-                      <p>Level {kuisLevel.level}</p>
+                    <div className="font-bold text--500 text-4xl">
+                      <p className="text">Level {kuisLevel.level}</p>
                     </div>
 
                     <div className="font-bold text-2xl">

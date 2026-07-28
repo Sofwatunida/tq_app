@@ -21,11 +21,11 @@ const MobileNav = ({ closeNav, showNav }: Props) => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed ${navOpenCloseStyle} flex flex-col justify-center h-full w-[80%] sm:w-[60%] bg-cyan-600 text-white space-y-6 transform transition-all duration-500 delay-300 z-[1050]`}
+        className={`fixed ${navOpenCloseStyle} flex flex-col justify-center h-full w-[80%] sm:w-[60%] bg-blue-500 text-white space-y-6 transform transition-all duration-500 delay-300 z-[1050]`}
       >
         {NAVLINKS.map((link) => (
           <Link key={link.id} href={link.url}>
-            <p className="text-[20px] sm:text-[30px] ml-12 w-fit border-b-[1.5px] border-white pb-1">
+            <p className="text-[30px] sm:text-[30px] font-semibold ml-12 w-fit border-b-[1.5px] border-white pb-1">
               {link.label}
             </p>
           </Link>

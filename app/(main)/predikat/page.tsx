@@ -32,6 +32,7 @@ const PredikatLevel = () => {
     }
   };
 
+  // ambil data dari supa
   useEffect(() => {
     const getData = async () => {
       const { data, error } = await supabase
@@ -46,8 +47,9 @@ const PredikatLevel = () => {
           nama_pengguna
         )
       `)
-        
+        // where
         .eq("level", selectedLevel)
+        // urut berdasar true=kecil false=besar
         .order("poin", { ascending: false })
         .order("waktu", { ascending: true });
 
@@ -56,8 +58,9 @@ const PredikatLevel = () => {
         return;
       }
 
+      // kl supa ga kirim data brrti selesai
       if (!data) return;
-      console.log("data dari supabase", data);
+      console.log("Data dari supabase", data);
 
       const hasil = data.sort((a, b) => {
         if (b.poin !== a.poin) {
@@ -74,13 +77,15 @@ const PredikatLevel = () => {
     getData();
   }, [selectedLevel]);
 
+
+  // tabel predikat
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
       <h2 className="text-5xl font-bold mt-20 mb-4 text-blue-500">
         Predikat Level {selectedLevel}
       </h2>
 
-      {/* tabel */}
+      {/* bikin tabel */}
       <div className="overflow-hidden rounded-xl border-2 font-semibold border-blue-500">
         <div className="grid grid-cols-4 bg-blue-500 font-extrabold text-white text-2xl text-center p-3">
           <div>Predikat</div>
@@ -89,16 +94,20 @@ const PredikatLevel = () => {
           <div>Poin</div>
         </div>
 
+      {/* mengisi baris tabel */}
         {userLevel.map((user) => (
           <div
+            // bikin 1 baris
             key={user.id}
             className="grid grid-cols-4 text-center border-t-2 border-blue-500 p-3"
           >
+            {/* predikat */}
             <div>{getPredikat(user.poin)}</div>
+            {/* nama user */}
             <div>{user.profiles?.nama_pengguna}</div>
             <div>
               {user.waktu >= 60
-                ? `${Math.floor(user.waktu / 60)} menit`
+                ? `${Math.floor(user.waktu / 60)} menit` 
                 : `${user.waktu} detik`}
             </div>
             <div>{user.poin}</div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import { daftarMateri } from "@/constant/constMateri";
 
 import PilihMateri from "pilihMateri";
@@ -10,10 +10,21 @@ import FahamMateri from "fahamMateri";
 
 export default function MateriPage() {
 
-const [materi, setMateri] = useState(daftarMateri);
+  const [materi, setMateri] = useState(daftarMateri);
   const [materiIndex, setMateriIndex] = useState(0);
   const [subMateriIndex, setSubMateriIndex] = useState(0);
   
+  useEffect(() => {
+    const saved = localStorage.getItem("progressMateri");
+
+    if (saved) {
+      setMateri(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("progresMateri", JSON.stringify(materi));
+  }, [materi]);
   
   const materiAktif = materi[materiIndex];
 
@@ -33,6 +44,29 @@ const [materi, setMateri] = useState(daftarMateri);
     setSubMateriIndex(0);
   };
 
+  // tambahan
+  useEffect(() => {
+    localStorage.setItem("materiIndex", String(materiIndex));
+  }, [materiIndex]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("progressMateri");
+    const savedMateriIndex = localStorage.getItem("materiIndex");
+    const savedSubMateriIndex = localStorage.getItem("subMateriIndex");
+
+    if (saved) {
+      setMateri(JSON.parse(saved));
+    }
+
+    if (savedMateriIndex) {
+      setMateriIndex(Number(savedMateriIndex));
+    }
+    
+    if (savedSubMateriIndex) {
+      setMateriIndex(Number(savedSubMateriIndex));
+    }
+
+  }, []);
 
 const handleFaham = () => {
   setMateri((prev) => {

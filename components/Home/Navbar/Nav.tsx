@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 
 import Logo from "@/components/Helper/Logo";
 import { NAVLINKS } from "@/constant/constant";
-import { supabase } from "@/lib/supabase/supabase";
 
+import { supabase } from "@/lib/supabase/supabase";
 import { User } from "@supabase/supabase-js";
 
 import { HiBars3BottomRight } from "react-icons/hi2";
@@ -27,36 +27,63 @@ const Nav = ({ openNav }: Props) => {
   const [nama, setNama] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // =====================
+  
   // Ambil user login
-  // =====================
+  
   useEffect(() => {
     const getUser = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (!user) return;
+      if (user) {
+        setUser(user);
 
-      setUser(user);
+        const { data } = await supabase
+          .from("profiles")
+          .select("nama_pengguna")
+          .eq("id", user.id)
+          .single();
 
-      const { data } = await supabase
-        .from("profiles")
-        .select("nama_pengguna")
-        .eq("id", user.id)
-        .single();
-
-      if (data) {
-        setNama(data.nama_pengguna);
+        if (data) {
+          setNama(data.nama_pengguna);
+        }
+      } else {
+        setUser(null);
+        setNama("");
       }
     };
 
     getUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session?.user) {
+        setUser(session.user);
+
+        const { data } = await supabase
+          .from("profiles")
+          .select("nama_pengguna")
+          .eq("id", session.user.id)
+          .single();
+        
+        setNama(data?.nama_pengguna ?? "");
+      } else {
+        setUser(null);
+        setNama("");
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  // =====================
+    
+  
   // Shadow Navbar
-  // =====================
+
   useEffect(() => {
     const handler = () => {
       setNavBg(window.scrollY >= 90);
@@ -69,11 +96,16 @@ const Nav = ({ openNav }: Props) => {
     };
   }, []);
 
-  // =====================
+
   // Logout
-  // =====================
+  
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.log(error);
+      return;
+    }
 
     router.push("/");
     router.refresh();
@@ -121,6 +153,8 @@ const Nav = ({ openNav }: Props) => {
               </Link>
             </>
           ) : (
+              
+              // profile
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -143,14 +177,14 @@ const Nav = ({ openNav }: Props) => {
                     </div>
 
                     <div>
-                      <h2 className="font-bold">{nama}</h2>
-                      <p className="text-sm text-gray-500">{user.email}</p>
+                      <h2 className="font-bold text-3xl">{nama}</h2>
+                      <p className="text-medium text-gray-500">{user.email}</p>
                     </div>
                   </div>
 
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-red-500 py-2 text-white hover:bg-red-600 duration-200"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-red-500 py-2 text-white hover:bg-red-600 duration-200 font-bold"
                   >
                     <FiLogOut />
                     Keluar
