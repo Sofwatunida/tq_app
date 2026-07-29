@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { daftarMateri } from "@/constant/constMateri";
+import { supabase } from "@/lib/supabase/supabase";
 
 import PilihMateri from "pilihMateri";
 import ListMateri from "listMateri";
@@ -13,18 +14,84 @@ export default function MateriPage() {
   const [materiIndex, setMateriIndex] = useState(0);
   const [subMateriIndex, setSubMateriIndex] = useState(0);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("progressMateri");
 
-    if (saved) {
-      setMateri(JSON.parse(saved));
+
+  const loadProgress = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) return;
+
+    const { data: progress, error } = await supabase
+    .from("progress_materi")
+    .select("*")
+    .eq("user_id", user.id);
+  
+    if (error) {
+    console.error(error);
+    return;
     }
-  }, []);
+
+  const dataMateri = structuredClone(daftarMateri);
+
+  dataMateri.forEach((materi, index) => {
+    let selesaiSemua = true;
+
+    materi.subMateri.forEach((sub) => {
+      const ditemukan = progress.find(
+        (p) =>
+          p.materi_id === materi.id &&
+          p.submateri_id === sub.id &&
+          p.selesai
+      );
+
+      sub.selesai = !!ditemukan;
+
+      if (!ditemukan) {
+        selesaiSemua = false;
+      }
+    });
+
+    if (selesaiSemua) {
+      materi.status = "Dipahami";
+    } else if (
+      index == 0 ||
+      dataMateri[index - 1].status === "Dipahami"
+    ) {
+      materi.status = "Pelajari";
+    } else {
+      materi.status = "Terkunci";
+    }
+  });
+
+    setMateri(dataMateri);
+    
+    const indexPelajari = dataMateri.findIndex(
+      (m) => m.status === "Pelajari"
+    );
+
+    const materiTerbuka =
+      indexPelajari === -1 ? materiIndex : indexPelajari;
+
+    if (materiTerbuka !== -1) {
+      setMateriIndex(materiTerbuka);
+
+      const subIndex = dataMateri[materiTerbuka].subMateri.findIndex(
+        (s) => !s.selesai
+      );
+  
+    setSubMateriIndex(subIndex === -1 ? 0 : subIndex);
+  }
+};
+
 
   useEffect(() => {
-    localStorage.setItem("progresMateri", JSON.stringify(materi));
-  }, [materi]);
+    loadProgress();
+  }, []);
+ 
 
+  
   const materiAktif = materi[materiIndex];
 
   const subMateriAktif = materiAktif?.subMateri[subMateriIndex];
@@ -39,59 +106,50 @@ export default function MateriPage() {
     setSubMateriIndex(0);
   };
 
-  // tambahan
-  useEffect(() => {
-    localStorage.setItem("materiIndex", String(materiIndex));
-  }, [materiIndex]);
+ 
 
-  useEffect(() => {
-    const saved = localStorage.getItem("progressMateri");
-    const savedMateriIndex = localStorage.getItem("materiIndex");
-    const savedSubMateriIndex = localStorage.getItem("subMateriIndex");
 
-    if (saved) {
-      setMateri(JSON.parse(saved));
-    }
 
-    if (savedMateriIndex) {
-      setMateriIndex(Number(savedMateriIndex));
-    }
 
-    if (savedSubMateriIndex) {
-      setMateriIndex(Number(savedSubMateriIndex));
-    }
-  }, []);
+const handleFaham = async () => {
+  const { data: sessionData, error: sessionError } =
+    await supabase.auth.getSession();
 
-  const handleFaham = () => {
-    setMateri((prev) => {
-      const data = structuredClone(prev);
-      const sub = data[materiIndex].subMateri;
+  console.log(sessionData.session);
+  console.log(sessionError);
 
-      sub[subMateriIndex].selesai = true;
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-      // kalo masih ada sub berukutnya
+  if (!user) return;
 
-      if (subMateriIndex < sub.length - 1) {
-        setSubMateriIndex(subMateriIndex + 1);
+  const sub = materi[materiIndex].subMateri[subMateriIndex];
 
-        return data;
-      }
+  const { error: upsertError } = await supabase.from("progress_materi").upsert(
+    {
+      user_id: user.id,
+      materi_id: materi[materiIndex].id,
+      submateri_id: sub.id,
+      selesai: true,
+    },
+    {
+      onConflict: "user_id,materi_id,submateri_id",
+    },
+  );
 
-      // semua sub materi selesai
-      data[materiIndex].status = "Dipahami";
+  if (upsertError) {
+    console.error(upsertError);
+    return;
+  }
 
-      // buka materi berikutnya
-      if (materiIndex + 1 < data.length) {
-        data[materiIndex + 1].status = "Pelajari";
+  if (subMateriIndex < materi[materiIndex].subMateri.length - 1) {
+    setSubMateriIndex((prev) => prev + 1);
+    return;
+  }
 
-        setMateriIndex(materiIndex + 1);
-
-        setSubMateriIndex(0);
-      }
-
-      return data;
-    });
-  };
+  await loadProgress();
+};
 
   return (
     <main className="min-h-screen bg-gray-100 pt-28 pb-20">

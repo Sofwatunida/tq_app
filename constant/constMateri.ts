@@ -1,19 +1,19 @@
 export const daftarMateri = [
   {
     id: 1,
-    judul: "Idgham",
+    judul: "idgom",
     status: "Pelajari",
     subMateri: [
       {
         id: 1,
-        judul: "Idgham Bighunnah",
-        isi: "Penjelasan Idgham Bighunnah...",
+        judul: "idgom Bighunnah",
+        isi: "Penjelasan idgom Bighunnah...",
         selesai: false,
       },
       {
         id: 2,
-        judul: "Idgham Bilaghunnah",
-        isi: "Penjelasan Idgham Bilaghunnah...",
+        judul: "idgom Bilaghunnah",
+        isi: "Penjelasan idgom Bilaghunnah...",
         selesai: false,
       },
     ],

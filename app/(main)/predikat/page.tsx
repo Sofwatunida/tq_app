@@ -81,14 +81,14 @@ const PredikatLevel = () => {
   // tabel judul
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
-      <h2 className=" text-3xl md:text-5xl font-bold mt-20 mb-4 text-blue-500">
+      <h2 className=" text-4xl md:text-5xl font-bold mt-20 mb-4 text-blue-500">
         Predikat Level {selectedLevel}
       </h2>
 
       {/* heder tabel */}
 <div className="overflow-x-auto rounded-xl border-2 border-blue-500 font-bold">
   <div className="min-w-[650px]">
-    <div className="grid grid-cols-4 bg-blue-500 font-extrabold text-white text-lg md:text-2xl text-center p-3">
+    <div className="grid grid-cols-4 bg-blue-500 font-extrabold text-white text-2xl md:text-2xl text-center p-3">
           <div>Predikat</div>
           <div>Pengguna</div>
           <div>Waktu</div>
@@ -99,7 +99,7 @@ const PredikatLevel = () => {
     {userLevel.map((user) => (
       <div
         key={user.id}
-        className="grid grid-cols-4 text-center text-sm md:text-lg border-t-2 border-blue-500 p-3"
+        className="grid grid-cols-4 text-center text-lg md:text-xl border-t-2 border-blue-500 p-3"
       >
          {/* predikat */}
             <div>{getPredikat(user.poin)}</div>

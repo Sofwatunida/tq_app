@@ -52,15 +52,16 @@ export default function DaftarPage() {
     });
 
 
-    if (error) {
-       await Swal.fire({
-              icon: "error",
-              title: "Pendaftaran gagal!",
-              text: "Email sudah terdaftar!",
-            });
-            return;
-    }
-   
+if (error) {
+  console.log(error);
+
+  await Swal.fire({
+    icon: "error",
+    title: "Pendaftaran gagal!",
+    text: error.message,
+  });
+  return;
+}
     // masukin data inputan ke tabel propil
     const { error: profileError } = await supabase
       .from("profiles")

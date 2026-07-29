@@ -172,13 +172,13 @@ const Nav = ({ openNav }: Props) => {
               {dropdownOpen && (
                 <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border p-5">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
+                    <div className=" shrink-0 w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
                       {nama ? nama.charAt(0).toUpperCase() : "U"}
                     </div>
 
-                    <div>
-                      <h2 className="font-bold text-3xl">{nama}</h2>
-                      <p className="text-medium text-gray-500">{user.email}</p>
+                    <div className="min-w-0">
+                      <h2 className="font-bold text-3xl truncate">{nama}</h2>
+                      <p className="text-medium text-gray-500 truncate">{user.email}</p>
                     </div>
                   </div>
 

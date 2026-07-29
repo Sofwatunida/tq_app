@@ -34,20 +34,6 @@ const Footer = () => {
             </ul>
           </div>
           {/* kolom telu */}
-          <div>
-            <h3 className="font-bold mb-3 text-3xl text-blue-500">Bantuan</h3>
-            <ul className="space-y-4 font-medium text-black">
-              <li className="hover:text-blue-500 cursor-pointer">
-                Tentang Aplikasi
-              </li>
-              <li className="hover:text-blue-500 cursor-pointer">FAQ</li>
-              <li className="hover:text-blue-500 cursor-pointer">
-                Panduan Penggunaan
-              </li>
-              <li className="hover:text-blue-500 cursor-pointer">Kebijakan</li>
-            </ul>
-          </div>
-          {/* kolom papat */}
           <div className="cursor-pointer">
             <h3 className="font-bold mb-3 text-3xl text-blue-500">Kontak</h3>
             <ul className="space-y-5 font-medium text-black">
@@ -68,15 +54,20 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          {/* sosmed part */}
-
-          <div className="text-white text-sm cursor-pointer flex-wrap flex gap-3 mb-1">
-            <span className=" hover:text-blue-500">GitHub </span>|
-            <span className=" hover:text-blue-500">LinkedIn </span>|
-            <span className=" hover:text-blue-500">Instagram</span>
+          {/* kolom papat */}
+          <div className="lg:ml-20">
+            <h3 className="font-bold mb-3 text-3xl text-blue-500">Media sosial</h3>
+            <ul className="space-y-4 font-medium text-black">
+              <li className="hover:text-blue-500 cursor-pointer">Github</li>
+              <li className="hover:text-blue-500 cursor-pointer">LinkedIn</li>
+              <li className="hover:text-blue-500 cursor-pointer">Instagram</li>
+            </ul>
           </div>
+          
         </div>
       </div>
+      {/* sosmed part */}
+
       <div className="border-t border-gray-200 py-6 text-center text-sm text-white">
         {" "}
         2026 ncopstar. All Right Reserved

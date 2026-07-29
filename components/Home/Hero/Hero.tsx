@@ -4,7 +4,7 @@ import React from 'react';
 const Hero = () => {
     return (
       <div
-        className=" bg-blue-50 relative w-full h-[145vh] md:h-[120vh] lg:h-[160vh] items-center flex justify-center 
+        className=" bg-blue-50 relative w-full min-h-screen  items-center flex justify-center 
     flex-col"
       >
         <div className="relative">
@@ -12,28 +12,12 @@ const Hero = () => {
           <h1
             data-aos="fade-up"
             data-aos-delay="100"
-            className="text-5xl leading-tight sm:text-5xl md:text-6xl lg:text-10xl font-bold text-center text-gray-800"
+            className="text-4xl  leading-tight sm:text-5xl md:text-6xl lg:leading-[1.2] font-bold text-center text-gray-800"
           >
             Belajar Tajwid Jadi <br />
-            <span className="text-blue-400">Lebih Mudah</span>
+            <span className="text-blue-500">Lebih Mudah!</span>
           </h1>
-          {/* isinya */}
-          <p
-            data-aos="fade-up"
-            data-aos-delay="200"
-            className="mt-3 text-base sm:text-3xl lg:text-3xl leading-8 text-center"
-          >
-            Belajar, uji pemahaman, dan bersing dengan <br /> teman- teman untuk
-            menjadi yang terbaik.
-          </p>
-          {/* image */}
-          {/* <div className="mt-7">
-            <Image
-              src={"/images/quran.png"}
-              alt="img"
-              width={300}
-              height={300} />
-          </div>  */}
+
         </div>
       </div>
     );

@@ -27,11 +27,11 @@ const FahamMateri = ({ handleFaham, semuaSelesai }: Props) => {
   return (
     <div className="bg-green-300 w-full min-h-[150px] p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <div className="max-w-full">
-        <h3 className="font-bold text-xl sm:text-2xl">
+        <h3 className="font-bold text-3xl">
           Sudah memahami sub materi ini?
         </h3>
 
-        <p className="text-base sm:text-lg text-gray-700 mt-2">
+        <p className="text-xl text-gray-700 mt-2">
           Klik paham jika Anda benar-benar sudah memahaminya!
         </p>
       </div>

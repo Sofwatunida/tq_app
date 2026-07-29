@@ -5,7 +5,7 @@ import React from 'react';
 const KuisLanding = () => {
   // const router = useRouter();
   return (
-    <div className=" py-16 bg-blue-50 ">
+    <div className= "min-h-screen flex items-center bg-blue-50 py-16 ">
       <div className="w-[80%] sm:mt-18 mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
         {/* header kiri */}
         <div>
@@ -35,8 +35,8 @@ const KuisLanding = () => {
             src={"/images/quran.png"}
             alt="img"
             width={250}
-            height={2500}
-            className=""
+            height={250}
+            className="flex justify-center lg:justify-start"
           />
         </div>
       </div>

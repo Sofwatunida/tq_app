@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 const About = () => {
   const router = useRouter();
     return (
-      <div className="py-24 bg-blue-50">
+      <div className="min-h-screen flex items-center py-16 bg-blue-50">
         <div className="w-[80%] mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
           {/* image */}
           <div 
@@ -15,7 +15,7 @@ const About = () => {
               alt="about"
               width={250}
               height={250}
-              className="flex justify-center items-center"
+              className="flex justify-center lg:justify-start"
             />
           </div>
           {/* isinya */}
