@@ -16,72 +16,39 @@ import { FiLogOut } from "react-icons/fi";
 
 type Props = {
   openNav: () => void;
+  user: User | null;
 };
 
-const Nav = ({ openNav }: Props) => {
+const Nav = ({ openNav, user }: Props) => {
   const router = useRouter();
 
   const [navBg, setNavBg] = useState(false);
 
-  const [user, setUser] = useState<User | null>(null);
   const [nama, setNama] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  
   // Ambil user login
-  
+  // Ambil nama pengguna ketika user berubah
+  // Ambil nama pengguna ketika user berubah
   useEffect(() => {
-    const getUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (user) {
-        setUser(user);
-
-        const { data } = await supabase
-          .from("profiles")
-          .select("nama_pengguna")
-          .eq("id", user.id)
-          .single();
-
-        if (data) {
-          setNama(data.nama_pengguna);
-        }
-      } else {
-        setUser(null);
+    const getNama = async () => {
+      if (!user) {
         setNama("");
+        return;
       }
+
+      const { data } = await supabase
+        .from("profiles")
+        .select("nama_pengguna")
+        .eq("id", user.id)
+        .single();
+
+      setNama(data?.nama_pengguna ?? "");
     };
 
-    getUser();
+    getNama();
+  }, [user]);
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (session?.user) {
-        setUser(session.user);
-
-        const { data } = await supabase
-          .from("profiles")
-          .select("nama_pengguna")
-          .eq("id", session.user.id)
-          .single();
-        
-        setNama(data?.nama_pengguna ?? "");
-      } else {
-        setUser(null);
-        setNama("");
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-    
-  
   // Shadow Navbar
 
   useEffect(() => {
@@ -96,9 +63,8 @@ const Nav = ({ openNav }: Props) => {
     };
   }, []);
 
-
   // Logout
-  
+
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
 
@@ -123,7 +89,13 @@ const Nav = ({ openNav }: Props) => {
 
         {/* Menu */}
         <div className="hidden lg:flex items-center gap-10">
-          {NAVLINKS.map((link) => (
+          {NAVLINKS.filter((link) => {
+            // Jika sudah login, tampilkan semua menu
+            if (user) return true;
+
+            // Jika belum login, hanya tampil Beranda dan Materi
+            return link.label === "Beranda" || link.label === "Materi";
+          }).map((link) => (
             <Link
               key={link.id}
               href={link.url}
@@ -153,8 +125,7 @@ const Nav = ({ openNav }: Props) => {
               </Link>
             </>
           ) : (
-              
-              // profile
+            // profile
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -178,7 +149,9 @@ const Nav = ({ openNav }: Props) => {
 
                     <div className="min-w-0">
                       <h2 className="font-bold text-3xl truncate">{nama}</h2>
-                      <p className="text-medium text-gray-500 truncate">{user.email}</p>
+                      <p className="text-medium text-gray-500 truncate">
+                        {user.email}
+                      </p>
                     </div>
                   </div>
 
@@ -203,6 +176,6 @@ const Nav = ({ openNav }: Props) => {
       </div>
     </div>
   );
-};
+};;
 
 export default Nav;

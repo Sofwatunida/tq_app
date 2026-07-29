@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { daftarMateri } from "@/constant/constMateri";
 import { supabase } from "@/lib/supabase/supabase";
 
@@ -9,11 +9,12 @@ import ListMateri from "listMateri";
 import LearnMateri from "learnMateri";
 import FahamMateri from "fahamMateri";
 
+
 export default function MateriPage() {
   const [materi, setMateri] = useState(daftarMateri);
   const [materiIndex, setMateriIndex] = useState(0);
   const [subMateriIndex, setSubMateriIndex] = useState(0);
-
+  const learnRef = useRef<HTMLDivElement>(null);
 
 
   const loadProgress = async () => {
@@ -104,10 +105,14 @@ export default function MateriPage() {
     setMateriIndex(index);
 
     setSubMateriIndex(0);
+
+    setTimeout(() => {
+      learnRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
   };
-
- 
-
 
 
 
@@ -145,10 +150,25 @@ const handleFaham = async () => {
 
   if (subMateriIndex < materi[materiIndex].subMateri.length - 1) {
     setSubMateriIndex((prev) => prev + 1);
+
+    // ini
+    setTimeout(() => {
+      learnRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+
     return;
   }
 
   await loadProgress();
+  setTimeout(() => {
+    learnRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, 100);
 };
 
   return (
@@ -166,7 +186,10 @@ const handleFaham = async () => {
 
         {/* Kolom kanan */}
         <div className="w-full lg:w-2/3 space-y-6">
-          <LearnMateri materiAktif={subMateriAktif} />
+          <div ref={learnRef} className="scroll-mt-20">
+            <LearnMateri materiAktif={subMateriAktif} />
+          </div>
+
           <FahamMateri handleFaham={handleFaham} semuaSelesai={semuaSelesai} />
         </div>
       </div>

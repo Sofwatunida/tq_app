@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import WrapperNav from "@/components/Home/Navbar/WrapperNav";
+import WrapperNav from "@/components/Home/KuisLanding/Navbar/WrapperNav";
 import Footer from "@/components/Home/Footer/Footer";
 
 const defaultUrl = process.env.VERCEL_URL
