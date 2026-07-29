@@ -9,7 +9,7 @@ const Logo_1 = () => {
           width={100}
           height={100}
         /> */}
-      <h1 className="text-9xl font-bold text-blue-500">TajwidQu</h1>
+      <h1 className="text-[9rem] font-bold text-blue-500">TajwidQu</h1>
     </div>
   );
 };

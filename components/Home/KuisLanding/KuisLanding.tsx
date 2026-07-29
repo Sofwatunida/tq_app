@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 const KuisLanding = () => {
-  const router = useRouter();
+  // const router = useRouter();
   return (
     <div className=" py-16 bg-blue-50 ">
       <div className="w-[80%] sm:mt-18 mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-8">
@@ -18,11 +18,11 @@ const KuisLanding = () => {
             langkah menuju hasil yang lebih baik!
           </p>
           {/* cta buttttttttton */}
-          <button
+          {/* <button
             onClick={() => router.push("/kuisLevel")}
             className="mt-3 px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-blue-500 text-white">
             Mulai
-          </button>
+          </button> */}
         </div>
 
         {/* kolom kanan */}

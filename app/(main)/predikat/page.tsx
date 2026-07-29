@@ -78,42 +78,43 @@ const PredikatLevel = () => {
   }, [selectedLevel]);
 
 
-  // tabel predikat
+  // tabel judul
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6">
-      <h2 className="text-5xl font-bold mt-20 mb-4 text-blue-500">
+      <h2 className=" text-3xl md:text-5xl font-bold mt-20 mb-4 text-blue-500">
         Predikat Level {selectedLevel}
       </h2>
 
-      {/* bikin tabel */}
-      <div className="overflow-hidden rounded-xl border-2 font-semibold border-blue-500">
-        <div className="grid grid-cols-4 bg-blue-500 font-extrabold text-white text-2xl text-center p-3">
+      {/* heder tabel */}
+<div className="overflow-x-auto rounded-xl border-2 border-blue-500 font-bold">
+  <div className="min-w-[650px]">
+    <div className="grid grid-cols-4 bg-blue-500 font-extrabold text-white text-lg md:text-2xl text-center p-3">
           <div>Predikat</div>
           <div>Pengguna</div>
           <div>Waktu</div>
-          <div>Poin</div>
-        </div>
+          <div>Poin</div> 
+    </div>
 
-      {/* mengisi baris tabel */}
-        {userLevel.map((user) => (
-          <div
-            // bikin 1 baris
-            key={user.id}
-            className="grid grid-cols-4 text-center border-t-2 border-blue-500 p-3"
-          >
-            {/* predikat */}
+          {/* baris tabel */}
+    {userLevel.map((user) => (
+      <div
+        key={user.id}
+        className="grid grid-cols-4 text-center text-sm md:text-lg border-t-2 border-blue-500 p-3"
+      >
+         {/* predikat */}
             <div>{getPredikat(user.poin)}</div>
             {/* nama user */}
             <div>{user.profiles?.nama_pengguna}</div>
             <div>
               {user.waktu >= 60
-                ? `${Math.floor(user.waktu / 60)} menit` 
+                ? `${Math.floor(user.waktu / 60)} menit`
                 : `${user.waktu} detik`}
             </div>
             <div>{user.poin}</div>
           </div>
         ))}
-      </div>
+  </div>
+</div>
 
       {/* dropdown */}
       <div className="mt-5 flex justify-center">
@@ -134,3 +135,6 @@ const PredikatLevel = () => {
 };
 
 export default PredikatLevel;
+
+
+

@@ -90,11 +90,11 @@ export default function KuisLevel() {
       };
 
       return (
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="bg-white w-full min-w-0 rounded-2xl shadow-lg overflow-hidden">
           {/* header */}
           <div className="text-white bg-blue-500 p-5">
             <h2 className="text-5xl font-bold">Pilih level kuis!</h2>
-            <p className="text-xl">Tantang pemahamanmu dengan kuis level 1 sampai 5!</p>
+            <p className="text-xl">Uji pemahamanmu dengan kuis level 1 sampai 5!</p>
           </div>
           {/* isi */}
           <div className="p-5 space-y-3 ">
