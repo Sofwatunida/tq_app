@@ -32,10 +32,10 @@ const KuisLanding = () => {
           data-aos-anchor-placement="top-center"
         >
           <Image
-            src={"/images/quran.png"}
+            src={"/images/quizpic.png"}
             alt="img"
-            width={250}
-            height={250}
+            width={300}
+            height={300}
             className="flex justify-center lg:justify-start"
           />
         </div>

@@ -1,4 +1,4 @@
-export const dummyKuis = [
+export const constKuis = [
   // =========================
   // LEVEL 1
   // =========================
@@ -419,3 +419,5 @@ export const dummyKuis = [
     jawaban: "Qamariyah",
   },
 ];
+
+

@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { daftarMateri } from "@/constant/constMateri";
 import { supabase } from "@/lib/supabase/supabase";
+import Swal from "sweetalert2";
+
 
 import PilihMateri from "pilihMateri";
 import ListMateri from "listMateri";
@@ -17,7 +19,7 @@ export default function MateriPage() {
   const learnRef = useRef<HTMLDivElement>(null);
 
 
-  const loadProgress = async () => {
+  const loadProgress = useCallback(async () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -25,71 +27,75 @@ export default function MateriPage() {
     if (!user) return;
 
     const { data: progress, error } = await supabase
-    .from("progress_materi")
-    .select("*")
-    .eq("user_id", user.id);
-  
+      .from("progress_materi")
+      .select("*")
+      .eq("user_id", user.id);
+
     if (error) {
-    console.error(error);
-    return;
+      console.log("ERROR OBJECT:", error);
+      console.log("MESSAGE:", error.message);
+      console.log("CODE:", error.code);
+      console.log("DETAILS:", error.details);
+      console.log("HINT:", error.hint);
+
+      await Swal.fire({
+        icon: "error",
+        title: "Supabase Error",
+        text: error.message,
+      });
+
+      return;
     }
+    const dataMateri = structuredClone(daftarMateri);
 
-  const dataMateri = structuredClone(daftarMateri);
+    dataMateri.forEach((materi, index) => {
+      let selesaiSemua = true;
 
-  dataMateri.forEach((materi, index) => {
-    let selesaiSemua = true;
+      materi.subMateri.forEach((sub) => {
+        const ditemukan = progress.find(
+          (p) =>
+            p.materi_id === materi.id && p.submateri_id === sub.id && p.selesai,
+        );
 
-    materi.subMateri.forEach((sub) => {
-      const ditemukan = progress.find(
-        (p) =>
-          p.materi_id === materi.id &&
-          p.submateri_id === sub.id &&
-          p.selesai
-      );
+        sub.selesai = !!ditemukan;
 
-      sub.selesai = !!ditemukan;
+        if (!ditemukan) {
+          selesaiSemua = false;
+        }
+      });
 
-      if (!ditemukan) {
-        selesaiSemua = false;
+      if (selesaiSemua) {
+        materi.status = "Dipahami";
+      } else if (index == 0 || dataMateri[index - 1].status === "Dipahami") {
+        materi.status = "Pelajari";
+      } else {
+        materi.status = "Terkunci";
       }
     });
 
-    if (selesaiSemua) {
-      materi.status = "Dipahami";
-    } else if (
-      index == 0 ||
-      dataMateri[index - 1].status === "Dipahami"
-    ) {
-      materi.status = "Pelajari";
-    } else {
-      materi.status = "Terkunci";
-    }
-  });
-
     setMateri(dataMateri);
-    
-    const indexPelajari = dataMateri.findIndex(
-      (m) => m.status === "Pelajari"
-    );
+
+    const indexPelajari = dataMateri.findIndex((m) => m.status === "Pelajari");
 
     const materiTerbuka =
-      indexPelajari === -1 ? materiIndex : indexPelajari;
-
+      indexPelajari === -1
+        ? dataMateri.findIndex((m) => m.status === "Dipahami")
+        : indexPelajari;
     if (materiTerbuka !== -1) {
       setMateriIndex(materiTerbuka);
 
       const subIndex = dataMateri[materiTerbuka].subMateri.findIndex(
-        (s) => !s.selesai
+        (s) => !s.selesai,
       );
-  
-    setSubMateriIndex(subIndex === -1 ? 0 : subIndex);
-  }
-};
 
-
-  useEffect(() => {
-    loadProgress();
+      setSubMateriIndex(subIndex === -1 ? 0 : subIndex);
+    }
   }, []);
+
+
+useEffect(() => {
+  loadProgress();
+}, [loadProgress]);
  
 
   
@@ -114,55 +120,99 @@ export default function MateriPage() {
     }, 100);
   };
 
-
-
+// simpan
 const handleFaham = async () => {
-  const { data: sessionData, error: sessionError } =
-    await supabase.auth.getSession();
-
-  console.log(sessionData.session);
-  console.log(sessionError);
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) return;
+  // ==========================
+  // USER LOGIN
+  // ==========================
+  if (user) {
+    const sub = materi[materiIndex].subMateri[subMateriIndex];
 
-  const sub = materi[materiIndex].subMateri[subMateriIndex];
+    const { error } = await supabase.from("progress_materi").upsert(
+      {
+        user_id: user.id,
+        materi_id: materi[materiIndex].id,
+        submateri_id: sub.id,
+        selesai: true,
+      },
+      {
+        onConflict: "user_id,materi_id,submateri_id",
+      },
+    );
 
-  const { error: upsertError } = await supabase.from("progress_materi").upsert(
-    {
-      user_id: user.id,
-      materi_id: materi[materiIndex].id,
-      submateri_id: sub.id,
-      selesai: true,
-    },
-    {
-      onConflict: "user_id,materi_id,submateri_id",
-    },
-  );
+    if (error) {
+      console.error(error);
+      return;
+    }
 
-  if (upsertError) {
-    console.error(upsertError);
-    return;
+    // kalau masih ada submateri berikutnya
+    if (subMateriIndex < materi[materiIndex].subMateri.length - 1) {
+      setSubMateriIndex((prev) => prev + 1);
+    } else {
+      // reload status materi dari Supabase
+      await loadProgress();
+    }
   }
 
-  if (subMateriIndex < materi[materiIndex].subMateri.length - 1) {
-    setSubMateriIndex((prev) => prev + 1);
 
-    // ini
-    setTimeout(() => {
-      learnRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 100);
+  // ==========================
+  // GUEST (BELUM LOGIN)
+  // ==========================
+  else {
+    const materiBaru = structuredClone(materi);
 
-    return;
+    // Tandai submateri selesai
+    materiBaru[materiIndex].subMateri[subMateriIndex].selesai = true;
+
+    // Cek apakah semua submateri pada materi ini sudah selesai
+    const selesaiSemua = materiBaru[materiIndex].subMateri.every(
+      (s) => s.selesai,
+    );
+
+    if (selesaiSemua) {
+      // Materi menjadi Dipahami
+      materiBaru[materiIndex].status = "Dipahami";
+
+      // Jika masih ada materi berikutnya
+      if (materiIndex < materiBaru.length - 1) {
+        // Buka materi berikutnya
+        materiBaru[materiIndex + 1].status = "Pelajari";
+
+        // Update tampilan
+        setMateri(materiBaru);
+
+        // Langsung pindah ke materi berikutnya
+        setMateriIndex(materiIndex + 1);
+        setSubMateriIndex(0);
+      } else {
+        // Materi terakhir selesai
+        setMateri(materiBaru);
+
+        Swal.fire({
+          icon: "success",
+          title: "Selamat!",
+          text: "Semua materi telah dipelajari. Silakan daftar untuk membuka kuis.",
+          confirmButtonText: "Daftar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/auth/daftar";
+          }
+        });
+      }
+    } else {
+      // Masih ada submateri berikutnya
+      setMateri(materiBaru);
+      setSubMateriIndex((prev) => prev + 1);
+    }
   }
 
-  await loadProgress();
+  // ==========================
+  // SCROLL (BERLAKU UNTUK KEDUANYA)
+  // ==========================
   setTimeout(() => {
     learnRef.current?.scrollIntoView({
       behavior: "smooth",

@@ -1,36 +1,58 @@
 import React from "react";
 
-type Props = {
-  materiAktif:
-    | {
-        id: number;
-        judul: string;
-        isi: string;
-        selesai: boolean;
-      }
-    | undefined;
-};
 
-const LearnMateri = ({ materiAktif }: Props) => {
-  if (!materiAktif) {
-    return (
-      <div className="bg-white w-full min-h-[320px] md:min-h-[600px] p-5 rounded-2xl shadow-lg">
-        <h1 className="text-2xl font-bold">Belum ada materi yang dipilih</h1>
-      </div>
-    );
-  }
+interface LearnMateriProps {
+  materiAktif: {
+    id: number;
+    judul: string;
+    pengertian: string;
+    huruf: string[];
+    ayat: string;
+    latin: string;
+    arti: string;
+    caraBaca: string;
+  };
+}
 
+export default function LearnMateri({ materiAktif }: LearnMateriProps) {
   return (
-    <div className="bg-white w-full min-h-[380px] md:min-h-[600px] p-5 rounded-2xl shadow-lg overflow-hidden">
-      <div className="p-6 max-h-[calc(100vh-260px)] overflow-y-auto">
-        <h1 className="text-3xl font-bold mb-4">{materiAktif.judul}</h1>
+    <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
+      <h2 className="text-3xl font-bold text-blue-700">{materiAktif.judul}</h2>
 
-        <p className="text-gray-700 leading-relaxed break-words">
-          {materiAktif.isi}
-        </p>
+      <div>
+        <h3 className="font-semibold text-lg">Pengertian</h3>
+
+        <p className="text-gray-700">{materiAktif.pengertian}</p>
+      </div>
+
+      <div>
+        <h3 className="font-semibold text-lg mb-3">Huruf</h3>
+
+        <div className="flex gap-3 flex-wrap">
+          {materiAktif.huruf.map((huruf: string) => (
+            <div
+              key={huruf}
+              className="w-14 h-14 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-3xl font-bold"
+            >
+              {huruf}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-slate-100 rounded-xl p-6">
+        <p className="text-5xl text-right">{materiAktif.ayat}</p>
+
+        <p className="italic mt-3">{materiAktif.latin}</p>
+
+        <p className="mt-2">{materiAktif.arti}</p>
+      </div>
+
+      <div>
+        <h3 className="font-semibold text-lg">Cara Membaca</h3>
+
+        <p className="text-gray-700">{materiAktif.caraBaca}</p>
       </div>
     </div>
   );
-};
-
-export default LearnMateri;
+}

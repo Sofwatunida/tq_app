@@ -1,12 +1,12 @@
 "use client";
 import { useParams } from "next/navigation";
-import { dummyKuis } from "@/constant/dummyKuis";
+import { constKuis } from "@/constant/constKuis";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/supabase";
 
-
 const KuisPages = () => {
+  console.log("KuisPages dibuat ulang");
   const router = useRouter();
   const params = useParams();
   const level = params.level as string;
@@ -18,13 +18,24 @@ const KuisPages = () => {
   const [totalWaktu, setTotalWaktu] = useState(0);
   const [selesai, setSelesai] = useState(false);
 
-
-  const soalLevel = dummyKuis.filter((item) => item.level === Number(level));
+  const resetKuis = () => {
+    setTimer(10);
+    setNomorSoal(0);
+    setJawabanDipilih("");
+    setPoin(0);
+    setTotalWaktu(0);
+    setSelesai(false);
+  };
+  useEffect(() => {
+  resetKuis();
+  }, []);
+  
+  const soalLevel = constKuis.filter((item) => item.level === Number(level));
 
   const soal = soalLevel[nomorSoal];
 
   // useepek
-  
+
   useEffect(() => {
     console.log("===RENDER===");
     console.log("timer:", timer);
@@ -32,7 +43,7 @@ const KuisPages = () => {
     console.log("selesai:", selesai);
     console.log("jumlah soal:", soalLevel.length);
   }, [timer, nomorSoal, selesai, soalLevel.length]);
-  
+
   // Jadi kalau sudah memilih jawaban, timer tidak ikut memindahkan soal.
 
   const lanjutSoal = () => {
@@ -45,111 +56,103 @@ const KuisPages = () => {
     }
   };
 
-  
-
   // hai
-   const pilihJawaban = (opsi: string) => {
-     if (jawabanDipilih) return;
+  const pilihJawaban = (opsi: string) => {
+    if (jawabanDipilih) return;
 
-     setJawabanDipilih(opsi);
+    setJawabanDipilih(opsi);
 
-     if (opsi === soal.jawaban) {
-       if (timer > 5) {
-         setPoin((prev) => prev + 10);
-       } else {
-         setPoin((prev) => prev + 5);
-       }
-     }
-
-     setTimeout(() => {
-       lanjutSoal();
-     }, 1000);
-   };
-
-   useEffect(() => {
-     if (selesai) return;
-
-     const interval = setInterval(() => {
-       setTimer((prev) => prev - 1);
-       setTotalWaktu((prev) => prev + 1);
-     }, 1000);
-
-     return () => clearInterval(interval);
-   }, [selesai]);
-
-useEffect(() => {
-  if (!selesai) return;
-
-
-  const simpanHasilKuis = async () => {
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    console.log("User:", user);
-
-    if (!user) {
-      console.log("User belum login");
-      return;
-    }
-
-    console.log("Level:", Number(level));
-    console.log("Poin", poin);
-    console.log("Waktu:", totalWaktu);
-
-    //  logic penyimpanan
-    // cek user udh prnh ngerjain kagak
-    const { data: dataLama, error: cekError } = await supabase
-      .from("hasil_kuis")
-      .select("id")
-      .eq("user_id", user.id)
-      .eq("level", Number(level))
-      .maybeSingle();
-    
-    if (cekError) {
-      console.error("error cek data:", cekError);
-      return;
-    }
-
-    if (dataLama) {
-      // kalau ada jdinya update bukan insert
-      const { error } = await supabase
-        .from("hasil_kuis")
-        .update({
-          poin,
-          waktu: totalWaktu,
-        })
-        .eq("id", dataLama.id);
-      
-      if (error) {
-        console.error("update ggl", error);
+    if (opsi === soal.jawaban) {
+      if (timer > 5) {
+        setPoin((prev) => prev + 10);
       } else {
-        console.log("data berhasil di update")
+        setPoin((prev) => prev + 5);
       }
-    } else {
-      // blm ada insert brrti
-      const { error } = await supabase
+    }
+
+    setTimeout(() => {
+      lanjutSoal();
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (selesai) return;
+
+    const interval = setInterval(() => {
+      setTimer((prev) => prev - 1);
+      setTotalWaktu((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [selesai]);
+
+  useEffect(() => {
+    if (!selesai) return;
+
+    const simpanHasilKuis = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      console.log("User:", user);
+
+      if (!user) {
+        console.log("User belum login");
+        return;
+      }
+
+      console.log("Level:", Number(level));
+      console.log("Poin", poin);
+      console.log("Waktu:", totalWaktu);
+
+      //  logic penyimpanan
+      // cek user udh prnh ngerjain kagak
+      const { data: dataLama, error: cekError } = await supabase
         .from("hasil_kuis")
-        .insert({
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("level", Number(level))
+        .maybeSingle();
+
+      if (cekError) {
+        console.error("error cek data:", cekError);
+        return;
+      }
+
+      if (dataLama) {
+        // kalau ada jdinya update bukan insert
+        const { error } = await supabase
+          .from("hasil_kuis")
+          .update({
+            poin,
+            waktu: totalWaktu,
+          })
+          .eq("id", dataLama.id);
+
+        if (error) {
+          console.error("update ggl", error);
+        } else {
+          console.log("data berhasil di update");
+        }
+      } else {
+        // blm ada insert brrti
+        const { error } = await supabase.from("hasil_kuis").insert({
           user_id: user.id,
           level: Number(level),
           poin,
           waktu: totalWaktu,
         });
 
-      if (error) {
-        console.error("Supabase Error:", error);
-      } else {
-        console.log("Berhasil disimpan");
+        if (error) {
+          console.error("Supabase Error:", error);
+        } else {
+          console.log("Berhasil disimpan");
+        }
       }
-    }
-  };
+    };
 
- 
-
-  simpanHasilKuis();
-}, [selesai, level, poin, totalWaktu]);
+    simpanHasilKuis();
+  }, [selesai, level, poin, totalWaktu]);
 
   useEffect(() => {
     if (jawabanDipilih) return;
@@ -165,12 +168,10 @@ useEffect(() => {
     }
   }, [timer, nomorSoal, jawabanDipilih, soalLevel.length]);
 
-
   if (!soal) {
     return <div>Loading soal...</div>;
   }
 
-  
   if (selesai) {
     return (
       <div className="bg-gradient-to-br from-green-400 to-emerald-600 min-h-screen flex justify-center items-center">
@@ -235,6 +236,5 @@ useEffect(() => {
     </div>
   );
 };
-
 
 export default KuisPages;

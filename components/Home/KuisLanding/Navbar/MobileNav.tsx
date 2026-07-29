@@ -3,19 +3,20 @@ import { CgClose } from "react-icons/cg";
 import { NAVLINKS } from "@/constant/constant";
 import React from "react";
 import { User } from "@supabase/supabase-js";
-
 type Props = {
   showNav: boolean;
   closeNav: () => void;
   user: User | null;
+  handleAksesKuis: (halaman: string) => void;
 };
 
-// type Props = {
-//   showNav: boolean;
-//   closeNav: () => void;
-// };
+const MobileNav = ({
+  showNav,
+  closeNav,
+  user,
+  handleAksesKuis,
+}: Props) => {
 
-const MobileNav = ({ closeNav, showNav, user }: Props) => {
   const navOpenCloseStyle = showNav ? "translate-x-0" : "-translate-x-full";
 
   return (
@@ -34,13 +35,32 @@ const MobileNav = ({ closeNav, showNav, user }: Props) => {
           if (user) return true;
 
           return link.label === "Beranda" || link.label === "Materi";
-        }).map((link) => (
-          <Link key={link.id} href={link.url}>
-            <p className="text-[30px] sm:text-[30px] font-semibold ml-12 w-fit border-b-[1.5px] border-white pb-1">
-              {link.label}
-            </p>
-          </Link>
-        ))}
+        }).map((link) => {
+          const isProtected =
+            link.url === "/kuisLevel" || link.url === "/predikat";
+
+          if (isProtected) {
+            return (
+              <button
+                key={link.id}
+                onClick={() => handleAksesKuis(link.url)}
+                className="text-left"
+              >
+                <p className="text-[30px] sm:text-[30px] font-semibold ml-12 w-fit border-b-[1.5px] border-white pb-1">
+                  {link.label}
+                </p>
+              </button>
+            );
+          }
+
+          return (
+            <Link key={link.id} href={link.url} onClick={closeNav}>
+              <p className="text-[30px] sm:text-[30px] font-semibold ml-12 w-fit border-b-[1.5px] border-white pb-1">
+                {link.label}
+              </p>
+            </Link>
+          );
+        })}
 
         <CgClose
           onClick={closeNav}

@@ -11,14 +11,12 @@ const FahamMateri = ({ handleFaham, semuaSelesai }: Props) => {
       <div className="bg-blue-500 w-full min-h-[150px] p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="max-w-full">
           <h3 className="font-bold text-2xl sm:text-3xl text-white">
-            Materi Selesai!
+            Semua materi Selesai!
           </h3>
 
           <p className="text-base sm:text-lg text-white mt-2">
             Saatnya uji pemahamanmu dengan kuis!
           </p>
-
-          <p className="text-white mt-1">Daftarkan akun untuk memulainya!</p>
         </div>
       </div>
     );

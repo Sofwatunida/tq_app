@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+
 import Logo from "@/components/Helper/Logo";
 import { NAVLINKS } from "@/constant/constant";
 
@@ -17,19 +18,16 @@ import { FiLogOut } from "react-icons/fi";
 type Props = {
   openNav: () => void;
   user: User | null;
+  handleAksesKuis: (halaman: string) => void;
 };
 
-const Nav = ({ openNav, user }: Props) => {
+const Nav = ({ openNav, user, handleAksesKuis }: Props) => {
   const router = useRouter();
 
   const [navBg, setNavBg] = useState(false);
-
   const [nama, setNama] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Ambil user login
-  // Ambil nama pengguna ketika user berubah
-  // Ambil nama pengguna ketika user berubah
   useEffect(() => {
     const getNama = async () => {
       if (!user) {
@@ -48,7 +46,6 @@ const Nav = ({ openNav, user }: Props) => {
 
     getNama();
   }, [user]);
-
   // Shadow Navbar
 
   useEffect(() => {
@@ -96,13 +93,19 @@ const Nav = ({ openNav, user }: Props) => {
             // Jika belum login, hanya tampil Beranda dan Materi
             return link.label === "Beranda" || link.label === "Materi";
           }).map((link) => (
-            <Link
+            <button
               key={link.id}
-              href={link.url}
+              onClick={() => {
+                if (link.url === "/kuisLevel" || link.url === "/predikat") {
+                  handleAksesKuis(link.url);
+                } else {
+                  router.push(link.url);
+                }
+              }}
               className="text-black hover:text-blue-500 font-medium duration-200"
             >
               {link.label}
-            </Link>
+            </button>
           ))}
         </div>
 
@@ -176,6 +179,6 @@ const Nav = ({ openNav, user }: Props) => {
       </div>
     </div>
   );
-};;
+};
 
 export default Nav;

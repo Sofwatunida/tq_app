@@ -51,14 +51,6 @@ export default function MasukPage() {
     router.push("/");
   };
 
-  //   if (!email || !password) {
-  //     alert("Isi woi biasain!!");
-  //     return;
-  //   }
-
-  //   alert("Login berhasil");
-  //   router.push("/");
-  // };
 
   
 

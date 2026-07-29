@@ -11,10 +11,10 @@ const About = () => {
           <div 
           data-aos="zoom-in" data-aos-anchor-placement="top-center" className="">
             <Image
-              src={"/images/quran.png"}
+              src={"/images/materipic.png"}
               alt="about"
-              width={250}
-              height={250}
+              width={300}
+              height={300}
               className="flex justify-center lg:justify-start"
             />
           </div>
@@ -26,9 +26,8 @@ const About = () => {
             </h1>
             {/* isinya */}
             <p className="text-gray-600 text-lg mt-2 sm:w-4/5">
-              Pelajari dasar hukum tajwid dengan materi yang ringkas dan mudah
-              dipahami.
               Siapkan dirimu sebelum menaklukkan kuis!
+              Ingin progres anda tersimpan? daftarkan akun anda!
             </p>
             {/* cta buttttttttton */}
             <button

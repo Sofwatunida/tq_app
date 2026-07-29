@@ -9,7 +9,7 @@ const KataMutiara = () => {
         <p className="text-white text-xl md:text-xl break-words">
           “Sebaik-baik kalian adalah yang belajar Al-Quran dan Mengajarkannya”
           <br />
-          <p className="font-bold">-HR. Bukhari</p>
+          <span className="font-bold">-HR.Bukhari-</span>
         </p>
       </div>
       <div className="pt-5">
