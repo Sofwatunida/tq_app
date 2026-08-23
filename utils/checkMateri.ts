@@ -1,15 +1,15 @@
-import { daftarMateri } from "@/constant/constMateri";
+// import { daftarMateri } from "@/constant/constMateri";
 
-export function semuaMateriSelesai() {
-  const statusMateri = localStorage.getItem("materiProgress");
+// export function semuaMateriSelesai() {
+//   const statusMateri = localStorage.getItem("materiProgress");
 
-  if (!statusMateri) {
-    return false;
-  }
+//   if (!statusMateri) {
+//     return false;
+//   }
 
-  const progress = JSON.parse(statusMateri);
+//   const progress = JSON.parse(statusMateri);
 
-  return daftarMateri.every((materi) => {
-    return progress[materi.id] === true;
-  });
-}
+//   return daftarMateri.every((materi) => {
+//     return progress[materi.id] === true;
+//   });
+// }

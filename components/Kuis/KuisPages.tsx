@@ -4,6 +4,7 @@ import { constKuis } from "@/constant/constKuis";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/supabase";
+import AudioAyat from "@/components/audioAyat"; 
 
 const KuisPages = () => {
   console.log("KuisPages dibuat ulang");
@@ -212,7 +213,13 @@ const KuisPages = () => {
         </h1>
 
         <div className="border text-2xl rounded-xl text-center p-8 m-3 select-none">
-          {soal.ayat}
+          {soal.surah && soal.nomorAyat && soal.audioPositions && (
+            <AudioAyat
+              surah={soal.surah}
+              ayat={soal.nomorAyat}
+              positions={soal.audioPositions}
+            />
+          )}
         </div>
 
         <p className="select-none">{soal.soal}</p>

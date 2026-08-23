@@ -1,4 +1,21 @@
-export const constKuis = [
+type Kuis = {
+  id: number;
+  level: number;
+  ayat: string;
+
+  surah?: number;
+  nomorAyat?: number;
+  audioPositions?: number[];
+
+  audio?: string[];
+
+  soal: string;
+  pilihan: string[];
+  jawaban: string;
+};
+
+
+export const constKuis: Kuis[] = [
   // =========================
   // LEVEL 1
   // =========================
@@ -6,8 +23,20 @@ export const constKuis = [
     id: 1,
     level: 1,
     ayat: "مِنْ بَعْدِ",
+
+    // sumber audio
+    surah: 2,
+    nomorAyat: 27,
+
+    // posisi kata per-ayat
+    audioPositions: [1, 6],
+
+    audio: [
+      "https://cdn.islamic.app/quran/audio-word/2/27/6.mp3",
+      "https://cdn.islamic.app/quran/audio-word/2/27/7.mp3",
+    ],
     soal: "Nun sukun bertemu huruf Ba hukumnya?",
-    pilihan: ["Idzhar", "Iqlab", "Ikhfa", "idgom"],
+    pilihan: ["Ikhfa", "Iqlab", "Idzhar", "Idgom"],
     jawaban: "Iqlab",
   },
   {
@@ -15,7 +44,7 @@ export const constKuis = [
     level: 1,
     ayat: "مِنْ هَادٍ",
     soal: "Nun sukun bertemu huruf Ha hukumnya?",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Ikhfa", "Idgom", "Iqlab", "Idzhar"],
     jawaban: "Idzhar",
   },
   {
@@ -23,15 +52,15 @@ export const constKuis = [
     level: 1,
     ayat: "مِنْ مَالٍ",
     soal: "Nun sukun bertemu huruf Mim hukumnya?",
-    pilihan: ["idgom", "Ikhfa", "Idzhar", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Idzhar", "Idgom", "Iqlab", "Ikhfa"],
+    jawaban: "Idgom",
   },
   {
     id: 4,
     level: 1,
     ayat: "مِنْ كُلِّ",
     soal: "Nun sukun bertemu huruf Kaf hukumnya?",
-    pilihan: ["Ikhfa", "Idzhar", "Iqlab", "idgom"],
+    pilihan: ["Idzhar", "Iqlab", "Ikhfa", "Idgom"],
     jawaban: "Ikhfa",
   },
   {
@@ -39,7 +68,7 @@ export const constKuis = [
     level: 1,
     ayat: "الشَّمْسُ",
     soal: "Alif Lam pada kata di atas termasuk?",
-    pilihan: ["Syamsiyah", "Qamariyah", "Ikhfa", "idgom"],
+    pilihan: ["Qamariyah", "Ikhfa", "Syamsiyah", "Idgom"],
     jawaban: "Syamsiyah",
   },
   {
@@ -47,7 +76,7 @@ export const constKuis = [
     level: 1,
     ayat: "الْقَمَرُ",
     soal: "Alif Lam pada kata di atas termasuk?",
-    pilihan: ["Qamariyah", "Syamsiyah", "Idzhar", "Ikhfa"],
+    pilihan: ["Syamsiyah", "Idzhar", "Ikhfa", "Qamariyah"],
     jawaban: "Qamariyah",
   },
   {
@@ -55,7 +84,7 @@ export const constKuis = [
     level: 1,
     ayat: "مِنْ عِلْمٍ",
     soal: "Nun sukun bertemu Ain hukumnya?",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Ikhfa", "Iqlab", "Idzhar", "Idgom"],
     jawaban: "Idzhar",
   },
   {
@@ -63,15 +92,15 @@ export const constKuis = [
     level: 1,
     ayat: "مِنْ يَقُولُ",
     soal: "Nun sukun bertemu Ya hukumnya?",
-    pilihan: ["idgom", "Idzhar", "Ikhfa", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Idzhar", "Ikhfa", "Idgom", "Iqlab"],
+    jawaban: "Idgom",
   },
   {
     id: 9,
     level: 1,
     ayat: "مِنْ تَحْتِ",
     soal: "Nun sukun bertemu Ta hukumnya?",
-    pilihan: ["Ikhfa", "Idzhar", "idgom", "Iqlab"],
+    pilihan: ["Idgom", "Ikhfa", "Idzhar", "Iqlab"],
     jawaban: "Ikhfa",
   },
   {
@@ -79,7 +108,7 @@ export const constKuis = [
     level: 1,
     ayat: "الْكَوْثَرُ",
     soal: "Alif Lam pada kata di atas termasuk?",
-    pilihan: ["Qamariyah", "Syamsiyah", "Ikhfa", "Iqlab"],
+    pilihan: ["Syamsiyah", "Iqlab", "Qamariyah", "Ikhfa"],
     jawaban: "Qamariyah",
   },
 
@@ -91,7 +120,7 @@ export const constKuis = [
     level: 2,
     ayat: "مِنْ ذَهَبٍ",
     soal: "Hukum bacaan pada nun sukun adalah...",
-    pilihan: ["Ikhfa", "Idzhar", "Iqlab", "idgom"],
+    pilihan: ["Idzhar", "Iqlab", "Ikhfa", "Idgom"],
     jawaban: "Ikhfa",
   },
   {
@@ -99,15 +128,15 @@ export const constKuis = [
     level: 2,
     ayat: "مِنْ لَدُنْهُ",
     soal: "Nun sukun bertemu Lam menjadi...",
-    pilihan: ["idgom", "Ikhfa", "Idzhar", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Ikhfa", "Iqlab", "Idgom", "Idzhar"],
+    jawaban: "Idgom",
   },
   {
     id: 13,
     level: 2,
     ayat: "مِنْ غِلٍّ",
     soal: "Nun sukun bertemu Ghain hukumnya?",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Iqlab", "Ikhfa", "Idzhar", "Idgom"],
     jawaban: "Idzhar",
   },
   {
@@ -115,7 +144,7 @@ export const constKuis = [
     level: 2,
     ayat: "مِنْ صَدَقَةٍ",
     soal: "Nun sukun bertemu Shad hukumnya?",
-    pilihan: ["Ikhfa", "idgom", "Idzhar", "Iqlab"],
+    pilihan: ["Idgom", "Ikhfa", "Iqlab", "Idzhar"],
     jawaban: "Ikhfa",
   },
   {
@@ -123,7 +152,7 @@ export const constKuis = [
     level: 2,
     ayat: "الرَّحْمٰنُ",
     soal: "Alif Lam pada kata di atas termasuk?",
-    pilihan: ["Syamsiyah", "Qamariyah", "Ikhfa", "Idzhar"],
+    pilihan: ["Qamariyah", "Ikhfa", "Idzhar", "Syamsiyah"],
     jawaban: "Syamsiyah",
   },
   {
@@ -131,7 +160,7 @@ export const constKuis = [
     level: 2,
     ayat: "الْفَلَقِ",
     soal: "Alif Lam pada kata di atas termasuk?",
-    pilihan: ["Qamariyah", "Syamsiyah", "Iqlab", "idgom"],
+    pilihan: ["Syamsiyah", "Iqlab", "Qamariyah", "Idgom"],
     jawaban: "Qamariyah",
   },
   {
@@ -139,15 +168,15 @@ export const constKuis = [
     level: 2,
     ayat: "مِنْ وَالٍ",
     soal: "Nun sukun bertemu Wawu hukumnya?",
-    pilihan: ["idgom", "Idzhar", "Ikhfa", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Idzhar", "Ikhfa", "Iqlab", "Idgom"],
+    jawaban: "Idgom",
   },
   {
     id: 18,
     level: 2,
     ayat: "مِنْ جَنَّةٍ",
     soal: "Nun sukun bertemu Jim hukumnya?",
-    pilihan: ["Ikhfa", "idgom", "Idzhar", "Iqlab"],
+    pilihan: ["Iqlab", "Idzhar", "Ikhfa", "Idgom"],
     jawaban: "Ikhfa",
   },
   {
@@ -155,7 +184,7 @@ export const constKuis = [
     level: 2,
     ayat: "مِنْ أَهْلِ",
     soal: "Nun sukun bertemu Hamzah hukumnya?",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Ikhfa", "Idgom", "Idzhar", "Iqlab"],
     jawaban: "Idzhar",
   },
   {
@@ -163,7 +192,7 @@ export const constKuis = [
     level: 2,
     ayat: "النَّاسِ",
     soal: "Alif Lam pada kata di atas termasuk?",
-    pilihan: ["Syamsiyah", "Qamariyah", "idgom", "Ikhfa"],
+    pilihan: ["Qamariyah", "Idgom", "Syamsiyah", "Ikhfa"],
     jawaban: "Syamsiyah",
   },
 
@@ -175,7 +204,7 @@ export const constKuis = [
     level: 3,
     ayat: "أَنْبِئْهُمْ",
     soal: "Hukum nun sukun pada ayat di atas adalah...",
-    pilihan: ["Iqlab", "Ikhfa", "idgom", "Idzhar"],
+    pilihan: ["Ikhfa", "Idgom", "Iqlab", "Idzhar"],
     jawaban: "Iqlab",
   },
   {
@@ -183,15 +212,15 @@ export const constKuis = [
     level: 3,
     ayat: "مِنْ رَبِّهِمْ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["idgom", "Ikhfa", "Idzhar", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Ikhfa", "Iqlab", "Idzhar", "Idgom"],
+    jawaban: "Idgom",
   },
   {
     id: 23,
     level: 3,
     ayat: "مِنْ ثَمَرَاتٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Ikhfa", "idgom", "Idzhar", "Iqlab"],
+    pilihan: ["Idgom", "Ikhfa", "Iqlab", "Idzhar"],
     jawaban: "Ikhfa",
   },
   {
@@ -199,7 +228,7 @@ export const constKuis = [
     level: 3,
     ayat: "مِنْ خَيْرٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Ikhfa", "Idzhar", "Idgom", "Iqlab"],
     jawaban: "Idzhar",
   },
   {
@@ -207,7 +236,7 @@ export const constKuis = [
     level: 3,
     ayat: "السَّمَاءِ",
     soal: "Alif Lam pada kata di atas termasuk...",
-    pilihan: ["Syamsiyah", "Qamariyah", "Idzhar", "Ikhfa"],
+    pilihan: ["Qamariyah", "Idzhar", "Syamsiyah", "Ikhfa"],
     jawaban: "Syamsiyah",
   },
   {
@@ -215,7 +244,7 @@ export const constKuis = [
     level: 3,
     ayat: "الْحَمْدُ",
     soal: "Alif Lam pada kata di atas termasuk...",
-    pilihan: ["Qamariyah", "Syamsiyah", "idgom", "Ikhfa"],
+    pilihan: ["Syamsiyah", "Idgom", "Qamariyah", "Ikhfa"],
     jawaban: "Qamariyah",
   },
   {
@@ -223,7 +252,7 @@ export const constKuis = [
     level: 3,
     ayat: "مِنْ دُونِ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Ikhfa", "idgom", "Idzhar", "Iqlab"],
+    pilihan: ["Idgom", "Iqlab", "Ikhfa", "Idzhar"],
     jawaban: "Ikhfa",
   },
   {
@@ -231,15 +260,15 @@ export const constKuis = [
     level: 3,
     ayat: "مِنْ نُورٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["idgom", "Idzhar", "Ikhfa", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Idzhar", "Idgom", "Ikhfa", "Iqlab"],
+    jawaban: "Idgom",
   },
   {
     id: 29,
     level: 3,
     ayat: "مِنْ حَكِيمٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Ikhfa", "Iqlab", "Idzhar", "Idgom"],
     jawaban: "Idzhar",
   },
   {
@@ -247,7 +276,7 @@ export const constKuis = [
     level: 3,
     ayat: "الْجَنَّةُ",
     soal: "Alif Lam pada kata di atas termasuk...",
-    pilihan: ["Qamariyah", "Syamsiyah", "Ikhfa", "idgom"],
+    pilihan: ["Syamsiyah", "Ikhfa", "Idgom", "Qamariyah"],
     jawaban: "Qamariyah",
   },
 
@@ -259,7 +288,7 @@ export const constKuis = [
     level: 4,
     ayat: "مِنْ زُخْرُفٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Ikhfa", "idgom", "Idzhar", "Iqlab"],
+    pilihan: ["Idzhar", "Ikhfa", "Iqlab", "Idgom"],
     jawaban: "Ikhfa",
   },
   {
@@ -267,15 +296,15 @@ export const constKuis = [
     level: 4,
     ayat: "مِنْ يَوْمٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["idgom", "Idzhar", "Ikhfa", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Ikhfa", "Iqlab", "Idgom", "Idzhar"],
+    jawaban: "Idgom",
   },
   {
     id: 33,
     level: 4,
     ayat: "مِنْ عَذَابٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Ikhfa", "Idzhar", "Iqlab", "Idgom"],
     jawaban: "Idzhar",
   },
   {
@@ -283,7 +312,7 @@ export const constKuis = [
     level: 4,
     ayat: "أَنْبَتَ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Iqlab", "Idzhar", "Ikhfa", "idgom"],
+    pilihan: ["Idzhar", "Iqlab", "Ikhfa", "Idgom"],
     jawaban: "Iqlab",
   },
   {
@@ -291,7 +320,7 @@ export const constKuis = [
     level: 4,
     ayat: "الطَّارِقِ",
     soal: "Alif Lam termasuk...",
-    pilihan: ["Syamsiyah", "Qamariyah", "Ikhfa", "Idzhar"],
+    pilihan: ["Qamariyah", "Ikhfa", "Syamsiyah", "Idzhar"],
     jawaban: "Syamsiyah",
   },
   {
@@ -299,7 +328,7 @@ export const constKuis = [
     level: 4,
     ayat: "الْغَاشِيَةُ",
     soal: "Alif Lam termasuk...",
-    pilihan: ["Qamariyah", "Syamsiyah", "Ikhfa", "idgom"],
+    pilihan: ["Syamsiyah", "Ikhfa", "Idgom", "Qamariyah"],
     jawaban: "Qamariyah",
   },
   {
@@ -307,7 +336,7 @@ export const constKuis = [
     level: 4,
     ayat: "مِنْ قَبْلِ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Ikhfa", "idgom", "Idzhar", "Iqlab"],
+    pilihan: ["Idgom", "Ikhfa", "Iqlab", "Idzhar"],
     jawaban: "Ikhfa",
   },
   {
@@ -315,15 +344,15 @@ export const constKuis = [
     level: 4,
     ayat: "مِنْ لَدُنْكَ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["idgom", "Ikhfa", "Idzhar", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Ikhfa", "Idzhar", "Idgom", "Iqlab"],
+    jawaban: "Idgom",
   },
   {
     id: 39,
     level: 4,
     ayat: "مِنْ أَنْفُسِهِمْ",
     soal: "Huruf setelah nun sukun adalah...",
-    pilihan: ["Hamzah", "Ba", "Mim", "Kaf"],
+    pilihan: ["Ba", "Mim", "Hamzah", "Kaf"],
     jawaban: "Hamzah",
   },
   {
@@ -331,7 +360,7 @@ export const constKuis = [
     level: 4,
     ayat: "الشَّرِّ",
     soal: "Alif Lam termasuk...",
-    pilihan: ["Syamsiyah", "Qamariyah", "idgom", "Ikhfa"],
+    pilihan: ["Qamariyah", "Idgom", "Ikhfa", "Syamsiyah"],
     jawaban: "Syamsiyah",
   },
 
@@ -343,7 +372,7 @@ export const constKuis = [
     level: 5,
     ayat: "مِنْ فَضْلِ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Ikhfa", "idgom", "Idzhar", "Iqlab"],
+    pilihan: ["Idgom", "Iqlab", "Ikhfa", "Idzhar"],
     jawaban: "Ikhfa",
   },
   {
@@ -351,7 +380,7 @@ export const constKuis = [
     level: 5,
     ayat: "مِنْ بَعْثِهِمْ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Iqlab", "Ikhfa", "idgom", "Idzhar"],
+    pilihan: ["Ikhfa", "Iqlab", "Idzhar", "Idgom"],
     jawaban: "Iqlab",
   },
   {
@@ -359,15 +388,15 @@ export const constKuis = [
     level: 5,
     ayat: "مِنْ وَرَائِهِمْ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["idgom", "Idzhar", "Ikhfa", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Idzhar", "Idgom", "Iqlab", "Ikhfa"],
+    jawaban: "Idgom",
   },
   {
     id: 44,
     level: 5,
     ayat: "مِنْ حَكِيمٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Ikhfa", "Iqlab", "Idzhar", "Idgom"],
     jawaban: "Idzhar",
   },
   {
@@ -375,7 +404,7 @@ export const constKuis = [
     level: 5,
     ayat: "الصَّالِحَاتِ",
     soal: "Alif Lam termasuk...",
-    pilihan: ["Syamsiyah", "Qamariyah", "idgom", "Ikhfa"],
+    pilihan: ["Qamariyah", "Idgom", "Syamsiyah", "Ikhfa"],
     jawaban: "Syamsiyah",
   },
   {
@@ -383,7 +412,7 @@ export const constKuis = [
     level: 5,
     ayat: "الْفَوْزُ",
     soal: "Alif Lam termasuk...",
-    pilihan: ["Qamariyah", "Syamsiyah", "Ikhfa", "idgom"],
+    pilihan: ["Syamsiyah", "Ikhfa", "Qamariyah", "Idgom"],
     jawaban: "Qamariyah",
   },
   {
@@ -391,7 +420,7 @@ export const constKuis = [
     level: 5,
     ayat: "مِنْ طِينٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Ikhfa", "Idzhar", "idgom", "Iqlab"],
+    pilihan: ["Idzhar", "Ikhfa", "Idgom", "Iqlab"],
     jawaban: "Ikhfa",
   },
   {
@@ -399,15 +428,15 @@ export const constKuis = [
     level: 5,
     ayat: "مِنْ نِعْمَةٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["idgom", "Ikhfa", "Idzhar", "Iqlab"],
-    jawaban: "idgom",
+    pilihan: ["Ikhfa", "Idgom", "Idzhar", "Iqlab"],
+    jawaban: "Idgom",
   },
   {
     id: 49,
     level: 5,
     ayat: "مِنْ غَفُورٍ",
     soal: "Hukum bacaannya adalah...",
-    pilihan: ["Idzhar", "Ikhfa", "idgom", "Iqlab"],
+    pilihan: ["Ikhfa", "Iqlab", "Idzhar", "Idgom"],
     jawaban: "Idzhar",
   },
   {
@@ -415,9 +444,7 @@ export const constKuis = [
     level: 5,
     ayat: "الْبَلَدِ",
     soal: "Alif Lam termasuk...",
-    pilihan: ["Qamariyah", "Syamsiyah", "Ikhfa", "Iqlab"],
+    pilihan: ["Syamsiyah", "Ikhfa", "Iqlab", "Qamariyah"],
     jawaban: "Qamariyah",
   },
 ];
-
-

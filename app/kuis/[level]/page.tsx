@@ -1,6 +1,7 @@
 import KuisPages from "@/components/Kuis/KuisPages";
 
-export default function Page(){
+export const dynamic = "force-dynamic";
 
+export default function Page() {
   return <KuisPages />;
 }

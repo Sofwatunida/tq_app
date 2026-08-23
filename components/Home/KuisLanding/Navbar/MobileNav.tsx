@@ -29,7 +29,7 @@ const MobileNav = ({
 
       {/* Mobile Menu */}
       <div
-        className={`fixed ${navOpenCloseStyle} flex flex-col justify-center h-full w-[80%] sm:w-[60%] bg-blue-500 text-white space-y-6 transform transition-all duration-500 delay-300 z-[1050]`}
+        className={`fixed ${navOpenCloseStyle} flex flex-col justify-center h-full w-[80%] sm:w-[60%] bg-blue-700 text-white space-y-6 transform transition-all duration-500 delay-300 z-[1050]`}
       >
         {NAVLINKS.filter((link) => {
           if (user) return true;
@@ -64,7 +64,7 @@ const MobileNav = ({
 
         <CgClose
           onClick={closeNav}
-          className="absolute top-[0.7rem] right-[1.4rem] w-6 h-6 sm:w-8 sm:h-8 cursor-pointer"
+          className=" top-[0.7rem] k-[1.4rem] w-6 h-6 sm:w-8 sm:h-8 cursor-pointer"
         />
       </div>
     </div>
