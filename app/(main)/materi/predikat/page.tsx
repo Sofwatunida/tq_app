@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/supabase";
+import { getPredikat } from "@/lib/getPredikat";
 
 interface UserLevelData {
   id: string;
@@ -18,19 +19,19 @@ const PredikatLevel = () => {
   const [selectedLevel, setSelectedLevel] = useState(1);
   const [userLevel, setUserLevel] = useState<UserLevelData[]>([]);
 
-  const getPredikat = (poin: number) => {
-    if (poin >= 90) {
-      return "A+";
-    } else if (poin >= 75) {
-      return "A";
-    } else if (poin >= 60) {
-      return "B";
-    } else if (poin >= 40) {
-      return "C";
-    } else {
-      return "D";
-    }
-  };
+  // const getPredikat = (poin: number) => {
+  //   if (poin >= 90) {
+  //     return "A+";
+  //   } else if (poin >= 75) {
+  //     return "A";
+  //   } else if (poin >= 60) {
+  //     return "B";
+  //   } else if (poin >= 40) {
+  //     return "C";
+  //   } else {
+  //     return "D";
+  //   }
+  // };
 
   // ambil data dari supa
   useEffect(() => {

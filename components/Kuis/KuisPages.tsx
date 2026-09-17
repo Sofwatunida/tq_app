@@ -4,10 +4,9 @@ import { constKuis } from "@/constant/constKuis";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/supabase";
-import AudioAyat from "@/components/audioAyat"; 
+import { getPredikat } from "@/lib/getPredikat";
 
 const KuisPages = () => {
-  console.log("KuisPages dibuat ulang");
   const router = useRouter();
   const params = useParams();
   const level = params.level as string;
@@ -28,24 +27,12 @@ const KuisPages = () => {
     setSelesai(false);
   };
   useEffect(() => {
-  resetKuis();
+    resetKuis();
   }, []);
-  
+
   const soalLevel = constKuis.filter((item) => item.level === Number(level));
 
   const soal = soalLevel[nomorSoal];
-
-  // useepek
-
-  useEffect(() => {
-    console.log("===RENDER===");
-    console.log("timer:", timer);
-    console.log("nomorSoal:", nomorSoal);
-    console.log("selesai:", selesai);
-    console.log("jumlah soal:", soalLevel.length);
-  }, [timer, nomorSoal, selesai, soalLevel.length]);
-
-  // Jadi kalau sudah memilih jawaban, timer tidak ikut memindahkan soal.
 
   const lanjutSoal = () => {
     if (nomorSoal < soalLevel.length - 1) {
@@ -57,7 +44,6 @@ const KuisPages = () => {
     }
   };
 
-  // hai
   const pilihJawaban = (opsi: string) => {
     if (jawabanDipilih) return;
 
@@ -95,19 +81,10 @@ const KuisPages = () => {
         data: { user },
       } = await supabase.auth.getUser();
 
-      console.log("User:", user);
-
       if (!user) {
-        console.log("User belum login");
         return;
       }
 
-      console.log("Level:", Number(level));
-      console.log("Poin", poin);
-      console.log("Waktu:", totalWaktu);
-
-      //  logic penyimpanan
-      // cek user udh prnh ngerjain kagak
       const { data: dataLama, error: cekError } = await supabase
         .from("hasil_kuis")
         .select("id")
@@ -131,9 +108,7 @@ const KuisPages = () => {
           .eq("id", dataLama.id);
 
         if (error) {
-          console.error("update ggl", error);
-        } else {
-          console.log("data berhasil di update");
+          console.error("Error updating quiz result:", error);
         }
       } else {
         // blm ada insert brrti
@@ -145,9 +120,7 @@ const KuisPages = () => {
         });
 
         if (error) {
-          console.error("Supabase Error:", error);
-        } else {
-          console.log("Berhasil disimpan");
+          console.error("Error saving quiz result:", error);
         }
       }
     };
@@ -182,7 +155,7 @@ const KuisPages = () => {
           <p className="text-2xl font-semibold mb-2">Poin: {poin}</p>
 
           <p className="text-xl text-gray-600">Waktu: {totalWaktu} detik</p>
-          <p className="text-xl text-gray-600">Predikat :</p>
+          <p className="text-xl text-gray-600">Predikat : {getPredikat(poin)}</p>
 
           <button
             onClick={() => router.push("/kuisLevel")}
@@ -212,14 +185,8 @@ const KuisPages = () => {
           {nomorSoal + 1}/ {soalLevel.length}
         </h1>
 
-        <div className="border text-2xl rounded-xl text-center p-8 m-3 select-none">
-          {soal.surah && soal.nomorAyat && soal.audioPositions && (
-            <AudioAyat
-              surah={soal.surah}
-              ayat={soal.nomorAyat}
-              positions={soal.audioPositions}
-            />
-          )}
+        <div className="border-4 border-green-700 text-2xl rounded-xl text-center p-8 m-3 select-none">
+          <p className="text-3xl font-semibold text-green-700">{soal.ayat}</p>
         </div>
 
         <p className="select-none">{soal.soal}</p>

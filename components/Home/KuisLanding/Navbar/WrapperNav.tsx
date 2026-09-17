@@ -41,9 +41,27 @@ const WrapperNav = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const handleAksesKuis = async (halaman: string) => {
+  const handleAksesMenu = async (halaman: string) => {
+    if (halaman === "/") {
+      router.push(halaman);
+      closeNavHandler();
+      return;
+    }
+
     if (!user) {
-      router.push("/auth/masuk");
+      const result = await Swal.fire({
+        icon: "info",
+        title: "Silakan Daftar",
+        text: "Daftar terlebih dahulu untuk mengakses fitur ini.",
+        showCancelButton: true,
+        confirmButtonText: "Daftar",
+        cancelButtonText: "Tutup",
+        confirmButtonColor: "#3b82f6",
+      });
+
+      if (result.isConfirmed) {
+        router.push("/auth/daftar");
+      }
       return;
     }
 
@@ -78,28 +96,28 @@ const WrapperNav = () => {
       return;
     }
 
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("sudah_lihat_unlock")
-      .eq("id", user.id)
-      .single();
+    // const { data: profile } = await supabase
+    //   .from("profiles")
+    //   .select("sudah_lihat_unlock")
+    //   .eq("id", user.id)
+    //   .single();
 
-    if (!profile?.sudah_lihat_unlock) {
-      const result = await Swal.fire({
-        icon: "success",
-        title: "Alhamdulillah!",
-        text: "Anda telah menyelesaikan seluruh materi. Kini Anda dapat mengakses Kuis dan Predikat.",
-        confirmButtonText: "Mulai",
-        confirmButtonColor: "#3b82f6",
-      });
+    // if (!profile?.sudah_lihat_unlock) {
+    //   const result = await Swal.fire({
+    //     icon: "success",
+    //     title: "Alhamdulillah!",
+    //     text: "Anda telah menyelesaikan seluruh materi. Kini Anda dapat mengakses Kuis dan Predikat.",
+    //     confirmButtonText: "Mulai",
+    //     confirmButtonColor: "#3b82f6",
+    //   });
 
-      if (!result.isConfirmed) return;
+    //   if (!result.isConfirmed) return;
 
-      await supabase
-        .from("profiles")
-        .update({ sudah_lihat_unlock: true })
-        .eq("id", user.id);
-    }
+    //   await supabase
+    //     .from("profiles")
+    //     .update({ sudah_lihat_unlock: true })
+    //     .eq("id", user.id);
+    // }
 
     router.push(halaman);
     closeNavHandler();
@@ -114,14 +132,13 @@ const WrapperNav = () => {
       <Nav
         openNav={openNavHandler}
         user={user}
-        handleAksesKuis={handleAksesKuis}
+        handleAksesMenu={handleAksesMenu}
       />
 
       <MobileNav
         showNav={showNav}
         closeNav={closeNavHandler}
-        user={user}
-        handleAksesKuis={handleAksesKuis}
+        handleAksesMenu={handleAksesMenu}
       />
     </>
   );

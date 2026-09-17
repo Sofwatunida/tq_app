@@ -1,3 +1,8 @@
+import { getMateriAudioUrl } from "@/lib/quranAudio";
+
+const getAudio = (surah: number, ayat: number, position: number) =>
+  getMateriAudioUrl(surah, ayat, position);
+
 export const daftarMateri = [
   {
     id: 1,
@@ -18,8 +23,9 @@ export const daftarMateri = [
 
         arti: "Pada lafaz ini, nun sukun bertemu huruf wau sehingga dibaca melebur dengan dengung.",
 
-        caraBaca:
+        cara_baca:
           "Nun sukun atau tanwin dilebur ke huruf setelahnya sambil didengungkan selama dua harakat.",
+        audio_url: getAudio(1, 1, 1),
 
         selesai: false,
       },
@@ -38,8 +44,9 @@ export const daftarMateri = [
 
         arti: "Nun sukun bertemu huruf ra sehingga dibaca melebur tanpa dengung.",
 
-        caraBaca:
+        cara_baca:
           "Nun sukun atau tanwin langsung dilebur tanpa mendengungkan suara.",
+        audio_url: getAudio(1, 1, 2),
 
         selesai: false,
       },
@@ -65,7 +72,8 @@ export const daftarMateri = [
 
         arti: "Nun sukun berubah menjadi bunyi mim karena bertemu huruf ba.",
 
-        caraBaca: "Bacalah nun menjadi mim dengan dengung selama dua harakat.",
+        cara_baca: "Bacalah nun menjadi mim dengan dengung selama dua harakat.",
+        audio_url: getAudio(2, 1, 1),
 
         selesai: false,
       },
@@ -91,7 +99,8 @@ export const daftarMateri = [
 
         arti: "Nun sukun bertemu huruf ha sehingga dibaca jelas.",
 
-        caraBaca: "Nun sukun dibaca dengan jelas tanpa dengung.",
+        cara_baca: "Nun sukun dibaca dengan jelas tanpa dengung.",
+        audio_url: getAudio(1, 2, 1),
 
         selesai: false,
       },
@@ -110,7 +119,8 @@ export const daftarMateri = [
 
         arti: "Mim sukun bertemu huruf qaf sehingga dibaca jelas.",
 
-        caraBaca: "Mim sukun dibaca jelas tanpa dengung.",
+        cara_baca: "Mim sukun dibaca jelas tanpa dengung.",
+        audio_url: getAudio(2, 1, 2),
 
         selesai: false,
       },
@@ -152,7 +162,8 @@ export const daftarMateri = [
 
         arti: "Nun sukun bertemu huruf syin sehingga dibaca samar.",
 
-        caraBaca: "Bacalah samar dengan dengung selama dua harakat.",
+        cara_baca: "Bacalah samar dengan dengung selama dua harakat.",
+        audio_url: getAudio(4, 1, 1),
 
         selesai: false,
       },
@@ -171,7 +182,9 @@ export const daftarMateri = [
 
         arti: "Mim sukun bertemu huruf ba sehingga dibaca samar.",
 
-        caraBaca: "Mim sukun dibaca samar disertai dengung selama dua harakat.",
+        cara_baca:
+          "Mim sukun dibaca samar disertai dengung selama dua harakat.",
+        audio_url: getAudio(6, 1, 1),
 
         selesai: false,
       },
@@ -212,7 +225,8 @@ export const daftarMateri = [
 
         arti: "Huruf lam dibaca jelas karena bertemu huruf qaf.",
 
-        caraBaca: "Bacalah huruf lam dengan jelas.",
+        cara_baca: "Bacalah huruf lam dengan jelas.",
+        audio_url: getAudio(10, 1, 1),
 
         selesai: false,
       },
@@ -246,8 +260,9 @@ export const daftarMateri = [
 
         arti: "Huruf lam tidak dibaca karena melebur ke huruf syin.",
 
-        caraBaca:
+        cara_baca:
           "Huruf lam dilebur ke huruf setelahnya tanpa dibaca terpisah.",
+        audio_url: getAudio(91, 1, 1),
 
         selesai: false,
       },

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-
 import Logo from "@/components/Helper/Logo";
 import { NAVLINKS } from "@/constant/constant";
 
@@ -18,10 +17,10 @@ import { FiLogOut } from "react-icons/fi";
 type Props = {
   openNav: () => void;
   user: User | null;
-  handleAksesKuis: (halaman: string) => void;
+  handleAksesMenu: (halaman: string) => void;
 };
 
-const Nav = ({ openNav, user, handleAksesKuis }: Props) => {
+const Nav = ({ openNav, user, handleAksesMenu }: Props) => {
   const router = useRouter();
 
   const [navBg, setNavBg] = useState(false);
@@ -86,22 +85,10 @@ const Nav = ({ openNav, user, handleAksesKuis }: Props) => {
 
         {/* Menu */}
         <div className="hidden lg:flex items-center gap-10">
-          {NAVLINKS.filter((link) => {
-            // Jika sudah login, tampilkan semua menu
-            if (user) return true;
-
-            // Jika belum login, hanya tampil Beranda dan Materi
-            return link.label === "Beranda" || link.label === "Materi";
-          }).map((link) => (
+          {NAVLINKS.map((link) => (
             <button
               key={link.id}
-              onClick={() => {
-                if (link.url === "/kuisLevel" || link.url === "/predikat") {
-                  handleAksesKuis(link.url);
-                } else {
-                  router.push(link.url);
-                }
-              }}
+              onClick={() => handleAksesMenu(link.url)}
               className="text-black hover:text-blue-500 font-medium duration-200"
             >
               {link.label}
@@ -173,7 +160,7 @@ const Nav = ({ openNav, user, handleAksesKuis }: Props) => {
           {/* Burger */}
           <HiBars3BottomRight
             onClick={openNav}
-            className="w-8 h-8 cursor-pointer lg:hidden"
+            className=" w-8 h-8 cursor-pointer lg:hidden"
           />
         </div>
       </div>

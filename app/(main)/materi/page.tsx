@@ -5,19 +5,16 @@ import { daftarMateri } from "@/constant/constMateri";
 import { supabase } from "@/lib/supabase/supabase";
 import Swal from "sweetalert2";
 
-
 import PilihMateri from "pilihMateri";
 import ListMateri from "listMateri";
 import LearnMateri from "learnMateri";
 import FahamMateri from "fahamMateri";
-
 
 export default function MateriPage() {
   const [materi, setMateri] = useState(daftarMateri);
   const [materiIndex, setMateriIndex] = useState(0);
   const [subMateriIndex, setSubMateriIndex] = useState(0);
   const learnRef = useRef<HTMLDivElement>(null);
-
 
   const loadProgress = useCallback(async () => {
     const {
@@ -92,18 +89,13 @@ export default function MateriPage() {
     }
   }, []);
 
+  useEffect(() => {
+    loadProgress();
+  }, [loadProgress]);
 
-useEffect(() => {
-  loadProgress();
-}, [loadProgress]);
- 
-
-  
   const materiAktif = materi[materiIndex];
 
   const subMateriAktif = materiAktif?.subMateri[subMateriIndex];
-
-  const semuaSelesai = materi.every((m) => m.status === "Dipahami");
 
   const handlePilihMateri = (index: number) => {
     if (materi[index].status === "Terkunci") return;
@@ -120,23 +112,56 @@ useEffect(() => {
     }, 100);
   };
 
-// simpan
-const handleFaham = async () => {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // FUNCTION: Pindah ke sub-materi berikutnya
+  const handleLanjutSubMateri = () => {
+    if (subMateriIndex < materi[materiIndex].subMateri.length - 1) {
+      setSubMateriIndex((prev) => prev + 1);
 
-  // ==========================
-  // USER LOGIN
-  // ==========================
-  if (user) {
-    const sub = materi[materiIndex].subMateri[subMateriIndex];
+      setTimeout(() => {
+        learnRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  };
 
+  // FUNCTION: Pindah ke materi berikutnya (BARU - untuk handle ketika sub-materi habis)
+  const handleLanjutMateri = () => {
+    // CEK: apakah ada materi berikutnya?
+    if (materiIndex < materi.length - 1) {
+      // Set materi index ke materi berikutnya
+      setMateriIndex((prev) => prev + 1);
+      // Reset sub-materi index ke 0 (mulai dari sub-materi pertama)
+      setSubMateriIndex(0);
+
+      setTimeout(() => {
+        learnRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  };
+
+  // simpan
+  const handleFaham = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // Seharusnya tidak terjadi karena Materi hanya untuk user login
+    if (!user) return;
+
+    const materiSekarang = materi[materiIndex];
+    const subSekarang = materiSekarang.subMateri[subMateriIndex];
+
+    // Simpan progress
     const { error } = await supabase.from("progress_materi").upsert(
       {
         user_id: user.id,
-        materi_id: materi[materiIndex].id,
-        submateri_id: sub.id,
+        materi_id: materiSekarang.id,
+        submateri_id: subSekarang.id,
         selesai: true,
       },
       {
@@ -149,77 +174,72 @@ const handleFaham = async () => {
       return;
     }
 
-    // kalau masih ada submateri berikutnya
-    if (subMateriIndex < materi[materiIndex].subMateri.length - 1) {
-      setSubMateriIndex((prev) => prev + 1);
-    } else {
-      // reload status materi dari Supabase
-      await loadProgress();
-    }
-  }
-
-
-  // ==========================
-  // GUEST (BELUM LOGIN)
-  // ==========================
-  else {
     const materiBaru = structuredClone(materi);
 
     // Tandai submateri selesai
     materiBaru[materiIndex].subMateri[subMateriIndex].selesai = true;
 
-    // Cek apakah semua submateri pada materi ini sudah selesai
-    const selesaiSemua = materiBaru[materiIndex].subMateri.every(
-      (s) => s.selesai,
+    const semuaSubSelesai = materiBaru[materiIndex].subMateri.every(
+      (sub) => sub.selesai,
     );
 
-    if (selesaiSemua) {
-      // Materi menjadi Dipahami
+    // ==========================
+    // MASIH ADA SUBMATERI
+    // ==========================
+    if (subMateriIndex < materiBaru[materiIndex].subMateri.length - 1) {
+      setMateri(materiBaru);
+
+      // Langsung ke submateri berikutnya
+      setSubMateriIndex((prev) => prev + 1);
+    }
+
+    // ==========================
+    // SEMUA SUBMATERI SELESAI
+    // ==========================
+    else if (semuaSubSelesai) {
       materiBaru[materiIndex].status = "Dipahami";
 
-      // Jika masih ada materi berikutnya
+      // ==========================
+      // MASIH ADA MATERI BERIKUTNYA
+      // ==========================
       if (materiIndex < materiBaru.length - 1) {
-        // Buka materi berikutnya
-        materiBaru[materiIndex + 1].status = "Pelajari";
+        const nextIndex = materiIndex + 1;
 
-        // Update tampilan
+        materiBaru[nextIndex].status = "Pelajari";
+
         setMateri(materiBaru);
-
-        // Langsung pindah ke materi berikutnya
-        setMateriIndex(materiIndex + 1);
+        setMateriIndex(nextIndex);
         setSubMateriIndex(0);
-      } else {
-        // Materi terakhir selesai
+      }
+
+      // ==========================
+      // SEMUA MATERI SELESAI
+      // ==========================
+      else {
         setMateri(materiBaru);
 
         Swal.fire({
           icon: "success",
-          title: "Selamat!",
-          text: "Semua materi telah dipelajari. Silakan daftar untuk membuka kuis.",
-          confirmButtonText: "Daftar",
+          title: "Selamat! 🎉",
+          text: "Semua materi telah selesai. Kuis sudah terbuka!",
+          confirmButtonText: "Mainkan Kuis",
+          confirmButtonColor: "#3b82f6",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "/auth/daftar";
+            window.location.href = "/kuisLevel";
           }
         });
       }
-    } else {
-      // Masih ada submateri berikutnya
-      setMateri(materiBaru);
-      setSubMateriIndex((prev) => prev + 1);
     }
-  }
 
-  // ==========================
-  // SCROLL (BERLAKU UNTUK KEDUANYA)
-  // ==========================
-  setTimeout(() => {
-    learnRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, 100);
-};
+    // Scroll
+    setTimeout(() => {
+      learnRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  };
 
   return (
     <main className="min-h-screen bg-gray-100 pt-28 pb-20">
@@ -240,7 +260,17 @@ const handleFaham = async () => {
             <LearnMateri materiAktif={subMateriAktif} />
           </div>
 
-          <FahamMateri handleFaham={handleFaham} semuaSelesai={semuaSelesai} />
+          <FahamMateri
+            handleFaham={handleFaham}
+            handleLanjutSubMateri={handleLanjutSubMateri}
+            handleLanjutMateri={handleLanjutMateri}
+            subMateriAktif={subMateriAktif}
+            // Props BARU untuk conditional rendering tombol
+            subMateriIndex={subMateriIndex}
+            materiIndex={materiIndex}
+            totalSubMateri={materi[materiIndex]?.subMateri.length || 0}
+            totalMateri={materi.length}
+          />
         </div>
       </div>
     </main>

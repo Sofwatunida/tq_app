@@ -15,52 +15,45 @@
     "jsx": "react-jsx",
     "incremental": true,
 
-
     "plugins": [
       {
         "name": "next"
       }
     ],
-    
-    "ignoreDeprecations": "6.0",
-
-    "baseUrl": ".",
 
     "paths": {
       "@/*": ["./*"],
 
-      "home": ["components/Home/Home"],
+      "home": ["./components/Home/Home"],
 
-      "hero": ["components/Home/Hero"],
-      "about": ["components/Home/About"],
-      "kuisLanding": ["components/Home/KuisLanding"],
-      "scrollback": ["components/Helper/scrollback"],
-      "logo": ["components/Helper/Logo"],
-     
+      "hero": ["./components/Home/Hero"],
+      "about": ["./components/Home/About"],
+      "kuisLanding": ["./components/Home/KuisLanding"],
+      "scrollback": ["./components/Helper/scrollback"],
+      "logo": ["./components/Helper/Logo"],
+
       // Materi
-      
-      "pilihMateri": ["components/Materi/PilihMateri"],
-      "listMateri":["components/Materi/ListMateri"],
-      "learnMateri": ["components/Materi/LearnMateri"],
-      "fahamMateri": ["components/Materi/FahamMateri"],
+
+      "pilihMateri": ["./components/Materi/PilihMateri"],
+      "listMateri": ["./components/Materi/ListMateri"],
+      "learnMateri": ["./components/Materi/LearnMateri"],
+      "fahamMateri": ["./components/Materi/FahamMateri"],
 
       // kuis
-      "kuisLevel": ["components/Kuis/KuisLevel"],
-      "kataMutiara": ["components/Kuis/KataMutiara"],
+      "kuisLevel": ["./components/Kuis/KuisLevel"],
+      "kataMutiara": ["./components/Kuis/KataMutiara"],
 
       // profil
-      "profilUser":["components/Profil/ProfilUser"]
+      "profilUser": ["./components/Profil/ProfilUser"]
     }
   },
-
 
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    ],
-  "exclude": ["node_modules"],
-
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
 }
