@@ -79,8 +79,6 @@ function keSubMateri(
     pengertian: baris.penjelasan,
     huruf: baris.huruf_hukum ?? [],
     ayat: cuplikan,
-    latin: "",
-    arti: ayat?.terjemahan ?? "",
     cara_baca: baris.cara_membaca,
     audio_url: ayat?.audio_url ?? "",
     selesai: false,

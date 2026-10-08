@@ -1,8 +1,5 @@
 import { getMateriAudioUrl } from "@/lib/quranAudio";
 
-const getAudio = (surah: number, ayat: number, position: number) =>
-  getMateriAudioUrl(surah, ayat, position);
-
 export const daftarMateri = [
   {
     id: 1,
@@ -19,13 +16,9 @@ export const daftarMateri = [
 
         ayat: "مِنْ وَالٍ",
 
-        latin: "Min wālin",
-
-        arti: "Pada lafaz ini, nun sukun bertemu huruf wau sehingga dibaca melebur dengan dengung.",
-
         cara_baca:
           "Nun sukun atau tanwin dilebur ke huruf setelahnya sambil didengungkan selama dua harakat.",
-        audio_url: getAudio(1, 1, 1),
+        audio_url: getMateriAudioUrl(1, 1, 1),
 
         selesai: false,
       },
@@ -40,13 +33,9 @@ export const daftarMateri = [
 
         ayat: "مِنْ رَبِّهِمْ",
 
-        latin: "Mir rabbihim",
-
-        arti: "Nun sukun bertemu huruf ra sehingga dibaca melebur tanpa dengung.",
-
         cara_baca:
           "Nun sukun atau tanwin langsung dilebur tanpa mendengungkan suara.",
-        audio_url: getAudio(1, 1, 2),
+        audio_url: getMateriAudioUrl(1, 1, 2),
 
         selesai: false,
       },
@@ -68,12 +57,8 @@ export const daftarMateri = [
 
         ayat: "أَنْبِئْهُمْ",
 
-        latin: "Ambi'hum",
-
-        arti: "Nun sukun berubah menjadi bunyi mim karena bertemu huruf ba.",
-
         cara_baca: "Bacalah nun menjadi mim dengan dengung selama dua harakat.",
-        audio_url: getAudio(2, 1, 1),
+        audio_url: getMateriAudioUrl(2, 1, 1),
 
         selesai: false,
       },
@@ -95,12 +80,8 @@ export const daftarMateri = [
 
         ayat: "مِنْ هَادٍ",
 
-        latin: "Min hādin",
-
-        arti: "Nun sukun bertemu huruf ha sehingga dibaca jelas.",
-
         cara_baca: "Nun sukun dibaca dengan jelas tanpa dengung.",
-        audio_url: getAudio(1, 2, 1),
+        audio_url: getMateriAudioUrl(1, 2, 1),
 
         selesai: false,
       },
@@ -115,12 +96,8 @@ export const daftarMateri = [
 
         ayat: "عَلَيْهِمْ قِتَالٌ",
 
-        latin: "Alaihim qitālun",
-
-        arti: "Mim sukun bertemu huruf qaf sehingga dibaca jelas.",
-
         cara_baca: "Mim sukun dibaca jelas tanpa dengung.",
-        audio_url: getAudio(2, 1, 2),
+        audio_url: getMateriAudioUrl(2, 1, 2),
 
         selesai: false,
       },
@@ -158,12 +135,8 @@ export const daftarMateri = [
 
         ayat: "مِنْ شَرِّ",
 
-        latin: "Min syarri",
-
-        arti: "Nun sukun bertemu huruf syin sehingga dibaca samar.",
-
         cara_baca: "Bacalah samar dengan dengung selama dua harakat.",
-        audio_url: getAudio(4, 1, 1),
+        audio_url: getMateriAudioUrl(4, 1, 1),
 
         selesai: false,
       },
@@ -178,13 +151,9 @@ export const daftarMateri = [
 
         ayat: "تَرْمِيهِمْ بِحِجَارَةٍ",
 
-        latin: "Tarmīhim bihijāratin",
-
-        arti: "Mim sukun bertemu huruf ba sehingga dibaca samar.",
-
         cara_baca:
           "Mim sukun dibaca samar disertai dengung selama dua harakat.",
-        audio_url: getAudio(6, 1, 1),
+        audio_url: getMateriAudioUrl(6, 1, 1),
 
         selesai: false,
       },
@@ -221,12 +190,8 @@ export const daftarMateri = [
 
         ayat: "الْقَمَرُ",
 
-        latin: "Al-qamaru",
-
-        arti: "Huruf lam dibaca jelas karena bertemu huruf qaf.",
-
         cara_baca: "Bacalah huruf lam dengan jelas.",
-        audio_url: getAudio(10, 1, 1),
+        audio_url: getMateriAudioUrl(10, 1, 1),
 
         selesai: false,
       },
@@ -256,13 +221,9 @@ export const daftarMateri = [
 
         ayat: "الشَّمْسُ",
 
-        latin: "Asy-syamsu",
-
-        arti: "Huruf lam tidak dibaca karena melebur ke huruf syin.",
-
         cara_baca:
           "Huruf lam dilebur ke huruf setelahnya tanpa dibaca terpisah.",
-        audio_url: getAudio(91, 1, 1),
+        audio_url: getMateriAudioUrl(91, 1, 1),
 
         selesai: false,
       },

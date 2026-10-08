@@ -80,8 +80,6 @@ export type SubMateriUi = {
   huruf: string[];
   /** Cuplikan singkat, sama seperti data lama. */
   ayat: string;
-  latin: string;
-  arti: string;
   cara_baca: string;
   /** Audio ayat utuh untuk pemutar utama. String kosong kalau tidak ada. */
   audio_url: string;
