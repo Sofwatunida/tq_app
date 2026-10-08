@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { daftarMateri } from "@/constant/constMateri";
 import { supabase } from "@/lib/supabase/supabase";
+import { ambilMateriTajwid } from "@/lib/materi";
+import type { MateriUi } from "@/lib/typesMateriTajwid";
 import Swal from "sweetalert2";
 
 import PilihMateri from "pilihMateri";
@@ -11,17 +12,35 @@ import LearnMateri from "learnMateri";
 import FahamMateri from "fahamMateri";
 
 export default function MateriPage() {
-  const [materi, setMateri] = useState(daftarMateri);
+  const [materi, setMateri] = useState<MateriUi[]>([]);
+  const [sudahDimuat, setSudahDimuat] = useState(false);
   const [materiIndex, setMateriIndex] = useState(0);
   const [subMateriIndex, setSubMateriIndex] = useState(0);
   const learnRef = useRef<HTMLDivElement>(null);
 
   const loadProgress = useCallback(async () => {
+    const { materi: materiAwal, dariDatabase, catatan } =
+      await ambilMateriTajwid();
+
+    if (!dariDatabase) {
+      console.log("Materi Tajwid:", catatan);
+    }
+
+    if (materiAwal.length === 0) {
+      setMateri([]);
+      setSudahDimuat(true);
+      return;
+    }
+
     const {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) return;
+    if (!user) {
+      setMateri(materiAwal);
+      setSudahDimuat(true);
+      return;
+    }
 
     const { data: progress, error } = await supabase
       .from("progress_materi")
@@ -41,9 +60,11 @@ export default function MateriPage() {
         text: error.message,
       });
 
+      setSudahDimuat(true);
+
       return;
     }
-    const dataMateri = structuredClone(daftarMateri);
+    const dataMateri = structuredClone(materiAwal);
 
     dataMateri.forEach((materi, index) => {
       let selesaiSemua = true;
@@ -87,6 +108,8 @@ export default function MateriPage() {
 
       setSubMateriIndex(subIndex === -1 ? 0 : subIndex);
     }
+
+    setSudahDimuat(true);
   }, []);
 
   useEffect(() => {
@@ -96,6 +119,26 @@ export default function MateriPage() {
   const materiAktif = materi[materiIndex];
 
   const subMateriAktif = materiAktif?.subMateri[subMateriIndex];
+
+  if (!sudahDimuat) {
+    return (
+      <main className="min-h-screen bg-gray-100 pt-28 pb-20">
+        <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6">
+          <p className="text-gray-600">Memuat materi...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (materi.length === 0) {
+    return (
+      <main className="min-h-screen bg-gray-100 pt-28 pb-20">
+        <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6">
+          <p className="text-gray-600">Materi belum tersedia.</p>
+        </div>
+      </main>
+    );
+  }
 
   const handlePilihMateri = (index: number) => {
     if (materi[index].status === "Terkunci") return;

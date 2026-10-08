@@ -38,6 +38,7 @@
       "listMateri": ["./components/Materi/ListMateri"],
       "learnMateri": ["./components/Materi/LearnMateri"],
       "fahamMateri": ["./components/Materi/FahamMateri"],
+      "ayatTajwid": ["./components/Materi/AyatTajwid"],
 
       // kuis
       "kuisLevel": ["./components/Kuis/KuisLevel"],

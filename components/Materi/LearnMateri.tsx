@@ -1,4 +1,6 @@
 import React from "react";
+import AyatTajwid from "@/components/Materi/AyatTajwid";
+import type { HighlightUi } from "@/lib/typesMateriTajwid";
 
 interface LearnMateriProps {
   materiAktif: {
@@ -11,12 +13,19 @@ interface LearnMateriProps {
     caraBaca?: string;
     audio_url?: string | null;
     audioUrl?: string | null;
+    ayatPenuh?: string;
+    highlight?: HighlightUi[];
+    ref?: string;
   };
 }
 
 export default function LearnMateri({ materiAktif }: LearnMateriProps) {
   const audioUrl = materiAktif.audio_url ?? materiAktif.audioUrl ?? null;
   const caraBaca = materiAktif.cara_baca ?? materiAktif.caraBaca ?? "";
+
+  // Data lama tidak punya ayat utuh, jadi pakai `ayat` yang berisi cuplikan.
+  const ayatPenuh = materiAktif.ayatPenuh ?? materiAktif.ayat;
+  const highlight = materiAktif.highlight ?? [];
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 space-y-6 max-h-[600px] overflow-y-auto">
@@ -42,7 +51,11 @@ export default function LearnMateri({ materiAktif }: LearnMateriProps) {
       </div>
 
       <div className="bg-slate-100 rounded-xl p-6">
-        <p className="text-5xl text-right">{materiAktif.ayat}</p>
+        <AyatTajwid
+          ayat={ayatPenuh}
+          highlight={highlight}
+          ref={materiAktif.ref}
+        />
 
         {audioUrl && (
           <audio controls className="w-full mt-4">

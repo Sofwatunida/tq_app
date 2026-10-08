@@ -42,7 +42,7 @@ const WrapperNav = () => {
   }, []);
 
   const handleAksesMenu = async (halaman: string) => {
-    if (halaman === "/") {
+    if (halaman === "/" || halaman === "/materi") {
       router.push(halaman);
       closeNavHandler();
       return;
