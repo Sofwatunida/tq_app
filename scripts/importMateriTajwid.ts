@@ -178,36 +178,76 @@ async function tulisMateri(
     };
   });
 
-  const { data, error } = await db
+  const { data: materiLama, error: errorBaca } = await db
     .from("materi_tajwid")
-    .upsert(baris, { onConflict: "ayat_id,urutan" })
-    .select("id, ayat_id");
+    .select("id, hukum_tajwid, sub_hukum, urutan")
+    .in("hukum_tajwid", [...new Set(materi.map((item) => item.hukum_tajwid))]);
 
-  if (error) throw new Error(`Gagal menulis materi_tajwid: ${error.message}`);
-
-  // id materi di database harus dicocokkan lewat ayat_id. Urutan baris yang
-  // dikembalikan PostgREST tidak dijamin sama dengan urutan baris yang dikirim.
-  const peta = new Map<string, number>();
-
-  for (const item of data ?? []) {
-    peta.set(String(item.ayat_id), item.id);
+  if (errorBaca) {
+    throw new Error(`Gagal membaca materi_tajwid: ${errorBaca.message}`);
   }
 
-  for (const row of baris) {
-    if (!peta.has(String(row.ayat_id))) {
+  const idPerKunci = new Map<string, number>();
+  const materiBaru: { seed: SeedMateri; row: (typeof baris)[number] }[] = [];
+
+  for (let index = 0; index < materi.length; index++) {
+    const seed = materi[index];
+    const row = baris[index];
+    const cocok = (materiLama ?? []).filter(
+      (item) =>
+        item.hukum_tajwid === seed.hukum_tajwid &&
+        item.sub_hukum === seed.sub_hukum &&
+        item.urutan === seed.urutan,
+    );
+
+    if (cocok.length > 1) {
       throw new Error(
-        `materi_tajwid untuk ayat ${row.ayat_id} tidak terbaca balik setelah upsert.`,
+        `Ditemukan lebih dari satu materi ${seed.hukum_tajwid} ${seed.sub_hukum} urutan ${seed.urutan}; perbarui data duplikat secara manual.`,
       );
+    }
+
+    if (cocok.length === 0) {
+      materiBaru.push({ seed, row });
+      continue;
+    }
+
+    const { data: diperbarui, error } = await db
+      .from("materi_tajwid")
+      .update(row)
+      .eq("id", cocok[0].id)
+      .select("id")
+      .single();
+
+    if (error) throw new Error(`Gagal memperbarui materi_tajwid: ${error.message}`);
+
+    idPerKunci.set(seed.kunci, diperbarui.id);
+  }
+
+  if (materiBaru.length > 0) {
+    const barisBaru = materiBaru.map(({ row }) => row);
+    const { data, error } = await db
+      .from("materi_tajwid")
+      .upsert(barisBaru, { onConflict: "ayat_id,urutan" })
+      .select("id, ayat_id, urutan");
+
+    if (error) throw new Error(`Gagal menulis materi_tajwid: ${error.message}`);
+
+    for (const { seed, row } of materiBaru) {
+      const saved = data?.find(
+        (item) => item.ayat_id === row.ayat_id && item.urutan === row.urutan,
+      );
+
+      if (!saved) {
+        throw new Error(
+          `materi_tajwid untuk ayat ${row.ayat_id} urutan ${row.urutan} tidak terbaca balik setelah upsert.`,
+        );
+      }
+
+      idPerKunci.set(seed.kunci, saved.id);
     }
   }
 
-  const hasil = new Map<string, number>();
-
-  baris.forEach((row, index) => {
-    hasil.set(materi[index].kunci, peta.get(String(row.ayat_id)) ?? 0);
-  });
-
-  return hasil;
+  return idPerKunci;
 }
 
 /** Tulis highlight setelah indeksnya dicek terhadap teks ayat. */

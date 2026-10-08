@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AyatTajwid from "@/components/Materi/AyatTajwid";
 import type { HighlightUi } from "@/lib/typesMateriTajwid";
 
@@ -13,6 +13,7 @@ interface LearnMateriProps {
     caraBaca?: string;
     audio_url?: string | null;
     audioUrl?: string | null;
+    audio_urls?: string[];
     ayatPenuh?: string;
     highlight?: HighlightUi[];
     ref?: string;
@@ -21,6 +22,11 @@ interface LearnMateriProps {
 
 export default function LearnMateri({ materiAktif }: LearnMateriProps) {
   const audioUrl = materiAktif.audio_url ?? materiAktif.audioUrl ?? null;
+  const audioUrls = materiAktif.audio_urls?.length
+    ? materiAktif.audio_urls
+    : audioUrl
+      ? [audioUrl]
+      : [];
   const caraBaca = materiAktif.cara_baca ?? materiAktif.caraBaca ?? "";
 
   // Data lama tidak punya ayat utuh, jadi pakai `ayat` yang berisi cuplikan.
@@ -57,11 +63,12 @@ export default function LearnMateri({ materiAktif }: LearnMateriProps) {
           ref={materiAktif.ref}
         />
 
-        {audioUrl && (
-          <audio controls className="w-full mt-4">
-            <source src={audioUrl} type="audio/mpeg" />
-            Browser kamu tidak mendukung pemutar audio.
-          </audio>
+        {audioUrls.length > 0 && (
+          <UrutanAudio
+            key={audioUrls.join("|")}
+            urls={audioUrls}
+            className="w-full mt-4"
+          />
         )}
       </div>
 
@@ -70,5 +77,45 @@ export default function LearnMateri({ materiAktif }: LearnMateriProps) {
         <p className="text-gray-700">{caraBaca}</p>
       </div>
     </div>
+  );
+}
+
+function UrutanAudio({
+  urls,
+  className,
+}: {
+  urls: string[];
+  className: string;
+}) {
+  const [index, setIndex] = useState(0);
+  const [lanjutkan, setLanjutkan] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (!lanjutkan) return;
+
+    setLanjutkan(false);
+    void audioRef.current?.play().catch((error: unknown) => {
+      console.error("Gagal melanjutkan audio materi:", error);
+    });
+  }, [index, lanjutkan]);
+
+  return (
+    <audio
+      ref={audioRef}
+      controls
+      src={urls[index]}
+      className={className}
+      onEnded={() => {
+        if (index < urls.length - 1) {
+          setIndex(index + 1);
+          setLanjutkan(true);
+        } else {
+          setIndex(0);
+        }
+      }}
+    >
+      Browser kamu tidak mendukung pemutar audio.
+    </audio>
   );
 }

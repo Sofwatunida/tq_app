@@ -37,6 +37,12 @@
       "jumlah_ayat": 5
     },
     {
+      "kunci": 114,
+      "nama_arab": "النّاس",
+      "nama_latin": "An-Nas",
+      "jumlah_ayat": 6
+    },
+    {
       "kunci": 79,
       "nama_arab": "النّٰزعٰت",
       "nama_latin": "An-Nazi'at",
@@ -92,11 +98,11 @@
       "audio_url": "https://cdn.equran.id/audio-partial/Misyari-Rasyid-Al-Afasi/015062.mp3"
     },
     {
-      "surah": 113,
-      "nomor_ayat": 2,
-      "teks_arab": "مِنْ شَرِّ مَا خَلَقَ",
-      "terjemahan": "dari kejahatan (makhluk yang) Dia ciptakan,",
-      "audio_url": "https://cdn.equran.id/audio-partial/Misyari-Rasyid-Al-Afasi/113002.mp3"
+      "surah": 114,
+      "nomor_ayat": 4,
+      "teks_arab": "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
+      "terjemahan": "dari kejahatan (bisikan) setan yang bersembunyi,",
+      "audio_url": "https://cdn.equran.id/audio-partial/Misyari-Rasyid-Al-Afasi/114004.mp3"
     },
     {
       "surah": 79,
@@ -232,8 +238,8 @@
     },
     {
       "kunci": "ikhfa-haqiqi",
-      "surah": 113,
-      "nomor_ayat": 2,
+      "surah": 114,
+      "nomor_ayat": 4,
       "judul": "Ikhfa Haqiqi",
       "hukum_tajwid": "Ikhfa",
       "sub_hukum": "Haqiqi",
@@ -399,7 +405,7 @@
       "start_index": 2,
       "end_index": 7,
       "label": "Ikhfa",
-      "audio_url": "https://cdn.islamic.app/quran/audio-word/113/2/1.mp3",
+      "audio_url": "https://cdn.islamic.app/quran/audio-word/114/4/1.mp3",
       "catatan": "Nun sukun bertemu huruf syin."
     },
     {

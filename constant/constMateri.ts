@@ -97,7 +97,7 @@ export const daftarMateri = [
         ayat: "عَلَيْهِمْ قِتَالٌ",
 
         cara_baca: "Mim sukun dibaca jelas tanpa dengung.",
-        audio_url: getMateriAudioUrl(2, 1, 2),
+        audio_url: getMateriAudioUrl(9, 1, 2),
 
         selesai: false,
       },
@@ -133,10 +133,19 @@ export const daftarMateri = [
           "ك",
         ],
 
-        ayat: "مِنْ شَرِّ",
+        // Surah An-Nas (114), ayat 4: "min sharri al-waswasi al-khannas".
+        ayat: "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
 
         cara_baca: "Bacalah samar dengan dengung selama dua harakat.",
-        audio_url: getMateriAudioUrl(4, 1, 1),
+        // Untuk beberapa potongan, gunakan audio_urls: audio diputar berurutan.
+        // Format tiap baris: (nomorSurah, nomorAyat, urutanKata dalam ayat).
+        // Sesuaikan angka dan jumlah baris dengan kata yang ingin diputar.
+        audio_urls: [
+          getMateriAudioUrl(114, 4, 1), // مِنْ
+          getMateriAudioUrl(114, 4, 2), // شَرِّ
+          getMateriAudioUrl(114, 4, 3), // الْوَسْوَاسِ
+          getMateriAudioUrl(114, 4, 4), // الْخَنَّاسِ
+        ],
 
         selesai: false,
       },
