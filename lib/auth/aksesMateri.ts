@@ -23,19 +23,15 @@ export async function aksesMateri(router: Router) {
   }
 
   if (!user) {
-    const result = await Swal.fire({
+    await Swal.fire({
       icon: "info",
       title: "Silakan Daftar",
-      text: "Daftar atau masuk terlebih dahulu untuk mengakses materi.",
-      showCancelButton: true,
-      confirmButtonText: "Daftar",
-      cancelButtonText: "Tutup",
+      text: "Daftar terlebih dahulu untuk mengakses materi.",
+      confirmButtonText: "Register",
       confirmButtonColor: "#3b82f6",
     });
 
-    if (result.isConfirmed) {
-      router.push("/auth/daftar");
-    }
+    router.push("/auth/daftar");
     return;
   }
 
