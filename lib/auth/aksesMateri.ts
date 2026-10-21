@@ -12,15 +12,7 @@ export async function aksesMateri(router: Router) {
     error,
   } = await supabase.auth.getUser();
 
-  if (error) {
-    await Swal.fire({
-      icon: "error",
-      title: "Gagal Memeriksa Akun",
-      text: error.message,
-      confirmButtonColor: "#3b82f6",
-    });
-    return;
-  }
+
 
   if (!user) {
     await Swal.fire({
