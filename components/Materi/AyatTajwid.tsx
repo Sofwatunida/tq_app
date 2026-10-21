@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { bagiAyat, kumpulkanLabel } from "@/lib/highlightTajwid";
 import type { HighlightUi } from "@/lib/typesMateriTajwid";
 
@@ -23,26 +23,71 @@ export default function AyatTajwid({ ayat, highlight, ref }: AyatTajwidProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [sedangBermain, setSedangBermain] = useState<number | null>(null);
 
+  // Penanda agar pemutaran lama berhenti saat tombol lain ditekan.
+  const tokenRef = useRef(0);
+
   const bagian = bagiAyat(ayat, highlight);
   const label = kumpulkanLabel(highlight);
 
-  const putar = (index: number, url: string | null) => {
+  useEffect(() => {
+    return () => {
+      tokenRef.current += 1;
+      audioRef.current?.pause();
+    };
+  }, []);
+
+  /**
+   * Satu tombol bisa memuat beberapa file audio sekaligus.
+   * Pisahkan tiap URL dengan tanda "|", lalu diputar berurutan.
+   *
+   * Contoh: "https://.../1.mp3|https://.../2.mp3"
+   */
+  const putar = async (index: number, url: string | null) => {
     if (!url) return;
+
+    const daftar = url
+      .split("|")
+      .map((satu) => satu.trim())
+      .filter(Boolean);
+
+    if (daftar.length === 0) return;
 
     if (!audioRef.current) {
       audioRef.current = new Audio();
     }
 
     const pemutar = audioRef.current;
-    pemutar.pause();
-    pemutar.src = url;
-    pemutar.currentTime = 0;
-    void pemutar.play().catch(() => setSedangBermain(null));
 
-    pemutar.onended = () => setSedangBermain(null);
-    pemutar.onerror = () => setSedangBermain(null);
+    // Tekan tombol yang sedang berbunyi = hentikan.
+    if (sedangBermain === index) {
+      tokenRef.current += 1;
+      pemutar.pause();
+      pemutar.currentTime = 0;
+      setSedangBermain(null);
+      return;
+    }
 
+    const token = (tokenRef.current += 1);
     setSedangBermain(index);
+
+    for (const satu of daftar) {
+      if (tokenRef.current !== token) return;
+
+      pemutar.src = satu;
+      pemutar.currentTime = 0;
+
+      const selesai = await new Promise<boolean>((resolve) => {
+        pemutar.onended = () => resolve(true);
+        pemutar.onerror = () => resolve(false);
+        void pemutar.play().catch(() => resolve(false));
+      });
+
+      if (!selesai || tokenRef.current !== token) break;
+    }
+
+    if (tokenRef.current === token) {
+      setSedangBermain(null);
+    }
   };
 
   return (
@@ -86,7 +131,7 @@ export default function AyatTajwid({ ayat, highlight, ref }: AyatTajwidProps) {
               <button
                 key={`audio-${index}`}
                 type="button"
-                onClick={() => putar(index, item.audioUrl)}
+                onClick={() => void putar(index, item.audioUrl)}
                 className="text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-full px-3 py-1 hover:bg-gray-50"
               >
                 {sedangBermain === index ? "▮▮ Memutar" : "▷ Dengar"}

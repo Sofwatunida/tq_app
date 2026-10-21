@@ -10,6 +10,7 @@ import MobileNav from "./MobileNav";
 
 import { supabase } from "@/lib/supabase/supabase";
 import { daftarMateri } from "@/constant/constMateri";
+import { aksesMateri } from "@/lib/auth/aksesMateri";
 
 const WrapperNav = () => {
   const pathname = usePathname();
@@ -42,8 +43,14 @@ const WrapperNav = () => {
   }, []);
 
   const handleAksesMenu = async (halaman: string) => {
-    if (halaman === "/" || halaman === "/materi") {
+    if (halaman === "/") {
       router.push(halaman);
+      closeNavHandler();
+      return;
+    }
+
+    if (halaman === "/materi") {
+      await aksesMateri(router);
       closeNavHandler();
       return;
     }

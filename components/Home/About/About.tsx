@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { aksesMateri } from "@/lib/auth/aksesMateri";
 
 const About = () => {
   const router = useRouter();
@@ -31,7 +32,7 @@ const About = () => {
             </p>
             {/* cta buttttttttton */}
             <button
-              onClick={() => router.push("/materi") }
+              onClick={() => aksesMateri(router)}
               className="mt-3 px-6 py-3 rounded-lg font-semibold text-sm cursor-pointer hover:bg-cyan-600 transition-all duration-200 bg-blue-500 text-white">
               Pelajari
             </button>

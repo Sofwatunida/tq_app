@@ -1,0 +1,43 @@
+import Swal from "sweetalert2";
+
+import { supabase } from "@/lib/supabase/supabase";
+
+type Router = {
+  push: (href: string) => void;
+};
+
+export async function aksesMateri(router: Router) {
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error) {
+    await Swal.fire({
+      icon: "error",
+      title: "Gagal Memeriksa Akun",
+      text: error.message,
+      confirmButtonColor: "#3b82f6",
+    });
+    return;
+  }
+
+  if (!user) {
+    const result = await Swal.fire({
+      icon: "info",
+      title: "Silakan Daftar",
+      text: "Daftar atau masuk terlebih dahulu untuk mengakses materi.",
+      showCancelButton: true,
+      confirmButtonText: "Daftar",
+      cancelButtonText: "Tutup",
+      confirmButtonColor: "#3b82f6",
+    });
+
+    if (result.isConfirmed) {
+      router.push("/auth/daftar");
+    }
+    return;
+  }
+
+  router.push("/materi");
+}
