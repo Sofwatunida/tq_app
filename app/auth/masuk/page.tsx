@@ -55,12 +55,12 @@ export default function MasukPage() {
   
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-blue-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-[400px]">
+    <div className="flex justify-center items-center min-h-screen bg-blue-50 px-4 py-6">
+      <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-[400px] mx-auto">
         <div className=" flex items-center justify-center">
-          <Image src={"/images/logo.png"} alt="img" width={100} height={100} />
+          <Image src={"/images/logo.png"} alt="img" width={100} height={100} className="max-w-full h-auto" />
         </div>
-        <h1 className="text-2xl  text-center mb-6">Masuk dengan akun anda!</h1>
+        <h1 className="text-xl sm:text-2xl text-center mb-6">Masuk dengan akun anda!</h1>
         <p className="font-medium mb-2">Email dan Password</p>
         <form onSubmit={handleLogin}>
           <input
@@ -82,13 +82,13 @@ export default function MasukPage() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className=" bg-blue-500 text-white px-6 py-2 rounded-lg"
+              className=" bg-blue-500 text-white px-6 py-2 rounded-lg w-full sm:w-auto"
             >
               Masuk
             </button>
           </div>
-          <p className="mt-3">
-            Belum punya akun?
+          <p className="mt-3 text-center sm:text-left">
+            Belum punya akun?{" "}
             <Link
               href="/auth/daftar"
               className="font-bold text-blue-500 cursor-pointer"

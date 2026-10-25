@@ -34,21 +34,21 @@ export default function LearnMateri({ materiAktif }: LearnMateriProps) {
   const highlight = materiAktif.highlight ?? [];
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 space-y-6 max-h-[600px] overflow-y-auto">
-      <h2 className="text-3xl font-bold text-blue-700">{materiAktif.judul}</h2>
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 space-y-4 sm:space-y-6 max-h-[70vh] sm:max-h-[600px] overflow-y-auto overflow-x-hidden">
+      <h2 className="text-2xl sm:text-3xl font-bold text-blue-700 break-words">{materiAktif.judul}</h2>
 
       <div>
-        <h3 className="font-semibold text-lg">Pengertian</h3>
-        <p className="text-gray-700">{materiAktif.pengertian}</p>
+        <h3 className="font-semibold text-base sm:text-lg">Pengertian</h3>
+        <p className="text-gray-700 break-words">{materiAktif.pengertian}</p>
       </div>
 
       <div>
-        <h3 className="font-semibold text-lg mb-3">Huruf</h3>
-        <div className="flex gap-3 flex-wrap">
+        <h3 className="font-semibold text-base sm:text-lg mb-3">Huruf</h3>
+        <div className="flex gap-2 sm:gap-3 flex-wrap">
           {materiAktif.huruf.map((huruf: string) => (
             <div
               key={huruf}
-              className="w-14 h-14 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-3xl font-bold"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xl sm:text-2xl md:text-3xl font-bold flex-shrink-0"
             >
               {huruf}
             </div>
@@ -56,7 +56,7 @@ export default function LearnMateri({ materiAktif }: LearnMateriProps) {
         </div>
       </div>
 
-      <div className="bg-slate-100 rounded-xl p-6">
+      <div className="bg-slate-100 rounded-xl p-4 sm:p-6 overflow-x-hidden">
         <AyatTajwid
           ayat={ayatPenuh}
           highlight={highlight}
@@ -73,8 +73,8 @@ export default function LearnMateri({ materiAktif }: LearnMateriProps) {
       </div>
 
       <div>
-        <h3 className="font-semibold text-lg">Cara Membaca</h3>
-        <p className="text-gray-700">{caraBaca}</p>
+        <h3 className="font-semibold text-base sm:text-lg">Cara Membaca</h3>
+        <p className="text-gray-700 break-words">{caraBaca}</p>
       </div>
     </div>
   );

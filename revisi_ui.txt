@@ -1,0 +1,155 @@
+Perbaiki dan optimalkan seluruh tampilan website **TajwidQu** agar menjadi **fully responsive** pada berbagai jenis perangkat, terutama smartphone Android, iPhone, tablet, laptop, dan desktop.
+
+Gunakan pendekatan **fluid responsive design**, bukan membuat tampilan yang hanya cocok pada ukuran layar tertentu. Layout harus dapat menyesuaikan secara otomatis terhadap berbagai ukuran layar, resolusi, dan rasio layar.
+
+### ATURAN UTAMA
+- Jangan mengubah fungsi, alur sistem, database, API, autentikasi, maupun logika aplikasi yang sudah berjalan.
+- Jangan mengubah identitas visual, warna, typography, maupun konsep desain utama TajwidQu.
+- Jangan menghapus fitur yang sudah ada.
+- Fokus hanya pada perbaikan **responsive UI/UX dan layout**.
+- Gunakan Tailwind CSS yang sudah digunakan dalam project.
+- Hindari fixed width yang menyebabkan elemen keluar dari layar.
+- Gunakan ukuran yang fleksibel seperti `w-full`, `max-w-*`, `min-w-0`, `flex-wrap`, responsive grid/flex, dan breakpoint Tailwind secara tepat.
+- Jangan menggunakan solusi yang hanya berlaku untuk satu tipe HP.
+- Jangan membuat banyak hardcode khusus berdasarkan ukuran device tertentu jika tidak diperlukan.
+
+### 1. NAVBAR
+- Pastikan navbar responsive pada layar kecil.
+- Jika ruang tidak cukup, gunakan hamburger/mobile menu.
+- Menu tidak boleh keluar dari viewport.
+- Logo dan nama TajwidQu tetap proporsional.
+- Pastikan dropdown profile tetap dapat digunakan di HP.
+- Semua tombol/menu memiliki area klik yang nyaman untuk touchscreen.
+
+### 2. BERANDA
+- Heading, subtitle, tombol, card, gambar, dan section harus menyesuaikan lebar layar.
+- Jangan sampai teks terpotong atau keluar layar.
+- Atur margin dan padding agar proporsional.
+- Elemen yang berjajar horizontal pada desktop dapat berubah menjadi vertikal pada layar kecil.
+- Pastikan seluruh konten dapat dibaca tanpa zoom.
+
+### 3. HALAMAN MATERI
+- Card materi harus menyesuaikan lebar layar secara otomatis.
+- Contoh ayat tidak boleh terpotong atau menyebabkan horizontal scrolling.
+- Teks Arab harus tetap terbaca dengan baik pada layar kecil.
+- Penjelasan hukum tajwid harus memiliki spacing yang nyaman.
+- Audio player harus responsive dan tidak keluar dari card/container.
+- Tombol dan navigasi materi harus mudah disentuh.
+- Jika terdapat layout dua kolom pada desktop, ubah menjadi satu kolom pada layar kecil jika diperlukan.
+
+### 4. HALAMAN KUIS
+- Soal dan pilihan jawaban harus menyesuaikan ukuran layar.
+- Pilihan jawaban tidak boleh terpotong.
+- Tombol next/submit harus mudah disentuh.
+- Hindari elemen yang terlalu kecil atau terlalu rapat.
+- Hasil kuis dan predikat harus tetap rapi pada layar kecil.
+
+### 5. LOGIN & REGISTRASI
+- Form harus responsive pada berbagai ukuran HP.
+- Input tidak boleh melewati batas layar.
+- Tombol harus memiliki ukuran yang nyaman untuk touchscreen.
+- Icon password/mata harus berada pada posisi yang tepat dan tidak bertabrakan dengan input.
+- Pastikan form tetap rapi pada HP dengan layar kecil maupun besar.
+
+### 6. PROFIL & PREDIKAT
+- Card profil harus responsive.
+- Informasi pengguna harus dapat tersusun secara vertikal pada layar kecil.
+- Data atau elemen yang terlalu lebar harus ditangani dengan layout responsive.
+- Pastikan tidak ada overflow horizontal.
+
+### 7. RESPONSIVE GLOBAL
+Periksa seluruh komponen dan halaman, termasuk:
+- Navbar
+- Footer
+- Button
+- Card
+- Form
+- Modal
+- Dropdown
+- Alert/SweetAlert
+- Audio player
+- Ayat Al-Qur'an
+- Tabel
+- Grid
+- Flexbox
+- Image
+- Icon
+- Heading
+- Paragraph
+- Loading state
+- Empty state
+- Error state
+
+Pastikan tidak ada:
+- Horizontal scrolling yang tidak diperlukan.
+- Text overflow.
+- Button terpotong.
+- Card keluar dari layar.
+- Gambar terlalu besar.
+- Container melebihi viewport.
+- Elemen bertabrakan.
+- Spacing terlalu sempit atau terlalu lebar.
+- Font terlalu kecil untuk dibaca di HP.
+
+### 8. BERBAGAI JENIS PERANGKAT
+Responsive harus bekerja pada berbagai kategori perangkat, bukan hanya resolusi tertentu:
+
+- Smartphone kecil
+- Smartphone standar
+- Smartphone besar
+- Android berbagai ukuran
+- iPhone berbagai ukuran
+- Tablet
+- Laptop
+- Desktop
+- Portrait
+- Landscape
+- Perangkat dengan notch/Dynamic Island
+
+Jangan membuat CSS khusus untuk setiap tipe HP. Buat layout yang **fluid dan adaptif** sehingga browser dapat menyesuaikan tampilan berdasarkan viewport.
+
+### 9. TAILWIND CSS
+Gunakan breakpoint Tailwind secara tepat, misalnya:
+
+`sm`, `md`, `lg`, `xl`, dan `2xl`
+
+Tetapi jangan bergantung hanya pada breakpoint. Gunakan kombinasi:
+- responsive width
+- max-width
+- flex/grid
+- wrapping
+- responsive spacing
+- responsive typography
+- relative sizing
+
+agar layout tetap stabil pada ukuran layar di antara breakpoint.
+
+### 10. TESTING
+Setelah melakukan perubahan, periksa seluruh halaman TajwidQu pada berbagai ukuran viewport.
+
+Minimal lakukan pengujian pada kategori:
+- HP kecil
+- HP standar
+- HP besar
+- Tablet
+- Laptop
+- Desktop
+- Portrait
+- Landscape
+
+Jangan hanya memperbaiki halaman yang sedang dibuka. **Periksa seluruh halaman dan seluruh komponen yang ada di aplikasi.**
+
+### HASIL YANG DIHARAPKAN
+Website TajwidQu harus:
+1. Terlihat rapi di berbagai ukuran HP.
+2. Tidak keluar dari layar.
+3. Tidak membutuhkan zoom.
+4. Tidak memiliki horizontal scrolling yang tidak diperlukan.
+5. Semua tombol dan input nyaman digunakan dengan touchscreen.
+6. Teks tetap terbaca.
+7. Ayat dan materi tetap nyaman dibaca.
+8. Audio dapat digunakan dengan baik.
+9. Tampilan tablet dan desktop tetap bagus.
+10. Tidak mengubah fungsi dan desain utama TajwidQu.
+
+**Intinya: buat TajwidQu benar-benar fully responsive dan fluid untuk berbagai ukuran perangkat, bukan responsive yang hanya cocok pada beberapa ukuran HP tertentu.**

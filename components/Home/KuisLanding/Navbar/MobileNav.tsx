@@ -20,7 +20,7 @@ const MobileNav = ({ showNav, closeNav, handleAksesMenu }: Props) => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed ${navOpenCloseStyle} flex flex-col justify-center h-full w-[80%] sm:w-[60%] bg-blue-700 text-white space-y-6 transform transition-all duration-500 delay-300 z-[1050]`}
+        className={`fixed ${navOpenCloseStyle} flex flex-col justify-center h-full w-[85%] xs:w-[80%] sm:w-[60%] max-w-sm bg-blue-700 text-white space-y-4 sm:space-y-6 transform transition-all duration-500 delay-300 z-[1050] overflow-y-auto`}
       >
         {NAVLINKS.map((link) => (
           <button
@@ -28,7 +28,7 @@ const MobileNav = ({ showNav, closeNav, handleAksesMenu }: Props) => {
             onClick={() => handleAksesMenu(link.url)}
             className="text-left"
           >
-            <p className="text-[30px] sm:text-[30px] font-semibold ml-12 w-fit border-b-[1.5px] border-white pb-1">
+            <p className="text-[24px] xs:text-[28px] sm:text-[30px] font-semibold ml-6 sm:ml-12 w-fit border-b-[1.5px] border-white pb-1">
               {link.label}
             </p>
           </button>

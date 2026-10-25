@@ -35,9 +35,9 @@ const FahamMateri = ({
     const adaMateriBerikatnya = materiIndex < totalMateri - 1;
 
     return (
-      <div className="bg-yellow-300 w-full min-h-[150px] p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-yellow-300 w-full min-h-[120px] sm:min-h-[150px] p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="max-w-full">
-          <h3 className="font-bold text-3xl">
+          <h3 className="font-bold text-xl sm:text-2xl md:text-3xl break-words">
             Materi ini sudah selesai dipelajari!
           </h3>
 
@@ -51,7 +51,7 @@ const FahamMateri = ({
           {adaSubMateriBerikutnya ? (
             <button
               onClick={handleLanjutSubMateri}
-              className="px-6 py-3 rounded-lg font-bold text-white bg-yellow-600 hover:bg-yellow-700 transition cursor-pointer"
+              className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold text-white bg-yellow-600 hover:bg-yellow-700 transition cursor-pointer w-full sm:w-auto"
             >
               Sub Materi Berikutnya →
             </button>
@@ -59,7 +59,7 @@ const FahamMateri = ({
             // TOMBOL OPTION 2: Sub-materi habis, tapi ada materi berikutnya
             <button
               onClick={handleLanjutMateri}
-              className="px-6 py-3 rounded-lg font-bold text-white bg-yellow-600 hover:bg-yellow-700 transition cursor-pointer"
+              className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold text-white bg-yellow-600 hover:bg-yellow-700 transition cursor-pointer w-full sm:w-auto"
             >
               Materi Selanjutnya →
             </button>
@@ -72,11 +72,11 @@ const FahamMateri = ({
 
   // CEK 3: Sub-materi BELUM selesai - tampilkan tombol "Paham"
   return (
-    <div className="bg-green-300 w-full min-h-[150px] p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div className="bg-green-300 w-full min-h-[120px] sm:min-h-[150px] p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <div className="max-w-full">
-        <h3 className="font-bold text-3xl">Sudah Memahami Materi Ini?</h3>
+        <h3 className="font-bold text-xl sm:text-2xl md:text-3xl break-words">Sudah Memahami Materi Ini?</h3>
 
-        <p className="text-xl text-gray-700 mt-2">
+        <p className="text-base sm:text-lg md:text-xl text-gray-700 mt-1 sm:mt-2">
           Klik paham jika Anda benar-benar sudah memahaminya!
         </p>
       </div>
@@ -84,7 +84,7 @@ const FahamMateri = ({
       <div className="w-full text-center sm:w-auto sm:text-left">
         <button
           onClick={handleFaham}
-          className="px-6 py-3 rounded-lg font-bold text-white bg-green-600 hover:bg-green-700 transition cursor-pointer"
+          className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-bold text-white bg-green-600 hover:bg-green-700 transition cursor-pointer w-full sm:w-auto"
         >
           Paham
         </button>

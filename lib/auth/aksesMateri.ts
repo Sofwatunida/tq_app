@@ -9,10 +9,10 @@ type Router = {
 export async function aksesMateri(router: Router) {
   const {
     data: { user },
-    error,
+   
   } = await supabase.auth.getUser();
 
-
+ 
 
   if (!user) {
     await Swal.fire({

@@ -3,10 +3,10 @@ import React from 'react'
 
 const KataMutiara = () => {
   return (
-    <div className="bg-white p-5 rounded-2xl shadow-md overflow-hidden">
-      <h1 className="font-bold text-4xl md:text-4xl pb-3">Kata-kata mutiara</h1>
-      <div className="w-full bg-blue-500 p-5 shadow-xl rounded-lg">
-        <p className="text-white text-xl md:text-xl break-words">
+    <div className="bg-white p-4 sm:p-5 rounded-2xl shadow-md overflow-hidden w-full">
+      <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl pb-3">Kata-kata mutiara</h1>
+      <div className="w-full bg-blue-500 p-4 sm:p-5 shadow-xl rounded-lg">
+        <p className="text-white text-base sm:text-lg md:text-xl break-words">
           “Sebaik-baik kalian adalah yang belajar Al-Quran dan Mengajarkannya”
           <br />
           <span className="font-bold">-HR.Bukhari-</span>

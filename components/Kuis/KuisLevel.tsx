@@ -92,12 +92,12 @@ export default function KuisLevel() {
       return (
         <div className="bg-white w-full min-w-0 rounded-2xl shadow-lg overflow-hidden">
           {/* header */}
-          <div className="text-white bg-blue-500 p-5">
-            <h2 className="text-5xl font-bold">Pilih level kuis!</h2>
-            <p className="text-xl">Uji pemahamanmu dengan kuis level 1 sampai 5!</p>
+          <div className="text-white bg-blue-500 p-4 sm:p-5">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Pilih level kuis!</h2>
+            <p className="text-base sm:text-lg md:text-xl">Uji pemahamanmu dengan kuis level 1 sampai 5!</p>
           </div>
           {/* isi */}
-          <div className="p-5 space-y-3 ">
+          <div className="p-3 sm:p-4 md:p-5 space-y-2 sm:space-y-3 ">
             {levelMateri.map((kuisLevel) => {
               const status = getStatusLevel(kuisLevel.level, levelSelesai);
 
@@ -116,14 +116,16 @@ export default function KuisLevel() {
                 <div
                   key={kuisLevel.level}
                   onClick={() => handleMasukLevel(kuisLevel.level, status)}
-                  className={`flex items-center justify-between rounded-xl p-4  ${style.card}`}
+                  className={`flex items-center justify-between rounded-xl p-3 sm:p-4 gap-3 ${style.card} ${
+                    status !== "Terkunci" ? "cursor-pointer hover:opacity-90" : "cursor-not-allowed"
+                  }`}
                 >
-                  <div>
-                    <div className="font-bold text--500 text-4xl">
-                      <p className="text">Level {kuisLevel.level}</p>
+                  <div className="min-w-0">
+                    <div className="font-bold text-blue-700 text-2xl sm:text-3xl md:text-4xl">
+                      <p className="text break-words">Level {kuisLevel.level}</p>
                     </div>
 
-                    <div className="font-bold text-2xl">
+                    <div className="font-bold text-lg sm:text-xl md:text-2xl">
                       <p>{kuisLevel.jumlah}</p>
                     </div>
                   </div>

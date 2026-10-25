@@ -60,9 +60,15 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border min-w-0;
+  }
+  html {
+    @apply overflow-x-hidden;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+  img, video, canvas, svg {
+    @apply max-w-full h-auto;
   }
 }

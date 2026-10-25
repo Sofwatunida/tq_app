@@ -79,17 +79,19 @@ const Nav = ({ openNav, user, handleAksesMenu }: Props) => {
         navBg ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="flex items-center justify-between h-full w-[90%] xl:w-[80%] mx-auto">
+      <div className="flex items-center justify-between h-full w-[90%] xl:w-[80%] mx-auto gap-2 sm:gap-4">
         {/* Logo */}
-        <Logo />
+        <div className="flex-shrink-0 min-w-0">
+          <Logo />
+        </div>
 
         {/* Menu */}
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-6 xl:gap-10 flex-wrap">
           {NAVLINKS.map((link) => (
             <button
               key={link.id}
               onClick={() => handleAksesMenu(link.url)}
-              className="text-black hover:text-blue-500 font-medium duration-200"
+              className="text-black hover:text-blue-500 font-medium duration-200 whitespace-nowrap"
             >
               {link.label}
             </button>
@@ -97,19 +99,19 @@ const Nav = ({ openNav, user, handleAksesMenu }: Props) => {
         </div>
 
         {/* Right */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
           {!user ? (
             <>
               <button
                 onClick={() => router.push("/auth/masuk")}
-                className="font-bold text-blue-500 hover:text-blue-300"
+                className="font-bold text-blue-500 hover:text-blue-300 whitespace-nowrap px-1"
               >
                 Masuk
               </button>
 
               <Link
                 href="/auth/daftar"
-                className="px-4 py-2 rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600"
+                className="px-3 py-2 sm:px-4 sm:py-2 rounded-lg bg-blue-500 text-white font-bold hover:bg-blue-600 whitespace-nowrap"
               >
                 Daftar
               </Link>
@@ -121,25 +123,25 @@ const Nav = ({ openNav, user, handleAksesMenu }: Props) => {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="flex items-center gap-2"
               >
-                <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
                   {nama ? nama.charAt(0).toUpperCase() : "U"}
                 </div>
 
                 <IoChevronDown
-                  className={`duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
+                  className={`duration-200 hidden sm:block ${dropdownOpen ? "rotate-180" : ""}`}
                 />
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border p-5">
+                <div className="absolute right-0 mt-3 w-[calc(100vw-2rem)] max-w-64 bg-white rounded-2xl shadow-xl border p-4 sm:p-5">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className=" shrink-0 w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
+                    <div className=" shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
                       {nama ? nama.charAt(0).toUpperCase() : "U"}
                     </div>
 
                     <div className="min-w-0">
-                      <h2 className="font-bold text-3xl truncate">{nama}</h2>
-                      <p className="text-medium text-gray-500 truncate">
+                      <h2 className="font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl truncate">{nama}</h2>
+                      <p className="text-xs sm:text-sm text-gray-500 truncate">
                         {user.email}
                       </p>
                     </div>
@@ -160,7 +162,7 @@ const Nav = ({ openNav, user, handleAksesMenu }: Props) => {
           {/* Burger */}
           <HiBars3BottomRight
             onClick={openNav}
-            className=" w-8 h-8 cursor-pointer lg:hidden"
+            className=" w-7 h-7 sm:w-8 sm:h-8 cursor-pointer lg:hidden"
           />
         </div>
       </div>

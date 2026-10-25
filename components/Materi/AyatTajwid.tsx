@@ -91,9 +91,9 @@ export default function AyatTajwid({ ayat, highlight, ref }: AyatTajwidProps) {
   };
 
   return (
-    <div dir="rtl" className="space-y-4">
+    <div dir="rtl" className="space-y-4 overflow-x-hidden">
       <p
-        className="text-5xl text-right leading-loose"
+        className="text-3xl xs:text-4xl sm:text-5xl text-right leading-loose break-words"
         title={ref && ref.length > 0 ? ref : undefined}
       >
         {bagian.map((item, index) =>

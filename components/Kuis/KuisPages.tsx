@@ -169,33 +169,33 @@ const KuisPages = () => {
   }
 
   return (
-    <div>
-      <div className="bg-white m-20 p-12 shadow-md rounded-lg ">
+    <div className="w-full px-3 sm:px-4 md:px-6">
+      <div className="bg-white my-6 sm:my-10 md:my-16 lg:my-20 mx-auto p-4 sm:p-6 md:p-8 lg:p-12 shadow-md rounded-lg max-w-4xl w-full">
         <h2
           className={
             timer <= 5
-              ? "text-red-500 font-bold flex justify-end text-2xl"
-              : "text-black font-bold flex justify-end text-2xl"
+              ? "text-red-500 font-bold flex justify-end text-xl sm:text-2xl"
+              : "text-black font-bold flex justify-end text-xl sm:text-2xl"
           }
         >
           ⏱ {timer}
         </h2>
-        <h1 className="font-bold text-2xl ">
+        <h1 className="font-bold text-xl sm:text-2xl ">
           {" "}
           {nomorSoal + 1}/ {soalLevel.length}
         </h1>
 
-        <div className="border-4 border-green-700 text-2xl rounded-xl text-center p-8 m-3 select-none">
-          <p className="text-3xl font-semibold text-green-700">{soal.ayat}</p>
+        <div className="border-4 border-green-700 text-xl sm:text-2xl rounded-xl text-center p-4 sm:p-6 md:p-8 m-2 sm:m-3 select-none overflow-x-hidden">
+          <p className="text-2xl sm:text-3xl font-semibold text-green-700 break-words">{soal.ayat}</p>
         </div>
 
-        <p className="select-none">{soal.soal}</p>
+        <p className="select-none break-words">{soal.soal}</p>
 
         {soal.pilihan.map((opsi) => (
           <div
             onClick={() => pilihJawaban(opsi)}
             key={opsi}
-            className={`text-white text-center p-3 m-2 rounded-lg ${
+            className={`text-white text-center p-3 m-2 rounded-lg cursor-pointer break-words ${
               jawabanDipilih === opsi
                 ? opsi === soal.jawaban
                   ? "bg-green-500"

@@ -285,10 +285,10 @@ export default function MateriPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 pt-28 pb-20">
-      <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 flex flex-col lg:flex-row gap-6">
+    <main className="min-h-screen bg-gray-100 pt-24 sm:pt-28 pb-16 sm:pb-20">
+      <div className="w-full max-w-[1200px] mx-auto px-3 sm:px-4 md:px-6 flex flex-col lg:flex-row gap-4 sm:gap-6">
         {/* Kolom kiri */}
-        <div className="w-full lg:w-1/3 space-y-6">
+        <div className="w-full lg:w-1/3 space-y-4 sm:space-y-6">
           <PilihMateri
             materi={materi}
             handlePilihMateri={handlePilihMateri}
@@ -298,8 +298,8 @@ export default function MateriPage() {
         </div>
 
         {/* Kolom kanan */}
-        <div className="w-full lg:w-2/3 space-y-6">
-          <div ref={learnRef} className="scroll-mt-20">
+        <div className="w-full lg:w-2/3 space-y-4 sm:space-y-6">
+          <div ref={learnRef} className="scroll-mt-24 sm:scroll-mt-20">
             <LearnMateri materiAktif={subMateriAktif} />
           </div>
 
