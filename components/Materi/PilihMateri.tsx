@@ -31,7 +31,7 @@ type Props = {
 
 const PilihMateri = ({ materi, handlePilihMateri }: Props) => {
   return (
-    <div className="bg-white w-full min-h-[300px] md:min-h-[420px] lg:min-h-[600px] rounded-2xl shadow-lg overflow-hidden">
+    <div className="bg-white w-full rounded-2xl shadow-lg overflow-hidden lg:min-h-[600px]">
       {/* header */}
       <div className="text-white bg-blue-500 p-4 sm:p-5">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold">

@@ -15,7 +15,7 @@ const ListMateri = ({ materiAktif }: Props) => {
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-2xl overflow-hidden w-full max-h-[400px] sm:max-h-[500px] lg:max-h-[600px] overflow-y-auto p-4 sm:p-5">
+    <div className="bg-white shadow-lg rounded-2xl overflow-hidden w-full lg:max-h-[600px] lg:overflow-y-auto p-4 sm:p-5">
       <h2 className="font-bold text-xl sm:text-2xl md:text-3xl text-blue-500 mb-3 sticky top-0 bg-white">
         Sub Materi {materiAktif.judul}
       </h2>

@@ -21,8 +21,8 @@ export default function MainLayout({
   return (
     <>
       <WrapperNav />
-      <main>
-      {children}
+      <main className="min-h-[calc(100dvh-12vh)]">
+        {children}
       </main>
       <Footer />
     </>

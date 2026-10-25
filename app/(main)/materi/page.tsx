@@ -285,7 +285,7 @@ export default function MateriPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 pt-24 sm:pt-28 pb-16 sm:pb-20">
+    <main className="min-h-[calc(100dvh-12vh)] bg-gray-100 pt-24 sm:pt-28 pb-16 sm:pb-24">
       <div className="w-full max-w-[1200px] mx-auto px-3 sm:px-4 md:px-6 flex flex-col lg:flex-row gap-4 sm:gap-6">
         {/* Kolom kiri */}
         <div className="w-full lg:w-1/3 space-y-4 sm:space-y-6">

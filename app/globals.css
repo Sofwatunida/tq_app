@@ -64,9 +64,12 @@
   }
   html {
     @apply overflow-x-hidden;
+    height: -webkit-fill-available;
   }
   body {
     @apply bg-background text-foreground overflow-x-hidden;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
   }
   img, video, canvas, svg {
     @apply max-w-full h-auto;

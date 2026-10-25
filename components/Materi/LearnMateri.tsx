@@ -34,7 +34,7 @@ export default function LearnMateri({ materiAktif }: LearnMateriProps) {
   const highlight = materiAktif.highlight ?? [];
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 space-y-4 sm:space-y-6 max-h-[70vh] sm:max-h-[600px] overflow-y-auto overflow-x-hidden">
+    <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 space-y-4 sm:space-y-6 overflow-x-hidden lg:max-h-[600px] lg:overflow-y-auto">
       <h2 className="text-2xl sm:text-3xl font-bold text-blue-700 break-words">{materiAktif.judul}</h2>
 
       <div>
