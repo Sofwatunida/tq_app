@@ -35,7 +35,7 @@ const FahamMateri = ({
     const adaMateriBerikatnya = materiIndex < totalMateri - 1;
 
     return (
-      <div className="bg-yellow-300 w-full min-h-[120px] sm:min-h-[150px] p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-yellow-300 w-full p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="max-w-full">
           <h3 className="font-bold text-xl sm:text-2xl md:text-3xl break-words">
             Materi ini sudah selesai dipelajari!
@@ -72,7 +72,7 @@ const FahamMateri = ({
 
   // CEK 3: Sub-materi BELUM selesai - tampilkan tombol "Paham"
   return (
-    <div className="bg-green-300 w-full min-h-[120px] sm:min-h-[150px] p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div className="bg-green-300 w-full p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <div className="max-w-full">
         <h3 className="font-bold text-xl sm:text-2xl md:text-3xl break-words">Sudah Memahami Materi Ini?</h3>
 

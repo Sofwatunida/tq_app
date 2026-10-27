@@ -6,19 +6,19 @@ const getStatusStyle = (status: string) => {
     case "Dipahami":
       return {
         card: "bg-green-50 border-2 border-green-500",
-        badge: "px-6 py-3 bg-green-500 text-white font-bold",
+        badge: "bg-green-500 text-white font-bold",
       };
 
     case "Pelajari":
       return {
         card: "bg-blue-50 border-2 border-blue-500",
-        badge: "px-6 py-3 bg-blue-500 text-white font-bold",
+        badge: "bg-blue-500 text-white font-bold",
       };
 
     default:
       return {
         card: "bg-gray-100 border-2 border-gray-500",
-        badge: "px-6 py-3 bg-gray-500 text-white font-bold",
+        badge: "bg-gray-500 text-white font-bold",
       };
   }
 };
@@ -64,7 +64,7 @@ const PilihMateri = ({ materi, handlePilihMateri }: Props) => {
               </div>
 
               <span
-                className={`shrink-0 w-20 sm:w-24 md:w-32 text-center font-bold rounded-full py-1 sm:py-2 text-xs sm:text-sm  ${style.badge}`}
+                className={`shrink-0 min-w-[5.5rem] md:min-w-32 whitespace-nowrap text-center rounded-full px-3 py-1.5 sm:px-6 sm:py-3 text-xs sm:text-sm ${style.badge}`}
               >
                 {item.status}
               </span>

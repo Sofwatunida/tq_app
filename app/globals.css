@@ -74,4 +74,7 @@
   img, video, canvas, svg {
     @apply max-w-full h-auto;
   }
+  main {
+    display: block;
+  }
 }

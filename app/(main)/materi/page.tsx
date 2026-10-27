@@ -122,21 +122,21 @@ export default function MateriPage() {
 
   if (!sudahDimuat) {
     return (
-      <main className="min-h-screen bg-gray-100 pt-28 pb-20">
+      <div className="min-h-dvh bg-gray-100 pt-24 sm:pt-[14vh] pb-20">
         <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6">
           <p className="text-gray-600">Memuat materi...</p>
         </div>
-      </main>
+      </div>
     );
   }
 
   if (materi.length === 0) {
     return (
-      <main className="min-h-screen bg-gray-100 pt-28 pb-20">
+      <div className="min-h-dvh bg-gray-100 pt-24 sm:pt-[14vh] pb-20">
         <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6">
           <p className="text-gray-600">Materi belum tersedia.</p>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -285,7 +285,7 @@ export default function MateriPage() {
   };
 
   return (
-    <main className="min-h-[calc(100dvh-12vh)] bg-gray-100 pt-24 sm:pt-28 pb-16 sm:pb-24">
+    <div className="bg-gray-100 pt-24 sm:pt-[14vh] pb-24 sm:pb-28 overflow-x-hidden">
       <div className="w-full max-w-[1200px] mx-auto px-3 sm:px-4 md:px-6 flex flex-col lg:flex-row gap-4 sm:gap-6">
         {/* Kolom kiri */}
         <div className="w-full lg:w-1/3 space-y-4 sm:space-y-6">
@@ -298,8 +298,8 @@ export default function MateriPage() {
         </div>
 
         {/* Kolom kanan */}
-        <div className="w-full lg:w-2/3 space-y-4 sm:space-y-6">
-          <div ref={learnRef} className="scroll-mt-24 sm:scroll-mt-20">
+        <div className="w-full lg:w-2/3 space-y-4 sm:space-y-6 min-w-0">
+          <div ref={learnRef} className="scroll-mt-24 sm:scroll-mt-[16vh]">
             <LearnMateri materiAktif={subMateriAktif} />
           </div>
 
@@ -316,6 +316,6 @@ export default function MateriPage() {
           />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
