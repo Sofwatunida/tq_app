@@ -169,8 +169,8 @@ const KuisPages = () => {
   }
 
   return (
-    <div className="w-full px-3 sm:px-4 md:px-6">
-      <div className="bg-white my-6 sm:my-10 md:my-16 lg:my-20 mx-auto p-4 sm:p-6 md:p-8 lg:p-12 shadow-md rounded-lg max-w-4xl w-full">
+    <div className="flex min-h-dvh w-full items-center justify-center px-3 py-6 sm:px-4 sm:py-8 md:px-6">
+      <div className="bg-white mx-auto p-4 sm:p-6 md:p-8 lg:p-12 shadow-md rounded-lg max-w-4xl w-full">
         <h2
           className={
             timer <= 5
