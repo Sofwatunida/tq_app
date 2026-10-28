@@ -56,7 +56,7 @@ export default function LearnMateri({ materiAktif }: LearnMateriProps) {
         </div>
       </div>
 
-      <div className="bg-slate-100 rounded-xl p-4 sm:p-6 overflow-x-hidden">
+      <div className="bg-slate-100 rounded-xl p-4 pt-6 sm:p-6 sm:pt-8 overflow-x-hidden">
         <AyatTajwid
           ayat={ayatPenuh}
           highlight={highlight}

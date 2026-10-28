@@ -263,9 +263,9 @@ export default function MateriPage() {
 
         Swal.fire({
           icon: "success",
-          title: "Selamat! 🎉",
+          title: "Selamat!",
           text: "Semua materi telah selesai. Kuis sudah terbuka!",
-          confirmButtonText: "Mainkan Kuis",
+          confirmButtonText: "Mainkan",
           confirmButtonColor: "#3b82f6",
         }).then((result) => {
           if (result.isConfirmed) {
